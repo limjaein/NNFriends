@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "319333915844",
+    "firebase_url": "https://summershelter-168313.firebaseio.com",
+    "project_id": "summershelter-168313",
+    "storage_bucket": "summershelter-168313.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319333915844:android:d2b3a532fc5948f7",
+        "android_client_info": {
+          "package_name": "com.project.mobile.summershelter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "319333915844-u2af492376acoemle7apmt819duj6cbl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.mobile.summershelter",
+            "certificate_hash": "105afad810e58ca2918857ebe0f770b5b583d614"
+          }
+        },
+        {
+          "client_id": "319333915844-v7u38n7frum9q3496ca5hljlll14on5q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsn9sh1HAi0ujQDR9qVUjIj5J2VYDC9O8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "319333915844-v7u38n7frum9q3496ca5hljlll14on5q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319333915844:android:e490f6bae7a77057",
+        "android_client_info": {
+          "package_name": "com.android.project.nnfriends_"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "319333915844-cdb9jll3iv2qj9jjuasnjhpgf6r1ihfm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.project.nnfriends_",
+            "certificate_hash": "105afad810e58ca2918857ebe0f770b5b583d614"
+          }
+        },
+        {
+          "client_id": "319333915844-v7u38n7frum9q3496ca5hljlll14on5q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsn9sh1HAi0ujQDR9qVUjIj5J2VYDC9O8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "319333915844-v7u38n7frum9q3496ca5hljlll14on5q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -39,3 +39,4 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':openCVLibrary330')
 }
+apply plugin: 'com.google.gms.google-services'
