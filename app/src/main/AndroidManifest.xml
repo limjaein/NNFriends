@@ -47,7 +47,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MenuActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".CameraView"
@@ -56,7 +60,9 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ConnectActivity" />
-        <activity android:name=".DiaryActivity" />
+        <activity android:name=".WDiaryActivity" />
+        <activity android:name=".RDiaryActivity" />
+        <activity android:name=".RWSelectActivity" />
         <activity android:name=".GroupActivity" />
         <activity android:name=".FriendActivity" />
         <activity android:name=".LoginActivity">
