@@ -1,20 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.android.project.nnfriends_.MenuActivity">
 
-    <TextView
-        android:id="@+id/sample_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:id="@+id/connectBtn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingLeft="70dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/menu1"
+        android:onClick="menuClick"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:background="@drawable/connect"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="150dp"
+            android:text="connect"
+            android:textSize="40dp"/>
+    </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/diaryBtn"
+        android:paddingLeft="90dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="0dp"
+        android:background="@color/menu2"
+        android:gravity="center_vertical"
+        android:onClick="menuClick"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/notebook"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="150dp"
+            android:text="diary"
+            android:textSize="40dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/groupBtn"
+        android:paddingLeft="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:background="@color/menu3"
+        android:onClick="menuClick"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:background="@drawable/group"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="150dp"
+            android:text="group"
+            android:textSize="40dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/friendBtn"
+        android:paddingLeft="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:background="@color/menu4"
+        android:onClick="menuClick"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:background="@drawable/handshake"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="150dp"
+            android:text="friend"
+            android:textSize="40dp"/>
+    </LinearLayout>
+</LinearLayout>
