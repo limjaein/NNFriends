@@ -1,9 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/menu1"
+    android:orientation="vertical"
+    android:gravity="center"
     tools:context="com.android.project.nnfriends_.LoginActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="35dp"
+        android:background="#FFFFFF"
+        android:gravity="center">
+
+        <EditText
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:hint="010-1111-1111"
+            android:paddingLeft="20dp"
+            android:textSize="45sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="35dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:inputType="number"
+            android:paddingLeft="20dp"
+            android:textSize="45sp"
+            android:hint="*  *  *  *"
+            android:layout_width="match_parent"
+            android:layout_height="90dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginBottom="150dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:onClick="btnClick"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/menu2"
+            android:textSize="35sp"
+            android:text="SIGN UP"
+            android:id="@+id/btnSignup"
+            android:layout_width="180dp"
+            android:layout_height="70dp" />
+        <Button
+            android:onClick="btnClick"
+            android:layout_marginLeft="30dp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/menu4"
+            android:textSize="35sp"
+            android:text="LOG IN"
+            android:id="@+id/btnLogin"
+            android:layout_width="180dp"
+            android:layout_height="70dp" />
+    </LinearLayout>
+
+</LinearLayout>
+

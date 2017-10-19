@@ -1,9 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/menu1"
+    android:orientation="vertical"
+    android:gravity="center|top"
     tools:context="com.android.project.nnfriends_.SignupActivity">
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="35dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:inputType="number"
+            android:paddingLeft="20dp"
+            android:textSize="45sp"
+            android:hint="010-1111-1111"
+            android:layout_width="match_parent"
+            android:layout_height="90dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="35dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:inputType="number"
+            android:paddingLeft="20dp"
+            android:textSize="45sp"
+            android:hint="*  *  *  *"
+            android:layout_width="match_parent"
+            android:layout_height="90dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="35dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</android.support.constraint.ConstraintLayout>
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:hint="이름"
+            android:paddingLeft="20dp"
+            android:textSize="45sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/editText3"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:hint="주민등록번호"
+            android:paddingLeft="20dp"
+            android:textSize="45sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioGroup
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+            <RadioButton
+                android:paddingLeft="10dp"
+                android:layout_marginRight="50dp"
+                android:text="봉사자"
+                android:textSize="40sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:paddingLeft="10dp"
+                android:text="수혜자"
+                android:textSize="40sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/menu1"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:hint="발굴자ID"
+            android:paddingLeft="20dp"
+            android:textSize="45sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:onClick="btnClick"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/menu3"
+            android:textSize="35sp"
+            android:text="OCR"
+            android:id="@+id/btnOCR"
+            android:layout_width="130dp"
+            android:layout_height="70dp" />
+        <Button
+            android:onClick="btnClick"
+            android:layout_marginLeft="15dp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/menu4"
+            android:textSize="35sp"
+            android:text="JOIN!"
+            android:id="@+id/btnJoin"
+            android:layout_width="180dp"
+            android:layout_height="70dp" />
+        <RadioButton
+            android:layout_marginLeft="3dp"
+            android:textSize="25sp"
+            android:text="Fingerprint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>
