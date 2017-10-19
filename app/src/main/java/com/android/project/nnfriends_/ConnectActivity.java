@@ -13,11 +13,11 @@ public class ConnectActivity extends AppCompatActivity {
 
     public void matchCheck(){
     /*매칭 여부 확인하고, 화면 2개로 다르게 해야함*/
-        if(true){
+//        if(true){
             setContentView(R.layout.activity_connect);
-        }else{
-            setContentView(R.layout.activity_notconnect);
-        }
+//        }else{
+//            setContentView(R.layout.activity_notconnect);
+//        }
 
     }
 }
