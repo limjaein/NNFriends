@@ -1,11 +1,6 @@
 package com.android.project.nnfriends_;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
-import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -13,17 +8,12 @@ import android.speech.tts.TextToSpeech;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class DiaryActivity extends AppCompatActivity {
-    //datepicker 부분
-    public static int year;
-    public static int day;
-    public static int month;
+public class WDiaryActivity extends AppCompatActivity {
     static TextView tv_year,tv_day,tv_month;
 
     //TTS 부분
@@ -38,19 +28,23 @@ public class DiaryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_diary);
+        setContentView(R.layout.activity_wdiary);
 
         init();
     }
 
     private void init() {
-        //datepicker부분
+
         tv_year = (TextView)findViewById(R.id.year);
         tv_month = (TextView)findViewById(R.id.month);
         tv_day = (TextView)findViewById(R.id.day);
 
-        DialogFragment dialogfragment = new DatePickerDialogTheme();
-        dialogfragment.show(getFragmentManager(), "Theme");
+        Intent int_date = getIntent();
+
+
+        tv_year.setText(int_date.getIntExtra("year", 0)+"");
+        tv_month.setText(int_date.getIntExtra("month", 0)+"/");
+        tv_day.setText(int_date.getIntExtra("day", 0)+"");
 
         //TTS부분
         tts = new TextToSpeech(
@@ -143,32 +137,4 @@ public class DiaryActivity extends AppCompatActivity {
         finish();
     }
 
-    public static class DatePickerDialogTheme extends DialogFragment implements DatePickerDialog.OnDateSetListener{
-
-        @RequiresApi(api = Build.VERSION_CODES.N)
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState){
-            final Calendar calendar = Calendar.getInstance();
-            year = calendar.get(Calendar.YEAR);
-            month = calendar.get(Calendar.MONTH);
-            day = calendar.get(Calendar.DAY_OF_MONTH);
-
-            DatePickerDialog datepickerdialog = new DatePickerDialog(getActivity(),
-                    AlertDialog.THEME_DEVICE_DEFAULT_LIGHT,this,year,month,day);
-
-            return datepickerdialog;
-        }
-        public void onResume(){
-            super.onResume();
-    //        Window window = getDialog().getWindow();
-    //        window.setLayout(1200,1500);
-    //        window.setGravity(Gravity.CENTER);
-        }
-        public void onDateSet(DatePicker view, int year, int month, int day){
-            tv_year.setText(year+"");
-            tv_month.setText("/ "+(month+1)+" ");
-            tv_day.setText("/ "+day);
-
-        }
-}
 }
