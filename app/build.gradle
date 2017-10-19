@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.1"
     defaultConfig {
         applicationId "com.android.project.nnfriends_"
         minSdkVersion 14
@@ -38,7 +38,13 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.rmtheis:tess-two:6.3.0'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.google.android.gms:play-services:10.2.6'
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:design:25.+'
+
+    compile 'com.github.ajalt.reprint:core:3.1.0@aar' // required: supports marshmallow devices
+    compile 'com.github.ajalt.reprint:reprint_spass:3.1.0@aar' // optional: support for pre-marshmallow Samsung devices
+    compile 'com.github.ajalt.reprint:rxjava:3.1.0@aar' // optional: the RxJava 1 interface
+    compile 'com.github.ajalt.reprint:rxjava2:3.1.0@aar' // optional: the RxJava 2 interface
 }
 apply plugin: 'com.google.gms.google-services'
