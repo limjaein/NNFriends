@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_group"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="64dp"
+    android:paddingRight="64dp"
+    android:paddingTop="16dp"
+    android:background="@color/menu2"
+    android:orientation="vertical"
+    tools:context="com.android.project.nnfriends_.GroupActivity">
+
+    <LinearLayout
+        android:id="@+id/selectWindow"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:background="@color/menu2"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
+        <LinearLayout
+            android:id="@+id/GuSelect"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/menu2"
+            android:onClick="menuClick"
+            android:gravity="center_vertical"
+            android:layout_weight="1">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/gubtn"
+                android:text="구"
+                android:textSize="40dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:id="@+id/GuTxt"
+                android:text="구"
+                android:textSize="80dp"
+                android:gravity="center" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/DongSelect"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/menu2"
+            android:onClick="menuClick"
+            android:gravity="center_vertical"
+            android:layout_weight="1">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/dongbtn"
+                android:text="동"
+                android:textSize="40dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:id="@+id/DongTxt"
+                android:text="동"
+                android:textSize="80dp"
+                android:gravity="center"  />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/resultWindow"
+        android:paddingLeft="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:background="@color/menu3"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
+
+    </LinearLayout>
+</LinearLayout>
