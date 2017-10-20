@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.github.ajalt.reprint.core.AuthenticationFailureReason;
@@ -41,10 +42,10 @@ public class LoginActivity extends AppCompatActivity {
             });
         } else {
             // 지문기능이 없는 경우
-            Log.d("ReprintLog", "4");
-            Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-            startActivity(intent);
-            finish();
+//            Log.d("ReprintLog", "4");
+//            Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+//            startActivity(intent);
+//            finish();
         }
     }
 
@@ -55,5 +56,21 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("ReprintLog", hasRegisteredFlag+"");
 
         return (finderprintFlag && hasRegisteredFlag);
+    }
+
+    public void btnClick(View view) {
+        Intent intent;
+        switch (view.getId()) {
+            case R.id.btnSignup:
+                intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.btnLogin:
+                intent = new Intent(LoginActivity.this, MenuActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
     }
 }
