@@ -14,8 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="35dp"
         android:background="#FFFFFF"
         android:gravity="center">
@@ -23,16 +23,16 @@
         <EditText
             android:inputType="number"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="80dp"
             android:hint="010-1111-1111"
             android:paddingLeft="20dp"
-            android:textSize="45sp" />
+            android:textSize="40sp" />
     </LinearLayout>
 
     <LinearLayout
         android:background="#FFFFFF"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginBottom="35dp"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -40,10 +40,10 @@
         <EditText
             android:inputType="number"
             android:paddingLeft="20dp"
-            android:textSize="45sp"
+            android:textSize="40sp"
             android:hint="*  *  *  *"
             android:layout_width="match_parent"
-            android:layout_height="90dp" />
+            android:layout_height="80dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -56,20 +56,20 @@
             android:onClick="btnClick"
             android:textColor="#FFFFFF"
             android:backgroundTint="@color/menu2"
-            android:textSize="35sp"
+            android:textSize="30sp"
             android:text="SIGN UP"
             android:id="@+id/btnSignup"
-            android:layout_width="180dp"
+            android:layout_width="130dp"
             android:layout_height="70dp" />
         <Button
             android:onClick="btnClick"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="20dp"
             android:textColor="#FFFFFF"
             android:backgroundTint="@color/menu4"
-            android:textSize="35sp"
+            android:textSize="30sp"
             android:text="LOG IN"
             android:id="@+id/btnLogin"
-            android:layout_width="180dp"
+            android:layout_width="130dp"
             android:layout_height="70dp" />
     </LinearLayout>
 

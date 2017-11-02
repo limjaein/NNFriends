@@ -1,6 +1,7 @@
 package com.android.project.nnfriends_;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -30,7 +31,39 @@ public class WDiaryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wdiary);
 
+        initFont();
         init();
+    }
+
+    private void initFont() {
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "gozik.ttf");
+
+        TextView textView1 = (TextView) findViewById(R.id.year);
+        TextView textView2 = (TextView) findViewById(R.id.day);
+        TextView textView3 = (TextView) findViewById(R.id.month);
+        TextView textView4 = (TextView) findViewById(R.id.quest1);
+        TextView textView5 = (TextView) findViewById(R.id.quest2);
+        TextView textView6 = (TextView) findViewById(R.id.quest3);
+        TextView textView7 = (TextView) findViewById(R.id.quest4);
+        TextView textView8 = (TextView) findViewById(R.id.quest5);
+        TextView textView9 = (TextView) findViewById(R.id.ans4);
+        TextView textView10 = (TextView) findViewById(R.id.ans1);
+        TextView textView11 = (TextView) findViewById(R.id.ans2);
+        TextView textView12 = (TextView) findViewById(R.id.ans3);
+        TextView textView13 = (TextView) findViewById(R.id.ans5);
+        textView1.setTypeface(typeface);
+        textView2.setTypeface(typeface);
+        textView3.setTypeface(typeface);
+        textView4.setTypeface(typeface);
+        textView5.setTypeface(typeface);
+        textView6.setTypeface(typeface);
+        textView7.setTypeface(typeface);
+        textView8.setTypeface(typeface);
+        textView9.setTypeface(typeface);
+        textView10.setTypeface(typeface);
+        textView11.setTypeface(typeface);
+        textView12.setTypeface(typeface);
+        textView13.setTypeface(typeface);
     }
 
     private void init() {
@@ -43,7 +76,7 @@ public class WDiaryActivity extends AppCompatActivity {
 
 
         tv_year.setText(int_date.getIntExtra("year", 0)+"");
-        tv_month.setText(int_date.getIntExtra("month", 0)+"/");
+        tv_month.setText(int_date.getIntExtra("month", 0)+" / ");
         tv_day.setText(int_date.getIntExtra("day", 0)+"");
 
         //TTS부분

@@ -1,10 +1,12 @@
 package com.android.project.nnfriends_;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.ajalt.reprint.core.AuthenticationFailureReason;
@@ -15,10 +17,13 @@ public class LoginActivity extends AppCompatActivity {
 
     boolean running;
 
+    static Typeface typeface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        initFont();
 
         Reprint.initialize(this);
 
@@ -47,6 +52,15 @@ public class LoginActivity extends AppCompatActivity {
 //            startActivity(intent);
 //            finish();
         }
+    }
+    private void initFont() {
+
+        typeface = Typeface.createFromAsset(getAssets(), "gozik.ttf");
+
+        TextView textView1 = (TextView) findViewById(R.id.btnLogin);
+        TextView textView2 = (TextView) findViewById(R.id.btnSignup);
+        textView1.setTypeface(typeface);
+        textView2.setTypeface(typeface);
     }
 
     public boolean checkDeviceSpec() {

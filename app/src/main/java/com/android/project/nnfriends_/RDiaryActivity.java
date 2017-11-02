@@ -1,6 +1,7 @@
 package com.android.project.nnfriends_;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -14,7 +15,19 @@ public class RDiaryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rdiary);
 
+        initFont();
         init();
+    }
+
+    private void initFont() {
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "gozik.ttf");
+
+        TextView textView1 = (TextView) findViewById(R.id.r_year);
+        TextView textView2 = (TextView) findViewById(R.id.r_day);
+        TextView textView3 = (TextView) findViewById(R.id.r_month);
+        textView1.setTypeface(typeface);
+        textView2.setTypeface(typeface);
+        textView3.setTypeface(typeface);
     }
 
     private void init() {
@@ -30,7 +43,7 @@ public class RDiaryActivity extends AppCompatActivity {
         day = int_date.getIntExtra("day", 0)+"";
 
         tv_year.setText(year+"");
-        tv_month.setText(month+"/");
+        tv_month.setText(month+" / ");
         tv_day.setText(day+"");
 
     }
