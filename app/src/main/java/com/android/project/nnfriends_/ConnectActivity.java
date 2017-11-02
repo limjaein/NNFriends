@@ -37,6 +37,8 @@ public class ConnectActivity extends AppCompatActivity {
         RadioButton tv6 = (RadioButton) dialog.findViewById(R.id.age4);
         RadioButton tv7 = (RadioButton) dialog.findViewById(R.id.gen1);
         RadioButton tv8 = (RadioButton) dialog.findViewById(R.id.gen2);
+        RadioButton tv9 = (RadioButton) dialog.findViewById(R.id.age5);
+        RadioButton tv10 = (RadioButton) dialog.findViewById(R.id.gen3);
         tv1.setTypeface(typeface);
         tv2.setTypeface(typeface);
         tv3.setTypeface(typeface);
@@ -45,6 +47,8 @@ public class ConnectActivity extends AppCompatActivity {
         tv6.setTypeface(typeface);
         tv7.setTypeface(typeface);
         tv8.setTypeface(typeface);
+        tv9.setTypeface(typeface);
+        tv10.setTypeface(typeface);
 
         dialog.show();
     }
@@ -112,12 +116,16 @@ public class ConnectActivity extends AppCompatActivity {
                         break;
                     case R.id.age4:
                         break;
+                    case R.id.age5:
+                        break;
                 }
             } else if (radioGroup.getId() == R.id.gender_select) {
                 switch (i) {
                     case R.id.gen1:
                         break;
                     case R.id.gen2:
+                        break;
+                    case R.id.gen3:
                         break;
                 }
             }

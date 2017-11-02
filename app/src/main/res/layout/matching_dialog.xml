@@ -21,7 +21,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:orientation="horizontal">
-
+        <RadioButton
+            android:id="@+id/age5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All"
+            android:textSize="30dp" />
         <RadioButton
             android:id="@+id/age1"
             android:layout_width="wrap_content"
@@ -64,6 +69,13 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/gen3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All"
+            android:textSize="30dp" />
 
         <RadioButton
             android:id="@+id/gen1"
