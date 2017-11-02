@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="2015"
-            android:textSize="90dp" />
+            android:textSize="80dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -37,18 +37,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10/"
-                android:textSize="80dp" />
+                android:textSize="70dp" />
 
             <TextView
                 android:id="@+id/r_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="21"
-                android:textSize="80dp" />
+                android:textSize="70dp" />
         </LinearLayout>
 
         <TextView
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:padding="40dp"
             android:layout_gravity="center"
             android:layout_width="500dp"

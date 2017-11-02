@@ -17,35 +17,40 @@
 
     <RadioGroup
         android:id="@+id/age_select"
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp">
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal">
+
         <RadioButton
             android:id="@+id/age1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:text="60s"/>
+            android:text="60s"
+            android:textSize="30dp" />
+
         <RadioButton
             android:id="@+id/age2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:text="70s"/>
+            android:text="70s"
+            android:textSize="30dp" />
+
         <RadioButton
             android:id="@+id/age3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:text="80s"/>
+            android:text="80s"
+            android:textSize="30dp" />
+
         <RadioButton
             android:id="@+id/age4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:text="90s~"/>
+            android:text="90s~"
+            android:textSize="30dp" />
     </RadioGroup>
+
     <TextView
         android:id="@+id/selectgender"
         android:layout_width="wrap_content"

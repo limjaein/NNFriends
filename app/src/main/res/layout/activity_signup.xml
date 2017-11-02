@@ -42,23 +42,25 @@
             android:layout_width="match_parent"
             android:layout_height="65dp" />
     </LinearLayout>
+
     <LinearLayout
-        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:layout_marginBottom="25dp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:background="#FFFFFF"
+        android:gravity="center">
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:hint="이름"
+            android:hint="name"
             android:paddingLeft="20dp"
             android:textSize="35sp" />
     </LinearLayout>
+
     <LinearLayout
         android:background="#FFFFFF"
         android:layout_marginLeft="40dp"
@@ -72,40 +74,45 @@
             android:id="@+id/editText3"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:hint="주민등록번호"
+            android:hint="SSN"
             android:inputType="number"
             android:paddingLeft="20dp"
             android:textSize="35sp" />
     </LinearLayout>
+
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:gravity="center">
+
         <RadioGroup
-            android:gravity="center"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
             <RadioButton
                 android:id="@+id/radio1"
-                android:paddingLeft="10dp"
-                android:layout_marginRight="50dp"
-                android:text="봉사자"
-                android:textSize="35sp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
+                android:paddingLeft="10dp"
+                android:text="servant"
+                android:textSize="20sp" />
+
             <RadioButton
                 android:id="@+id/radio2"
-                android:paddingLeft="10dp"
-                android:text="수혜자"
-                android:textSize="35sp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="Beneficiary"
+                android:textSize="20sp" />
         </RadioGroup>
     </LinearLayout>
+
     <LinearLayout
         android:background="@color/menu1"
         android:layout_marginLeft="40dp"
@@ -119,7 +126,7 @@
             android:id="@+id/editText2"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:hint="발굴자ID"
+            android:hint="Helper ID"
             android:inputType="number"
             android:paddingLeft="20dp"
             android:textSize="35sp" />
