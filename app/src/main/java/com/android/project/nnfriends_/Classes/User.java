@@ -7,12 +7,12 @@ package com.android.project.nnfriends_.Classes;
 public class User {
 
     /* 필수정보 */
-    private int uID;        // 핸드폰번호
-    private int uPW;        // 4자리 PIN비밀번호
+    private String uID;        // 핸드폰번호
+    private String uPW;        // 4자리 PIN비밀번호
     private String name;
     private int age;        // 만 나이, 주민번호에서 판별
-    private int gender;     // 주민번호에서 판별
-    private int SSN;        // 주민등록번호
+    private int gender;     // 주민번호에서 판별; 0:여, 1:남
+    private String SSN;        // 주민등록번호
     private int state;      // 권한상태; 0:봉사대기, 1:수혜대기, 2:봉사승인, 3:수혜승인
     private String address_full;    // 전체주소
     private String address_city;    // 시
@@ -22,12 +22,13 @@ public class User {
     /* 추가정보 */
     private int matchNum;   // 매칭 번호
     private int payday;     // 월급일
-    private int vID;        // 발굴자ID
+    private String vID;        // 발굴자ID; -1:없음
+    private int vAge;       // 수혜자가 매칭을 원하는 봉사자의 나이대; 0:all, 1:60s, 2:70s, 3:80s, 4:90s~
+    private int vGender;    // 수혜자가 매칭을 원하는 봉사자의 성별; 0:all, 1:여, 2:남
 
     public User(){}
-    public User(int uID, int uPW, String name, int age, int gender, int SSN, int state,
-                String full, String city, String gu, String dong,
-                int matchNum, int payday, int vID) {
+    public User(String uID, String uPW, String name, int age, int gender, String SSN, int state,
+                String full, String city, String gu, String dong, String vID) {
         this.uID = uID;
         this.uPW = uPW;
         this.name = name;
@@ -39,16 +40,14 @@ public class User {
         this.address_city = city;
         this.address_gu = gu;
         this.address_dong = dong;
-        this.matchNum = matchNum;
-        this.payday = payday;
         this.vID = vID;
     }
 
-    public int getuID() {
+    public String getuID() {
         return uID;
     }
 
-    public int getuPW() {
+    public String getuPW() {
         return uPW;
     }
 
@@ -64,7 +63,7 @@ public class User {
         return gender;
     }
 
-    public int getSSN() {
+    public String getSSN() {
         return SSN;
     }
 
@@ -96,15 +95,19 @@ public class User {
         return payday;
     }
 
-    public int getvID() {
+    public String getvID() {
         return vID;
     }
 
-    public void setuID(int uID) {
+    public int getvAge() { return vAge; }
+
+    public int getvGender() { return vGender; }
+
+    public void setuID(String uID) {
         this.uID = uID;
     }
 
-    public void setuPW(int uPW) {
+    public void setuPW(String uPW) {
         this.uPW = uPW;
     }
 
@@ -120,7 +123,7 @@ public class User {
         this.gender = gender;
     }
 
-    public void setSSN(int SSN) {
+    public void setSSN(String SSN) {
         this.SSN = SSN;
     }
 
@@ -152,7 +155,11 @@ public class User {
         this.payday = payday;
     }
 
-    public void setvID(int vID) {
+    public void setvID(String vID) {
         this.vID = vID;
     }
+
+    public void setvAge(int vAge) { this.vAge = vAge; }
+
+    public void setvGender(int vGender) { this.vGender = vGender; }
 }

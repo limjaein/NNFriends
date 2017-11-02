@@ -46,13 +46,108 @@
                 android:text="21"
                 android:textSize="70dp" />
         </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/writer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/writeTime"
+                android:gravity="right"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_marginTop="10dp"
-            android:padding="40dp"
-            android:layout_gravity="center"
-            android:layout_width="500dp"
-            android:layout_height="400dp"
-            android:background="@color/colorWhite"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/quest1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Please tell me your friend's name."
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/ans1r"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/quest2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="When did you work during breakfast, lunch or dinner?"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/ans2r"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/quest3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Tell me your time of service."
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/ans3r"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/quest4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="What activities did you do?"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/ans4r"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/quest5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Was there anything unusual?"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/ans5r"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30dp" />
+            </LinearLayout>
+        </ScrollView>
 </LinearLayout>
 </LinearLayout>

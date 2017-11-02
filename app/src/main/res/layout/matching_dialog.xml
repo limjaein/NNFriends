@@ -22,6 +22,7 @@
         android:layout_marginBottom="30dp"
         android:orientation="horizontal">
         <RadioButton
+            android:checked="true"
             android:id="@+id/age5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,6 +72,7 @@
         android:layout_height="wrap_content">
 
         <RadioButton
+            android:checked="true"
             android:id="@+id/gen3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

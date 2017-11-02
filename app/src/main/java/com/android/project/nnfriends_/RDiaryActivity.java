@@ -6,9 +6,19 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.android.project.nnfriends_.Classes.Diary;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class RDiaryActivity extends AppCompatActivity {
     String year, month, day;
-    TextView tv_year, tv_month, tv_day;
+    TextView tv_year, tv_month, tv_day, tv_writer, tv_writeTime;
+    TextView tv_ans1, tv_ans2, tv_ans3, tv_ans4, tv_ans5;
+
+    DatabaseReference table;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,21 +32,42 @@ public class RDiaryActivity extends AppCompatActivity {
     private void initFont() {
         Typeface typeface = Typeface.createFromAsset(getAssets(), "gozik.ttf");
 
-        TextView textView1 = (TextView) findViewById(R.id.r_year);
-        TextView textView2 = (TextView) findViewById(R.id.r_day);
-        TextView textView3 = (TextView) findViewById(R.id.r_month);
-        textView1.setTypeface(typeface);
-        textView2.setTypeface(typeface);
-        textView3.setTypeface(typeface);
+        tv_year = (TextView)findViewById(R.id.r_year);
+        tv_month = (TextView)findViewById(R.id.r_month);
+        tv_day = (TextView)findViewById(R.id.r_day);
+        tv_writer = (TextView) findViewById(R.id.writer);
+        tv_writeTime = (TextView) findViewById(R.id.writeTime);
+        tv_ans1 = (TextView) findViewById(R.id.ans1r);
+        tv_ans2 = (TextView) findViewById(R.id.ans2r);
+        tv_ans3 = (TextView) findViewById(R.id.ans3r);
+        tv_ans4 = (TextView) findViewById(R.id.ans4r);
+        tv_ans5 = (TextView) findViewById(R.id.ans5r);
+        TextView textView4 = (TextView) findViewById(R.id.quest1);
+        TextView textView5 = (TextView) findViewById(R.id.quest2);
+        TextView textView6 = (TextView) findViewById(R.id.quest3);
+        TextView textView7 = (TextView) findViewById(R.id.quest4);
+        TextView textView8 = (TextView) findViewById(R.id.quest5);
+
+        tv_year.setTypeface(typeface);
+        tv_month.setTypeface(typeface);
+        tv_day.setTypeface(typeface);
+        tv_writer.setTypeface(typeface);
+        tv_writeTime.setTypeface(typeface);
+        tv_ans1.setTypeface(typeface);
+        tv_ans2.setTypeface(typeface);
+        tv_ans3.setTypeface(typeface);
+        tv_ans4.setTypeface(typeface);
+        tv_ans5.setTypeface(typeface);
+        textView4.setTypeface(typeface);
+        textView5.setTypeface(typeface);
+        textView6.setTypeface(typeface);
+        textView7.setTypeface(typeface);
+        textView8.setTypeface(typeface);
     }
 
     private void init() {
 
         Intent int_date = getIntent();
-
-        tv_year = (TextView)findViewById(R.id.r_year);
-        tv_month = (TextView)findViewById(R.id.r_month);
-        tv_day = (TextView)findViewById(R.id.r_day);
 
         year = int_date.getIntExtra("year", 0)+"";
         month = int_date.getIntExtra("month", 0)+"";
@@ -45,6 +76,31 @@ public class RDiaryActivity extends AppCompatActivity {
         tv_year.setText(year+"");
         tv_month.setText(month+" / ");
         tv_day.setText(day+"");
+
+        table = FirebaseDatabase.getInstance().getReference("NNfriendsDB/DiaryDB");
+        final int matchNum = 0; // 처리해야함
+        String key = String.valueOf(matchNum) + "_" + year + month + day;
+
+        table.orderByKey().equalTo(key).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Diary diary = data.getValue(Diary.class);
+                    tv_writer.setText(diary.getvID()); // 전화번호말고 이름 가져와야됨
+                    tv_writeTime.setText(diary.getwTime());
+                    tv_ans1.setText(diary.getAnswer1());
+                    tv_ans2.setText(diary.getAnswer2());
+                    tv_ans3.setText(diary.getAnswer3());
+                    tv_ans4.setText(diary.getAnswer4());
+                    tv_ans5.setText(diary.getAnswer5());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 }
