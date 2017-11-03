@@ -6,25 +6,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/activity_diary"
-    android:padding="40dp"
+    android:padding="30dp"
     android:fitsSystemWindows="true"
     android:background="@color/menu2"
     tools:context="com.android.project.nnfriends_.WDiaryActivity">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="end|bottom"
+        android:onClick="writeClick" />
+
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/year"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="120dp"
-            android:text="2015"/>
+            android:text="2015"
+            android:textSize="80dp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="4dp"
-            android:background="@color/colorPrimary"/>
+            android:background="@color/colorPrimary" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,105 +45,108 @@
                 android:id="@+id/month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="80dp"
-                android:text="10/"/>
+                android:text="10/"
+                android:textSize="70dp" />
 
             <TextView
                 android:id="@+id/day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="80dp"
-                android:text="21"/>
+                android:text="21"
+                android:textSize="70dp" />
         </LinearLayout>
-            <ScrollView
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/quest1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:padding="20dp"
-                    android:orientation="vertical"
-                    android:background="@color/colorWhite">
-                    <TextView
-                        android:id="@+id/quest1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Q : 돌봄 친구분의 성함을 말해주세요."
-                        android:textSize="30dp"
-                        android:onClick="questClick"/>
-                    <TextView
-                        android:id="@+id/ans1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="30dp"/>
+                    android:onClick="questClick"
+                    android:text="Please tell me your friend's name."
+                    android:textSize="30dp" />
 
-                    <TextView
-                        android:id="@+id/quest2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="Q : 시간대는 아침, 점심, 저녁중
-                 언제입니까?"
-                        android:textSize="30dp"
-                        android:onClick="questClick" />
+                <TextView
+                    android:id="@+id/ans1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30dp" />
 
-                    <TextView
-                        android:id="@+id/ans2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="30dp"/>
+                <TextView
+                    android:id="@+id/quest2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:onClick="questClick"
+                    android:text="When did you work during breakfast, lunch or dinner?"
+                    android:textSize="30dp" />
 
-                    <TextView
-                        android:id="@+id/quest3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="Q : 봉사 시간을 말해주세요."
-                        android:textSize="30dp"
-                        android:onClick="questClick"/>
+                <TextView
+                    android:id="@+id/ans2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30dp" />
 
-                    <TextView
-                        android:id="@+id/ans3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="30dp"/>
+                <TextView
+                    android:id="@+id/quest3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:onClick="questClick"
+                    android:text="Tell me your time of service."
+                    android:textSize="30dp" />
 
-                    <TextView
-                        android:id="@+id/quest4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="Q : 무슨 활동을 하셨나요?"
-                        android:onClick="questClick"
-                        android:textSize="30dp"/>
+                <TextView
+                    android:id="@+id/ans3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30dp" />
 
-                    <TextView
-                        android:id="@+id/ans4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="30dp"/>
-                    <TextView
-                        android:id="@+id/quest5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="Q : 특이사항이 있었나요?"
-                        android:onClick="questClick"
-                        android:textSize="30dp"/>
-                    <TextView
-                        android:id="@+id/ans5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="30dp"/>
-                </LinearLayout>
-            </ScrollView>
+                <TextView
+                    android:id="@+id/quest4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:onClick="questClick"
+                    android:text="What activities did you do?"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/ans4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/quest5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:onClick="questClick"
+                    android:text="Was there anything unusual?"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/ans5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30dp" />
             </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_gravity="end|bottom"
-        android:onClick="writeClick" />
+        </ScrollView>
+    </LinearLayout>
 </FrameLayout>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="30dp">
+
+    <TextView
+        android:id="@+id/selectAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Select age you want"
+        android:textColor="@color/colorGray"
+        android:textSize="40dp" />
+
+    <RadioGroup
+        android:id="@+id/age_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:checked="true"
+            android:id="@+id/age5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All"
+            android:textSize="30dp" />
+        <RadioButton
+            android:id="@+id/age1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="60s"
+            android:textSize="30dp" />
+
+        <RadioButton
+            android:id="@+id/age2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="70s"
+            android:textSize="30dp" />
+
+        <RadioButton
+            android:id="@+id/age3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="80s"
+            android:textSize="30dp" />
+
+        <RadioButton
+            android:id="@+id/age4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="90s~"
+            android:textSize="30dp" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/selectgender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select gender you want"
+        android:textSize="35dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/colorGray"/>
+    <RadioGroup
+        android:id="@+id/gender_select"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:checked="true"
+            android:id="@+id/gen3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All"
+            android:textSize="30dp" />
+
+        <RadioButton
+            android:id="@+id/gen1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="women"
+            android:textSize="30dp" />
+
+        <RadioButton
+            android:id="@+id/gen2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="men"/>
+    </RadioGroup>
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/matchBtn"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:text="match"
+        android:textSize="25dp"
+        android:textColor="@color/colorWhite"
+        android:onClick="matchBtnClick"
+        android:background="@color/menu1"/>
+</LinearLayout>

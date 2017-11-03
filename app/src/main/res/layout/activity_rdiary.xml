@@ -9,42 +9,145 @@
     android:padding="30dp"
     tools:context="com.android.project.nnfriends_.RDiaryActivity">
 
-    <TextView
-        android:layout_marginTop="30dp"
-        android:id="@+id/r_year"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="120dp"
-        android:text="2015"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@color/colorPrimary"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/r_month"
-            android:layout_width="wrap_content"
+            android:id="@+id/r_year"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="80dp"
-            android:text="10/"/>
+            android:gravity="center"
+            android:text="2015"
+            android:textSize="80dp" />
 
         <TextView
-            android:id="@+id/r_day"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="80dp"
-            android:text="21"/>
-    </LinearLayout>
-    <TextView
-        android:layout_marginTop="30dp"
-        android:padding="30dp"
-        android:layout_gravity="center"
-        android:layout_width="500dp"
-        android:layout_height="400dp"
-        android:background="@color/colorWhite"/>
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/r_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10/"
+                android:textSize="70dp" />
+
+            <TextView
+                android:id="@+id/r_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="21"
+                android:textSize="70dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/writer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/writeTime"
+                android:gravity="right"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/quest1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Please tell me your friend's name."
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/ans1r"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/quest2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="When did you work during breakfast, lunch or dinner?"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/ans2r"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/quest3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Tell me your time of service."
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/ans3r"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/quest4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="What activities did you do?"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/ans4r"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/quest5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Was there anything unusual?"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/ans5r"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30dp" />
+            </LinearLayout>
+        </ScrollView>
+</LinearLayout>
 </LinearLayout>
