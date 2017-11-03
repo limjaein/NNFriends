@@ -62,7 +62,7 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.friendBtn:
-                intent = new Intent();
+                intent = new Intent(this, FriendActivity.class);
                 startActivity(intent);
                 break;
         }

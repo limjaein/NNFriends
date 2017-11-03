@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: C:\\GitKraken\\NNfriends_\\openCVLibrary330\\src\\main\\aidl\\org\\opencv\\engine\\OpenCVEngineInterface.aidl
+ * Original file: E:\\Android\\NNfriends_\\openCVLibrary330\\src\\main\\aidl\\org\\opencv\\engine\\OpenCVEngineInterface.aidl
  */
 package org.opencv.engine;
 /**

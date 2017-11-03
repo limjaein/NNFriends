@@ -5,11 +5,13 @@ package com.android.project.nnfriends_.Classes;
  */
 
 public class Diary {
-    private int diaryNum;
-    private int vID;
+    private String key;
+    private String vID;
     private int matchNum;
-    private int vDate;
-    private int vTime;
+    private String vYear;
+    private String vMonth;
+    private String vDay;
+    private String wTime;
     private String answer1;
     private String answer2;
     private String answer3;
@@ -17,12 +19,14 @@ public class Diary {
     private String answer5;
 
     public Diary(){}
-    public Diary(int num, int vID, int matchNum, int date, int time, String a1, String a2, String a3, String a4, String a5){
-        this.diaryNum = num;
+    public Diary(String key, String vID, int matchNum, String year, String month, String day, String time, String a1, String a2, String a3, String a4, String a5){
+        this.key = key;
         this.vID = vID;
         this.matchNum = matchNum;
-        this.vDate = date;
-        this.vTime = time;
+        this.vYear = year;
+        this.vMonth = month;
+        this.vDay = day;
+        this.wTime = time;
         this.answer1 = a1;
         this.answer2 = a2;
         this.answer3 = a3;
@@ -30,11 +34,11 @@ public class Diary {
         this.answer5 = a5;
     }
 
-    public int getDiaryNum() {
-        return diaryNum;
+    public String getKey() {
+        return key;
     }
 
-    public int getvID() {
+    public String getvID() {
         return vID;
     }
 
@@ -42,12 +46,20 @@ public class Diary {
         return matchNum;
     }
 
-    public int getvDate() {
-        return vDate;
+    public String getvYear() {
+        return vYear;
     }
 
-    public int getvTime() {
-        return vTime;
+    public String getvMonth() {
+        return vMonth;
+    }
+
+    public String getvDay() {
+        return vDay;
+    }
+
+    public String getwTime() {
+        return wTime;
     }
 
     public String getAnswer1() {
@@ -70,11 +82,11 @@ public class Diary {
         return answer5;
     }
 
-    public void setDiaryNum(int diaryNum) {
-        this.diaryNum = diaryNum;
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    public void setvID(int vID) {
+    public void setvID(String vID) {
         this.vID = vID;
     }
 
@@ -82,12 +94,20 @@ public class Diary {
         this.matchNum = matchNum;
     }
 
-    public void setvDate(int vDate) {
-        this.vDate = vDate;
+    public void setvYear(String vYear) {
+        this.vYear = vYear;
     }
 
-    public void setvTime(int vTime) {
-        this.vTime = vTime;
+    public void setvMonth(String vMonth) {
+        this.vMonth = vMonth;
+    }
+
+    public void setvDay(String vDay) {
+        this.vDay = vDay;
+    }
+
+    public void setwTime(String vTime) {
+        this.wTime = vTime;
     }
 
     public void setAnswer1(String answer1) {
