@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.project.nnfriends_.Classes.PreferenceManager;
 import com.android.project.nnfriends_.Classes.User;
 import com.github.ajalt.reprint.core.AuthenticationFailureReason;
 import com.github.ajalt.reprint.core.AuthenticationListener;
@@ -27,6 +28,13 @@ public class LoginActivity extends AppCompatActivity {
     EditText editID, editPIN;
 
     DatabaseReference table;
+
+    PreferenceManager pref;
+    //static final String KEY_AUTO_LOGIN = "autoLogin";
+    static final String KEY_USER_ID = "userID";
+    static final String KEY_USER_NAME = "userName";
+    static final String KEY_USER_PIN = "userPIN";
+    static final String KEY_USER_MATNUM = "matchNum";
 
     static Typeface typeface;
     @Override
@@ -120,8 +128,10 @@ public class LoginActivity extends AppCompatActivity {
                     User user = data.getValue(User.class);
                     if (user.getuPW().equals(pw)) {
                         Toast.makeText(LoginActivity.this, "로그인 성공!", Toast.LENGTH_LONG).show();
-                        //pref.saveStringPref(LoginActivity.this, KEY_USER_ID, id);
-                        //pref.saveStringPref(LoginActivity.this, KEY_USER_NAME, user.getUserName());
+                        pref.saveStringPref(LoginActivity.this, KEY_USER_ID, id);
+                        pref.saveStringPref(LoginActivity.this, KEY_USER_NAME, user.getName());
+                        pref.saveStringPref(LoginActivity.this, KEY_USER_PIN, user.getuPW());
+                        pref.saveIntPref(LoginActivity.this, KEY_USER_MATNUM, user.getMatchNum());
                         //Log.d("check",  pref.getBooleanPref(LoginActivity.this, KEY_AUTO_LOGIN)+"");
                         Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
                         startActivity(intent);

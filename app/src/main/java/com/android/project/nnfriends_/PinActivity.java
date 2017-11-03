@@ -6,10 +6,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.project.nnfriends_.Classes.PreferenceManager;
+
+import static com.android.project.nnfriends_.LoginActivity.KEY_USER_PIN;
 import static com.android.project.nnfriends_.LoginActivity.typeface;
 
 public class PinActivity extends AppCompatActivity {
     TextView password;
+
+    PreferenceManager pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +73,14 @@ public class PinActivity extends AppCompatActivity {
             }
             if(password.length()==4){
                 //비번 확인! 틀리면 초기화해주기 맞으면 넘어가기
-                Toast.makeText(this, password.getText().toString()+" / 넘어가기!", Toast.LENGTH_SHORT).show();
-                this.finish();
+                String pin = pref.getStringPref(PinActivity.this, KEY_USER_PIN);
+                if (password.getText().toString().equals(pin)) {
+                    //Toast.makeText(this, password.getText().toString()+" / 넘어가기!", Toast.LENGTH_SHORT).show();
+                    this.finish();
+                } else {
+                    password.setText("");
+                    Toast.makeText(this, "PIN번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }
