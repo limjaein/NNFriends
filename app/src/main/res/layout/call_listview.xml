@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="@color/colorWhite"
+        android:layout_height="100sp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_weight = "3">
+            <TextView
+                android:id="@+id/NameView"
+                android:layout_width="match_parent"
+                android:layout_height="0sp"
+                android:layout_weight = "1"
+                android:paddingLeft = "20sp"
+                android:paddingTop = "10sp"
+                android:text="JOIN"
+                android:textSize ="30sp"
+                />
+            <TextView
+                android:id="@+id/PhoneView"
+                android:layout_width="match_parent"
+                android:layout_height="0sp"
+                android:layout_weight = "1"
+                android:paddingLeft = "20sp"
+                android:paddingTop = "10sp"
+                android:text="JOIN"
+                android:textSize ="30sp"/>
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/CallBtn"
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_weight = "1"
+            android:text="CALL"
+            android:textSize ="30sp">
+
+        </Button>
+    </LinearLayout>
+
+</LinearLayout>
