@@ -128,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                     User user = data.getValue(User.class);
                     if (user.getuPW().equals(pw)) {
                         Toast.makeText(LoginActivity.this, "로그인 성공!", Toast.LENGTH_LONG).show();
+                        pref = new PreferenceManager();
                         pref.saveStringPref(LoginActivity.this, KEY_USER_ID, id);
                         pref.saveStringPref(LoginActivity.this, KEY_USER_NAME, user.getName());
                         pref.saveStringPref(LoginActivity.this, KEY_USER_PIN, user.getuPW());
