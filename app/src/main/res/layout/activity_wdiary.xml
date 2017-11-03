@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/activity_diary"
-    android:padding="30dp"
     android:fitsSystemWindows="true"
     android:background="@color/menu2"
+    android:padding="20dp"
     tools:context="com.android.project.nnfriends_.WDiaryActivity">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="end|bottom"
-        android:onClick="writeClick" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,6 +31,7 @@
             android:background="@color/colorPrimary" />
 
         <LinearLayout
+            android:id="@+id/fab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
@@ -60,93 +55,104 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/quest1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorWhite"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:onClick="questClick"
+                android:text="Please tell me your friend's name."
+                android:textSize="30dp" />
 
-                <TextView
-                    android:id="@+id/quest1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="questClick"
-                    android:text="Please tell me your friend's name."
-                    android:textSize="30dp" />
+            <TextView
+                android:id="@+id/ans1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30dp" />
 
-                <TextView
-                    android:id="@+id/ans1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="30dp" />
+            <TextView
+                android:id="@+id/quest2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="questClick"
+                android:text="When did you work during breakfast, lunch or dinner?"
+                android:textSize="30dp" />
 
-                <TextView
-                    android:id="@+id/quest2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:onClick="questClick"
-                    android:text="When did you work during breakfast, lunch or dinner?"
-                    android:textSize="30dp" />
+            <TextView
+                android:id="@+id/ans2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorGray"
+                android:textSize="30dp" />
 
-                <TextView
-                    android:id="@+id/ans2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorGray"
-                    android:textSize="30dp" />
+            <TextView
+                android:id="@+id/quest3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="questClick"
+                android:text="Tell me your time of service."
+                android:textSize="30dp" />
 
-                <TextView
-                    android:id="@+id/quest3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:onClick="questClick"
-                    android:text="Tell me your time of service."
-                    android:textSize="30dp" />
+            <TextView
+                android:id="@+id/ans3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorGray"
+                android:textSize="30dp" />
 
-                <TextView
-                    android:id="@+id/ans3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorGray"
-                    android:textSize="30dp" />
+            <TextView
+                android:id="@+id/quest4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="questClick"
+                android:text="What activities did you do?"
+                android:textSize="30dp" />
 
-                <TextView
-                    android:id="@+id/quest4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:onClick="questClick"
-                    android:text="What activities did you do?"
-                    android:textSize="30dp" />
+            <TextView
+                android:id="@+id/ans4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorGray"
+                android:textSize="30dp" />
 
-                <TextView
-                    android:id="@+id/ans4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorGray"
-                    android:textSize="30dp" />
+            <TextView
+                android:id="@+id/quest5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="questClick"
+                android:text="Was there anything unusual?"
+                android:textSize="30dp" />
 
-                <TextView
-                    android:id="@+id/quest5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:onClick="questClick"
-                    android:text="Was there anything unusual?"
-                    android:textSize="30dp" />
-
-                <TextView
-                    android:id="@+id/ans5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorGray"
-                    android:textSize="30dp" />
-            </LinearLayout>
-        </ScrollView>
+            <TextView
+                android:id="@+id/ans5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorGray"
+                android:textSize="30dp" />
+        </LinearLayout>
     </LinearLayout>
-</FrameLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:backgroundTint="@color/menu4"
+        android:src="@drawable/savingdiary"
+        app:layout_anchor="@id/fab_layout"
+        app:layout_anchorGravity="right|bottom"
+        android:onClick="writeClick" />
+</android.support.design.widget.CoordinatorLayout>

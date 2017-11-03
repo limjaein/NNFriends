@@ -24,7 +24,6 @@ public class WDiaryActivity extends AppCompatActivity {
     TextView tv_quest;
     TextView tv_answer;
 
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +84,7 @@ public class WDiaryActivity extends AppCompatActivity {
                 new TextToSpeech.OnInitListener(){
                     @Override
                     public void onInit(int status) {
-                        ttsReady = true;
+                                ttsReady = true;
                     }
                 }
         );
@@ -94,8 +93,11 @@ public class WDiaryActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
         super.onDestroy();
-        tts.shutdown();
     }
 
     private void initQuest() {
@@ -103,6 +105,7 @@ public class WDiaryActivity extends AppCompatActivity {
             if(ttsReady){
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     //질문 읽어주는 부분
+                    tts.setLanguage(Locale.ENGLISH);
                     tts.speak(tv_quest.getText().toString(), TextToSpeech.QUEUE_ADD, null, null);
                     while(true){
                         if(!tts.isSpeaking()){
@@ -110,7 +113,7 @@ public class WDiaryActivity extends AppCompatActivity {
                             Intent intent = new Intent(
                                     RecognizerIntent.ACTION_RECOGNIZE_SPEECH
                             );
-                            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+                            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH);
                             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                                     RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
                             intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "대답해");
