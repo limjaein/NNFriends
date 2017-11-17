@@ -2,6 +2,7 @@ package com.android.project.nnfriends_;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,7 @@ public class GroupAdapter extends BaseAdapter {
         }
 
         final Room room = mRoom.get(i);
+        Log.d("checkk", "getView");
 
         TextView dateView = (TextView)view.findViewById(R.id.DateView);
         TextView placeView = (TextView)view.findViewById(R.id.PlaceView);

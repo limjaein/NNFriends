@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -142,7 +143,8 @@ public class GroupActivity extends AppCompatActivity {
 
     }
 
-    public void showList(String gu, String dong){
+    public void showList(final String gu, final String dong){
+        Log.d("checkk", "showList");
         final ArrayList<Room> selectDong = new ArrayList<>();
         DatabaseReference table = FirebaseDatabase.getInstance().getReference("NNfriendsDB/RoomDB");
         Query query = table.orderByKey();
@@ -151,7 +153,10 @@ public class GroupActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Room room = data.getValue(Room.class);
-                    selectDong.add(room);
+                    if (room.getGu().equals(gu) && room.getDong().equals(dong)) {
+                        selectDong.add(room);
+                        Log.d("checkk", "datachange");
+                    }
                 }
             }
 
