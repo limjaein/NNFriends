@@ -14,6 +14,12 @@ import android.widget.TextView;
 
 import com.android.project.nnfriends_.Classes.DialogListAdapter;
 import com.android.project.nnfriends_.Classes.Room;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,11 +48,11 @@ public class GroupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
         /////////////////////////////////////
-        rooms.add(new Room("광진구","자양동","20171101, 13시","한아름볼링장", "볼링치기"));
-        rooms.add(new Room("광진구","화양동","20171103, 17시", "로니로티", "저녁먹기"));
-        rooms.add(new Room("광진구","화양동","20171107, 12시", "일감호", "산책하기"));
-        rooms.add(new Room("광진구","화양동","20171112, 15시", "화양동주민센터", "수다떨기"));
-        rooms.add(new Room("광진구","화양동","20171115, 14시", "노인정", "뜨개질"));
+//        rooms.add(new Room("광진구","자양동","20171101, 13시","한아름볼링장", "볼링치기"));
+//        rooms.add(new Room("광진구","화양동","20171103, 17시", "로니로티", "저녁먹기"));
+//        rooms.add(new Room("광진구","화양동","20171107, 12시", "일감호", "산책하기"));
+//        rooms.add(new Room("광진구","화양동","20171112, 15시", "화양동주민센터", "수다떨기"));
+//        rooms.add(new Room("광진구","화양동","20171115, 14시", "노인정", "뜨개질"));
 
         /////////////////////////////////////
 
@@ -137,12 +143,23 @@ public class GroupActivity extends AppCompatActivity {
     }
 
     public void showList(String gu, String dong){
-        ArrayList<Room> selectDong = new ArrayList<>();
-        for(int i = 0; i< rooms.size(); i++){
-            if (dong.equals(rooms.get(i).getDong())){
-                selectDong.add(rooms.get(i));
+        final ArrayList<Room> selectDong = new ArrayList<>();
+        DatabaseReference table = FirebaseDatabase.getInstance().getReference("NNfriendsDB/RoomDB");
+        Query query = table.orderByKey();
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Room room = data.getValue(Room.class);
+                    selectDong.add(room);
+                }
             }
-        }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         GroupAdapter mGroupAdapter = new GroupAdapter(GroupActivity.this, selectDong);
         ActiveList.setAdapter(mGroupAdapter);

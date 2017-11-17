@@ -96,11 +96,10 @@
         android:id="@+id/addBtn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:background="@color/menu3"
         android:layout_gravity="center_vertical"
         android:layout_weight="0.2"
+        android:background="@color/menu3"
+        android:orientation="vertical"
         android:text="Add Activity"
-        android:textSize="20sp">
-    </Button>
+        android:textSize="20sp"></Button>
 </LinearLayout>

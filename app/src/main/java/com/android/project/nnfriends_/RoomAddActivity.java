@@ -22,8 +22,10 @@ import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.android.project.nnfriends_.Classes.DialogListAdapter;
+import com.android.project.nnfriends_.Classes.PreferenceManager;
 import com.android.project.nnfriends_.Classes.Room;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,9 +33,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Locale;
+
+import static com.android.project.nnfriends_.LoginActivity.KEY_USER_NAME;
 
 public class RoomAddActivity extends AppCompatActivity {
 
@@ -182,8 +188,7 @@ public class RoomAddActivity extends AppCompatActivity {
             month = calendar.get(Calendar.MONTH);
             day = calendar.get(Calendar.DAY_OF_MONTH);
 
-            DatePickerDialog datepickerdialog = new DatePickerDialog(getActivity(),
-                    AlertDialog.THEME_DEVICE_DEFAULT_LIGHT,this,year,month,day);
+            DatePickerDialog datepickerdialog = new DatePickerDialog(getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT,this,year,month,day);
 
             return datepickerdialog;
         }
@@ -372,16 +377,19 @@ public class RoomAddActivity extends AppCompatActivity {
     }
 
     public void saveClick(View view){
+
+        PreferenceManager pref = new PreferenceManager();
+
         //db 저장 부분
         final String Gu = GuTxt.getText().toString();
         final String Dong =DongTxt.getText().toString();
         final String groupDate = dateTxt.getText().toString()+","+timeTxt.getText().toString();
-        final String grouPlace = ans2;
+        final String groupPlace = ans2;
         final String groupContent = ans3;
-        final String Leader;
+        final String Leader = pref.getStringPref(RoomAddActivity.this, KEY_USER_NAME);
         final String TeamNum = String.valueOf(ans4);
         final String Active = String.valueOf(0);    //모집중
-        final String Roomkey;
+        final String Roomkey = "0"; // 바꿀예정
 
 
         table = FirebaseDatabase.getInstance().getReference("NNfriendsDB/RoomDB");  //모집중인 방들 모음
@@ -389,15 +397,15 @@ public class RoomAddActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-//                int matchNum = 0; // 처리해야됨
-//                String key = String.valueOf(matchNum) + "_" + year + month + day;
-//                SimpleDateFormat wTime = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm"); // 작성시간
-//                final Date today = new Date();
-//
-//                DatabaseReference diaryRef = table.child(key);
-//                Diary diary = new Diary(key, "01027679287", matchNum, year, month, day, wTime.format(today), ans1, ans2, ans3, ans4, ans5);
-//                diaryRef.setValue(diary);
-//                Toast.makeText(RoomAddActivity.this, "작성 완료", Toast.LENGTH_SHORT).show();
+                int matchNum = 0; // 처리해야됨
+                String key = String.valueOf(matchNum) + "_" + year + month + day;
+                SimpleDateFormat wTime = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm"); // 작성시간
+                final Date today = new Date();
+
+                DatabaseReference roomRef = table.child(key);
+                Room room = new Room(key, Active, Leader, TeamNum, Gu, Dong, groupDate, groupPlace, groupContent);
+                roomRef.setValue(room);
+                Toast.makeText(RoomAddActivity.this, "작성 완료", Toast.LENGTH_SHORT).show();
             }
 
             @Override

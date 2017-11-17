@@ -16,18 +16,22 @@ public class Room {
     private String Roomkey;         //방번호 -> 구_동_생성시간 (일단은 이렇게)
 
     public Room(){}
-    public Room(String Gu, String Dong, String groupDate, String groupPlace, String groupContent){
+    public Room(String RoomKey, String Active, String Leader, String TeamNum, String Gu, String Dong, String groupDate, String groupPlace, String groupContent){
+        this.Roomkey = RoomKey;
+        this.Active = Active;
+        this.Leader = Leader;
+        this.TeamNum = TeamNum;
         this.Gu = Gu;
         this.Dong = Dong;
         this.groupContent = groupContent;
         this.groupDate = groupDate;
         this.groupPlace = groupPlace;
     }
-//
-//    public String getLeader{return Leader;}
-//    public String getTeamNum{return TeamNum;}
-//    public String getActive{return Active;}
-//    public String getRoomkey{return Roomkey;}
+
+    public String getLeader(){return Leader;}
+    public String getTeamNum(){return TeamNum;}
+    public String getActive(){return Active;}
+    public String getRoomkey(){return Roomkey;}
     public String getGu(){
         return Gu;
     }
