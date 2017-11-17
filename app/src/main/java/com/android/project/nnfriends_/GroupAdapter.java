@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.android.project.nnfriends_.Classes.Group;
+import com.android.project.nnfriends_.Classes.Room;
 
 import java.util.ArrayList;
 
@@ -18,21 +18,21 @@ import java.util.ArrayList;
 
 public class GroupAdapter extends BaseAdapter {
 
-    private ArrayList<Group> mGroup = new ArrayList<>();
+    private ArrayList<Room> mRoom = new ArrayList<>();
     private Activity activity;
 
-    public GroupAdapter(Activity activity, ArrayList<Group> mGroup){
+    public GroupAdapter(Activity activity, ArrayList<Room> mRoom){
         this.activity = activity;
-        this.mGroup = mGroup;
+        this.mRoom = mRoom;
     }
     @Override
     public int getCount() {
-        return mGroup.size();
+        return mRoom.size();
     }
 
     @Override
-    public Group getItem(int i) {
-        return mGroup.get(i);
+    public Room getItem(int i) {
+        return mRoom.get(i);
     }
 
     @Override
@@ -49,15 +49,15 @@ public class GroupAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.group_listview, null);
         }
 
-        final Group group = mGroup.get(i);
+        final Room room = mRoom.get(i);
 
         TextView dateView = (TextView)view.findViewById(R.id.DateView);
         TextView placeView = (TextView)view.findViewById(R.id.PlaceView);
         TextView contentView = (TextView)view.findViewById(R.id.ContentView);
 
-        dateView.setText(group.getGroupDate());
-        placeView.setText(group.getGroupPlace());
-        contentView.setText(group.getGroupContent());
+        dateView.setText(room.getGroupDate());
+        placeView.setText(room.getGroupPlace());
+        contentView.setText(room.getGroupContent());
 
         return view;
     }

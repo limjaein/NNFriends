@@ -1,21 +1,19 @@
 package com.android.project.nnfriends_;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.project.nnfriends_.Classes.Group;
+import com.android.project.nnfriends_.Classes.DialogListAdapter;
+import com.android.project.nnfriends_.Classes.Room;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,8 +24,10 @@ public class GroupActivity extends AppCompatActivity {
     private Button GuBtn, DongBtn;
     public TextView GuTxt, DongTxt;
     public ListView ActiveList;
+    public Button addBtn;
+    static Intent intent_add;
 
-    ArrayList<Group> groups = new ArrayList<>();
+    ArrayList<Room> rooms = new ArrayList<>();
 
     ArrayList<String> GuList, DongList;
     int guNum;
@@ -42,15 +42,16 @@ public class GroupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
         /////////////////////////////////////
-        groups.add(new Group("광진구","자양동","20171101, 13시","한아름볼링장", "볼링치기"));
-        groups.add(new Group("광진구","화양동","20171103, 17시", "로니로티", "저녁먹기"));
-        groups.add(new Group("광진구","화양동","20171107, 12시", "일감호", "산책하기"));
-        groups.add(new Group("광진구","화양동","20171112, 15시", "화양동주민센터", "수다떨기"));
-        groups.add(new Group("광진구","화양동","20171115, 14시", "노인정", "뜨개질"));
+        rooms.add(new Room("광진구","자양동","20171101, 13시","한아름볼링장", "볼링치기"));
+        rooms.add(new Room("광진구","화양동","20171103, 17시", "로니로티", "저녁먹기"));
+        rooms.add(new Room("광진구","화양동","20171107, 12시", "일감호", "산책하기"));
+        rooms.add(new Room("광진구","화양동","20171112, 15시", "화양동주민센터", "수다떨기"));
+        rooms.add(new Room("광진구","화양동","20171115, 14시", "노인정", "뜨개질"));
 
         /////////////////////////////////////
 
         ActiveList = (ListView)findViewById(R.id.activeList);
+        addBtn = (Button)findViewById(R.id.addBtn);
         GuBtn = (Button) findViewById(R.id.gubtn);
         DongBtn = (Button) findViewById(R.id.dongbtn);
         GuTxt = (TextView)findViewById(R.id.GuTxt);
@@ -125,13 +126,21 @@ public class GroupActivity extends AppCompatActivity {
             }
         });
 
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent_add = new Intent(getApplication(), RoomAddActivity.class);
+                startActivity(intent_add);
+            }
+        });
+
     }
 
     public void showList(String gu, String dong){
-        ArrayList<Group> selectDong = new ArrayList<>();
-        for(int i=0; i<groups.size(); i++){
-            if (dong.equals(groups.get(i).getDong())){
-                selectDong.add(groups.get(i));
+        ArrayList<Room> selectDong = new ArrayList<>();
+        for(int i = 0; i< rooms.size(); i++){
+            if (dong.equals(rooms.get(i).getDong())){
+                selectDong.add(rooms.get(i));
             }
         }
 
@@ -140,44 +149,3 @@ public class GroupActivity extends AppCompatActivity {
     }
 }
 
-class DialogListAdapter extends BaseAdapter{
-
-    private Activity activity;
-    private ArrayList<String> dataList;
-
-    public DialogListAdapter(Activity activity, ArrayList<String> dataList){
-        this.activity = activity;
-        this.dataList = dataList;
-    }
-    @Override
-    public int getCount() {
-        return dataList.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return position;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int i, View convertView, ViewGroup viewGroup) {
-        View view = convertView;
-        if(view == null){
-            LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.dialog_list_row, null);
-        }
-
-        final String gu = dataList.get(i);
-
-        TextView textView = (TextView)view.findViewById(R.id.choiceTitle);
-
-        textView.setText(gu);
-
-        return view;
-    }
-}

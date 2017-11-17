@@ -20,7 +20,7 @@ public class User {
     private String address_dong;    // 동
 
     /* 추가정보 */
-    private int matchNum;   // 매칭 번호
+    private int matchNum;   // 매칭 번호 (그룹이름같은 존재)
     private int payday;     // 월급일
     private String vID;        // 발굴자ID; -1:없음
     private int vAge;       // 수혜자가 매칭을 원하는 봉사자의 나이대; 0:all, 1:60s, 2:70s, 3:80s, 4:90s~

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/menu2"
-    android:padding="40dp"
+    android:padding="40sp"
     tools:context="com.android.project.nnfriends_.FriendActivity">
     <ListView
         android:id="@+id/callList"
