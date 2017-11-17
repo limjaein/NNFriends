@@ -1,5 +1,6 @@
 package com.android.project.nnfriends_;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -131,4 +132,11 @@ public class ConnectActivity extends AppCompatActivity {
             }
         }
     };
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Intent reintent = new Intent(this, PinActivity.class);
+        startActivity(reintent);
+    }
 }
