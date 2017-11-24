@@ -3,10 +3,13 @@ package com.android.project.nnfriends_;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,11 +51,23 @@ public class LoginActivity extends AppCompatActivity {
         Reprint.initialize(this);
 
         if (checkDeviceSpec()) {
-            Log.d("ReprintLog", "1");
+
+            final LayoutInflater inflater = getLayoutInflater();
+            final View dialogView = inflater.inflate(R.layout.dialog_login, null);
+            final ImageView check = (ImageView) dialogView.findViewById(R.id.imgFingerprint);
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
+            alert.setView(dialogView);
+            alert.setPositiveButton("cancel", null);
+            alert.setCancelable(false);
+            final AlertDialog dialog = alert.create();
+            dialog.show();
+
             Reprint.authenticate(new AuthenticationListener() {
                 @Override
                 public void onSuccess(int moduleTag) {
-                    Log.d("ReprintLog", "2");
+                    check.setImageResource(R.drawable.fingerprint_check);
+                    dialog.dismiss();
                     Toast.makeText(LoginActivity.this, "success", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                     startActivity(intent);
@@ -61,7 +76,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(AuthenticationFailureReason failureReason, boolean fatal, CharSequence errorMessage, int moduleTag, int errorCode) {
-                    Log.d("ReprintLog", "3");
                     Toast.makeText(LoginActivity.this, "failure", Toast.LENGTH_SHORT).show();
                 }
             });
