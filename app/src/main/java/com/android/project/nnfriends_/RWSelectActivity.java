@@ -10,12 +10,11 @@ import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
-public class RWSelectActivity extends AppCompatActivity {
+public class RWSelectActivity extends MyActivity {
     //datepicker 부분
     public static int year;
     public static int day;
@@ -63,9 +62,6 @@ public class RWSelectActivity extends AppCompatActivity {
         }
         public void onResume(){
             super.onResume();
-            //        Window window = getDialog().getWindow();
-            //        window.setLayout(1200,1500);
-            //        window.setGravity(Gravity.CENTER);
         }
         public void onDateSet(DatePicker view, int year, int month, int day){
 

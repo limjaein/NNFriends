@@ -14,9 +14,10 @@ public class Room {
     private String TeamNum;         //참여 팀 수
     private String Active;          //모집 중: 0, 마감:1
     private String Roomkey;         //방번호 -> 구_동_생성시간 (일단은 이렇게)
+    private String attendNum;       //참가팀 수
 
     public Room(){}
-    public Room(String RoomKey, String Active, String Leader, String TeamNum, String Gu, String Dong, String groupDate, String groupPlace, String groupContent){
+    public Room(String RoomKey, String Active, String Leader, String TeamNum, String Gu, String Dong, String groupDate, String groupPlace, String groupContent, String attendNum){
         this.Roomkey = RoomKey;
         this.Active = Active;
         this.Leader = Leader;
@@ -26,6 +27,7 @@ public class Room {
         this.groupContent = groupContent;
         this.groupDate = groupDate;
         this.groupPlace = groupPlace;
+        this.attendNum = attendNum;
     }
 
     public String getLeader(){return Leader;}
@@ -47,6 +49,7 @@ public class Room {
     public String getGroupContent(){
         return groupContent;
     }
+    public String getAttendNum(){return attendNum;}
 
     public void setLeader(String Leader){this.Leader = Leader;}
     public void setTeamNum(String TeamNum){this.TeamNum = TeamNum;}
@@ -67,4 +70,5 @@ public class Room {
     public void setGroupContent(String groupContent){
         this.groupContent = groupContent;
     }
+    public void setAttendNum(String attendNum){this.attendNum = attendNum;}
 }

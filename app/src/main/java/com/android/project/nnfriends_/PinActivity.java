@@ -2,6 +2,7 @@ package com.android.project.nnfriends_;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,8 +14,16 @@ import static com.android.project.nnfriends_.LoginActivity.typeface;
 
 public class PinActivity extends AppCompatActivity {
     TextView password;
-
     PreferenceManager pref;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +36,15 @@ public class PinActivity extends AppCompatActivity {
     private void init() {
         password = (TextView)findViewById(R.id.passView);
         password.setTypeface(typeface);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        CustomApp app = (CustomApp)getApplication();
+        //현재 액티비티 저장
+        app.setPreActivity("PinActivity");
     }
 
     public void passClick(View view) {
@@ -75,7 +93,6 @@ public class PinActivity extends AppCompatActivity {
                 //비번 확인! 틀리면 초기화해주기 맞으면 넘어가기
                 String pin = pref.getStringPref(PinActivity.this, KEY_USER_PIN);
                 if (password.getText().toString().equals(pin)) {
-                    //Toast.makeText(this, password.getText().toString()+" / 넘어가기!", Toast.LENGTH_SHORT).show();
                     this.finish();
                 } else {
                     password.setText("");

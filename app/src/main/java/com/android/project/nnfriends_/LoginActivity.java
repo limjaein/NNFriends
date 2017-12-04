@@ -1,8 +1,11 @@
 package com.android.project.nnfriends_;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
     boolean running;
     EditText editID, editPIN;
+    String autoId, autoPin;
 
     DatabaseReference table;
 
@@ -37,11 +41,17 @@ public class LoginActivity extends AppCompatActivity {
     static final String KEY_USER_MATNUM = "matchNum";
 
     static Typeface typeface;
+
+    @Override
+    public void onBackPressed() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        initAutoLogin();
         initFont();
         init();
 
@@ -74,12 +84,36 @@ public class LoginActivity extends AppCompatActivity {
 
         }
     }
+    public void initAutoLogin(){
+        SharedPreferences autopref = getSharedPreferences("autopref", Activity.MODE_PRIVATE);
 
+        PreferenceManager pref = new PreferenceManager();
+        String Id = pref.getStringPref(LoginActivity.this, KEY_USER_ID);
+        String Pin = pref.getStringPref(LoginActivity.this, KEY_USER_PIN);
+
+        autoId = autopref.getString("autoId",null);
+        autoPin = autopref.getString("autoPin", null);
+
+        if(autoId !=null && autoPin != null) {
+            if(autoId.equals(Id) && autoPin.equals(Pin)) {
+                Toast.makeText(LoginActivity.this, autoId +" 님 자동로그인 입니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, PinActivity.class);
+                startActivity(intent);
+
+                Intent intent2 = new Intent(LoginActivity.this, MenuActivity.class);
+                startActivity(intent2);
+            }
+        }
+    }
     public void init() {
         editID = (EditText) findViewById(R.id.editLoginID);
         editPIN = (EditText) findViewById(R.id.editLoginPIN);
-    }
 
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null)
+            actionBar.hide();
+
+    }
     private void initFont() {
 
         typeface = Typeface.createFromAsset(getAssets(), "gozik.ttf");
@@ -89,7 +123,6 @@ public class LoginActivity extends AppCompatActivity {
         textView1.setTypeface(typeface);
         textView2.setTypeface(typeface);
     }
-
     public boolean checkDeviceSpec() {
         boolean finderprintFlag = Reprint.isHardwarePresent();
         boolean hasRegisteredFlag = Reprint.hasFingerprintRegistered();
@@ -98,7 +131,6 @@ public class LoginActivity extends AppCompatActivity {
 
         return (finderprintFlag && hasRegisteredFlag);
     }
-
     public void btnClick(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -112,7 +144,6 @@ public class LoginActivity extends AppCompatActivity {
                 break;
         }
     }
-
     public void loginCheck() {
         final String id = editID.getText().toString();
         final String pw = editPIN.getText().toString();
@@ -129,11 +160,17 @@ public class LoginActivity extends AppCompatActivity {
                     if (user.getuPW().equals(pw)) {
                         Toast.makeText(LoginActivity.this, "로그인 성공!", Toast.LENGTH_LONG).show();
                         pref = new PreferenceManager();
+                        SharedPreferences autopref = getSharedPreferences("autopref", Activity.MODE_PRIVATE);
+
+                        SharedPreferences.Editor autoLogin = autopref.edit();
+                        autoLogin.putString("autoId", id);
+                        autoLogin.putString("autoPin", pw);
+
+                        autoLogin.commit(); // 저장
                         pref.saveStringPref(LoginActivity.this, KEY_USER_ID, id);
                         pref.saveStringPref(LoginActivity.this, KEY_USER_NAME, user.getName());
                         pref.saveStringPref(LoginActivity.this, KEY_USER_PIN, user.getuPW());
                         pref.saveIntPref(LoginActivity.this, KEY_USER_MATNUM, user.getMatchNum());
-                        //Log.d("check",  pref.getBooleanPref(LoginActivity.this, KEY_AUTO_LOGIN)+"");
                         Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
                         startActivity(intent);
                         finish();

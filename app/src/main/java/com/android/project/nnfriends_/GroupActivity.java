@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class GroupActivity extends AppCompatActivity {
+public class GroupActivity extends MyActivity {
 
     final Context context = this;
     private Button GuBtn, DongBtn;
@@ -33,6 +32,7 @@ public class GroupActivity extends AppCompatActivity {
     public ListView ActiveList;
     public Button addBtn;
     static Intent intent_add;
+
 
     ArrayList<Room> rooms = new ArrayList<>();
 
@@ -158,6 +158,9 @@ public class GroupActivity extends AppCompatActivity {
                         Log.d("checkk", "datachange");
                     }
                 }
+                GroupAdapter mGroupAdapter = new GroupAdapter(GroupActivity.this, selectDong);
+                mGroupAdapter.notifyDataSetChanged();
+                ActiveList.setAdapter(mGroupAdapter);
             }
 
             @Override
@@ -166,8 +169,6 @@ public class GroupActivity extends AppCompatActivity {
             }
         });
 
-        GroupAdapter mGroupAdapter = new GroupAdapter(GroupActivity.this, selectDong);
-        ActiveList.setAdapter(mGroupAdapter);
     }
 }
 

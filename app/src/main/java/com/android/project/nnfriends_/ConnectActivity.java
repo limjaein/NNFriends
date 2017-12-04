@@ -1,10 +1,8 @@
 package com.android.project.nnfriends_;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -12,13 +10,14 @@ import android.widget.TextView;
 
 import com.android.project.nnfriends_.Classes.customDialog;
 
-public class ConnectActivity extends AppCompatActivity {
+public class ConnectActivity extends MyActivity {
     Typeface typeface;
     customDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         typeface = Typeface.createFromAsset(getAssets(), "gozik.ttf");
 
@@ -133,10 +132,4 @@ public class ConnectActivity extends AppCompatActivity {
         }
     };
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Intent reintent = new Intent(this, PinActivity.class);
-        startActivity(reintent);
-    }
 }

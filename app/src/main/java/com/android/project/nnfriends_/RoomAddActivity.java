@@ -7,13 +7,13 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +25,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.project.nnfriends_.Classes.DialogListAdapter;
+import com.android.project.nnfriends_.Classes.Group;
 import com.android.project.nnfriends_.Classes.PreferenceManager;
 import com.android.project.nnfriends_.Classes.Room;
 import com.google.firebase.database.DataSnapshot;
@@ -39,9 +40,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.android.project.nnfriends_.LoginActivity.KEY_USER_MATNUM;
 import static com.android.project.nnfriends_.LoginActivity.KEY_USER_NAME;
 
-public class RoomAddActivity extends AppCompatActivity {
+public class RoomAddActivity extends MyActivity {
 
     public static int year;
     public static int day;
@@ -74,6 +76,7 @@ public class RoomAddActivity extends AppCompatActivity {
     int ansNum;
 
     DatabaseReference table;
+    Room room;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -85,7 +88,43 @@ public class RoomAddActivity extends AppCompatActivity {
 
         init();
         init2();
+        initFont();
 
+    }
+
+    private void initFont() {
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "gozik.ttf");
+
+        TextView textView1 = (TextView) findViewById(R.id.GuTxt);
+        TextView textView2 = (TextView) findViewById(R.id.DongTxt);
+        TextView textView3 = (TextView) findViewById(R.id.DateTxt);
+        TextView textView4 = (TextView) findViewById(R.id.TimeTxt);
+        TextView textView5 = (TextView) findViewById(R.id.quest2);
+        TextView textView6 = (TextView) findViewById(R.id.quest3);
+        TextView textView7 = (TextView) findViewById(R.id.quest4);
+        TextView textView9 = (TextView) findViewById(R.id.ans4);
+        TextView textView11 = (TextView) findViewById(R.id.ans2);
+        TextView textView12 = (TextView) findViewById(R.id.ans3);
+        Button btn1 = (Button)findViewById(R.id.gubtn);
+        Button btn2 = (Button)findViewById(R.id.dongbtn);
+        Button btn3 = (Button)findViewById(R.id.DateBtn);
+        Button btn4 = (Button)findViewById(R.id.TimeBtn);
+        Button btn5 = (Button)findViewById(R.id.saveBtn);
+        textView1.setTypeface(typeface);
+        textView2.setTypeface(typeface);
+        textView3.setTypeface(typeface);
+        textView4.setTypeface(typeface);
+        textView5.setTypeface(typeface);
+        textView6.setTypeface(typeface);
+        textView7.setTypeface(typeface);
+        textView9.setTypeface(typeface);
+        textView11.setTypeface(typeface);
+        textView12.setTypeface(typeface);
+        btn1.setTypeface(typeface);
+        btn2.setTypeface(typeface);
+        btn3.setTypeface(typeface);
+        btn4.setTypeface(typeface);
+        btn5.setTypeface(typeface);
     }
 
     public void init(){
@@ -199,8 +238,12 @@ public class RoomAddActivity extends AppCompatActivity {
             //        window.setGravity(Gravity.CENTER);
         }
         public void onDateSet(DatePicker view, int year, int month, int day){
-
-            dateTxt.setText(String.valueOf(year)+String.valueOf(month+1)+String.valueOf(day));
+            if(day<10){
+                dateTxt.setText(String.valueOf(year)+String.valueOf(month+1)+"0"+String.valueOf(day));
+            }
+            else{
+                dateTxt.setText(String.valueOf(year)+String.valueOf(month+1)+String.valueOf(day));
+            }
 
         }
 
@@ -234,7 +277,23 @@ public class RoomAddActivity extends AppCompatActivity {
             else{
                 currentHour = hourOfDay;
             }
-            timeTxt.setText(currentHour+":"+minute+aMpM);
+            if (currentHour<10){
+                if (minute<10){
+                    timeTxt.setText("0"+currentHour+":"+"0"+minute+aMpM);
+                }
+                else{
+                    timeTxt.setText("0"+currentHour+":"+minute+aMpM);
+                }
+            }
+            else{
+                if (minute<10){
+                    timeTxt.setText(currentHour+":"+"0"+minute+aMpM);
+                }
+                else{
+                    timeTxt.setText(currentHour+":"+minute+aMpM);
+                }
+            }
+
         }
     }
 
@@ -390,20 +449,21 @@ public class RoomAddActivity extends AppCompatActivity {
         final String TeamNum = String.valueOf(ans4);
         final String Active = String.valueOf(0);    //모집중
         final String Roomkey = "0"; // 바꿀예정
+        final String attendNum ="1";
 
 
         table = FirebaseDatabase.getInstance().getReference("NNfriendsDB/RoomDB");  //모집중인 방들 모음
         table.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                PreferenceManager pref = new PreferenceManager();
+                int matchNum = pref.getIntPref(RoomAddActivity.this, KEY_USER_MATNUM);
 
-                int matchNum = 0; // 처리해야됨
-                String key = String.valueOf(matchNum) + "_" + year + month + day;
-                SimpleDateFormat wTime = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm"); // 작성시간
-                final Date today = new Date();
+                SimpleDateFormat wTime = new SimpleDateFormat("yyyyMMddhhmm"); // 작성시간
+                final String key = String.valueOf(matchNum)+"_"+wTime.format(new Date());
 
                 DatabaseReference roomRef = table.child(key);
-                Room room = new Room(key, Active, Leader, TeamNum, Gu, Dong, groupDate, groupPlace, groupContent);
+                room = new Room(key, Active, Leader, TeamNum, Gu, Dong, groupDate, groupPlace, groupContent, attendNum);
                 roomRef.setValue(room);
                 Toast.makeText(RoomAddActivity.this, "작성 완료", Toast.LENGTH_SHORT).show();
             }
@@ -414,8 +474,30 @@ public class RoomAddActivity extends AppCompatActivity {
             }
         });
 
+        final DatabaseReference gtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/GroupDB");
+        gtable.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                PreferenceManager pref = new PreferenceManager();
+                int matchNum = pref.getIntPref(RoomAddActivity.this, KEY_USER_MATNUM);
+
+
+                String key = room.getRoomkey()+"_"+String.valueOf(matchNum);
+                DatabaseReference groupRef = gtable.child(key);
+                Group group= new Group(key, String.valueOf(matchNum));
+                groupRef.setValue(group);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         // 액티비티 끄기
+        CustomApp app = (CustomApp)getApplication();
+        app.setPreActivity("PinActivity");
         finish();
     }
 

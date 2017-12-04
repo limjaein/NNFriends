@@ -3,7 +3,6 @@ package com.android.project.nnfriends_;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.android.project.nnfriends_.Classes.Diary;
@@ -13,7 +12,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class RDiaryActivity extends AppCompatActivity {
+public class RDiaryActivity extends MyActivity {
     String year, month, day;
     TextView tv_year, tv_month, tv_day, tv_writer, tv_writeTime;
     TextView tv_ans1, tv_ans2, tv_ans3, tv_ans4, tv_ans5;

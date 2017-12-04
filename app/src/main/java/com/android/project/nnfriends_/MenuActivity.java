@@ -3,17 +3,17 @@ package com.android.project.nnfriends_;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MenuActivity extends AppCompatActivity {
+public class MenuActivity extends MyActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
 
         initFont();
 
@@ -47,7 +47,6 @@ public class MenuActivity extends AppCompatActivity {
 
     public void menuClick(View view) {
         Intent intent;
-
         switch(view.getId()){
             case R.id.connectBtn:
                 intent = new Intent(this, ConnectActivity.class);
@@ -67,7 +66,4 @@ public class MenuActivity extends AppCompatActivity {
                 break;
         }
     }
-
-
-
 }

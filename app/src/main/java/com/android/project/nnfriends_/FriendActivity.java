@@ -1,14 +1,13 @@
 package com.android.project.nnfriends_;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.android.project.nnfriends_.Classes.Call;
 
 import java.util.ArrayList;
 
-public class FriendActivity extends AppCompatActivity {
+public class FriendActivity extends MyActivity {
 
     ArrayList<Call> calls = new ArrayList<>();
     ListView callList;
@@ -28,4 +27,5 @@ public class FriendActivity extends AppCompatActivity {
         CallAdapter mCallAdapter = new CallAdapter(FriendActivity.this, calls);
         callList.setAdapter(mCallAdapter);
     }
+
 }

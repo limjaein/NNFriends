@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +26,7 @@ import java.util.Locale;
 
 import static com.android.project.nnfriends_.LoginActivity.KEY_USER_NAME;
 
-public class WDiaryActivity extends AppCompatActivity {
+public class WDiaryActivity extends MyActivity {
     Intent int_date;
     static TextView tv_year,tv_day,tv_month;
 
@@ -241,6 +240,8 @@ public class WDiaryActivity extends AppCompatActivity {
 
 
         // 액티비티 끄기
+        CustomApp app = (CustomApp)getApplication();
+        app.setPreActivity("PinActivity");
         finish();
     }
 
