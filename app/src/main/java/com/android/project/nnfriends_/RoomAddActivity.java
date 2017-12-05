@@ -40,6 +40,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.android.project.nnfriends_.LoginActivity.KEY_USER_ID;
 import static com.android.project.nnfriends_.LoginActivity.KEY_USER_MATNUM;
 import static com.android.project.nnfriends_.LoginActivity.KEY_USER_NAME;
 
@@ -48,12 +49,18 @@ public class RoomAddActivity extends MyActivity {
     public static int year;
     public static int day;
     public static int month;
+    public static int dayofweek;
     public static int hour;
     public static int minute;
     private Button GuBtn, DongBtn;
     public TextView GuTxt, DongTxt;
     public static TextView dateTxt;
     public static TextView timeTxt;
+
+    public static String strYear;
+    public static String strMonth;
+    public static String strDay;
+    public static String strDayofweek;
 
     ArrayList<Room> rooms = new ArrayList<>();
 
@@ -226,6 +233,7 @@ public class RoomAddActivity extends MyActivity {
             year = calendar.get(Calendar.YEAR);
             month = calendar.get(Calendar.MONTH);
             day = calendar.get(Calendar.DAY_OF_MONTH);
+            dayofweek = calendar.get(Calendar.DAY_OF_WEEK);
 
             DatePickerDialog datepickerdialog = new DatePickerDialog(getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT,this,year,month,day);
 
@@ -238,12 +246,38 @@ public class RoomAddActivity extends MyActivity {
             //        window.setGravity(Gravity.CENTER);
         }
         public void onDateSet(DatePicker view, int year, int month, int day){
-            if(day<10){
-                dateTxt.setText(String.valueOf(year)+String.valueOf(month+1)+"0"+String.valueOf(day));
+            strYear = String.valueOf(year);
+            strMonth = String.valueOf(month+1);
+            strDay = String.valueOf(day);
+            if (month+1<10)
+                strMonth = "0"+strMonth;
+            if (day<10)
+                strDay = "0"+strDay;
+            switch (dayofweek) {
+                case 0:
+                    strDayofweek = "Mon";
+                    break;
+                case 1:
+                    strDayofweek = "Tue";
+                    break;
+                case 2:
+                    strDayofweek = "Wnd";
+                    break;
+                case 3:
+                    strDayofweek = "Thu";
+                    break;
+                case 4:
+                    strDayofweek = "Fri";
+                    break;
+                case 5:
+                    strDayofweek = "Sat";
+                    break;
+                case 6:
+                    strDayofweek = "Sun";
+                    break;
             }
-            else{
-                dateTxt.setText(String.valueOf(year)+String.valueOf(month+1)+String.valueOf(day));
-            }
+
+            dateTxt.setText(strDayofweek+", "+strDay+"/"+strMonth+"/"+strYear);
 
         }
 
@@ -279,18 +313,18 @@ public class RoomAddActivity extends MyActivity {
             }
             if (currentHour<10){
                 if (minute<10){
-                    timeTxt.setText("0"+currentHour+":"+"0"+minute+aMpM);
+                    timeTxt.setText("0"+currentHour+":"+"0"+minute+" "+aMpM);
                 }
                 else{
-                    timeTxt.setText("0"+currentHour+":"+minute+aMpM);
+                    timeTxt.setText("0"+currentHour+":"+minute+" "+aMpM);
                 }
             }
             else{
                 if (minute<10){
-                    timeTxt.setText(currentHour+":"+"0"+minute+aMpM);
+                    timeTxt.setText(currentHour+":"+"0"+minute+" "+aMpM);
                 }
                 else{
-                    timeTxt.setText(currentHour+":"+minute+aMpM);
+                    timeTxt.setText(currentHour+":"+minute+" "+aMpM);
                 }
             }
 
@@ -442,13 +476,16 @@ public class RoomAddActivity extends MyActivity {
         //db 저장 부분
         final String Gu = GuTxt.getText().toString();
         final String Dong =DongTxt.getText().toString();
-        final String groupDate = dateTxt.getText().toString()+","+timeTxt.getText().toString();
+        final String groupDate = dateTxt.getText().toString();
+        final String groupTime = timeTxt.getText().toString();
         final String groupPlace = ans2;
         final String groupContent = ans3;
-        final String Leader = pref.getStringPref(RoomAddActivity.this, KEY_USER_NAME);
+        final String LeaderName = pref.getStringPref(RoomAddActivity.this, KEY_USER_NAME);
+        final String LeaderID = pref.getStringPref(RoomAddActivity.this, KEY_USER_ID);
+        final String LeaderMatchNum = pref.getStringPref(RoomAddActivity.this, KEY_USER_MATNUM);
         final String TeamNum = String.valueOf(ans4);
         final String Active = String.valueOf(0);    //모집중
-        final String Roomkey = "0"; // 바꿀예정
+        //final String Roomkey; // 바꿀예정
         final String attendNum ="1";
 
 
@@ -459,11 +496,11 @@ public class RoomAddActivity extends MyActivity {
                 PreferenceManager pref = new PreferenceManager();
                 int matchNum = pref.getIntPref(RoomAddActivity.this, KEY_USER_MATNUM);
 
-                SimpleDateFormat wTime = new SimpleDateFormat("yyyyMMddhhmm"); // 작성시간
-                final String key = String.valueOf(matchNum)+"_"+wTime.format(new Date());
+                SimpleDateFormat wTime = new SimpleDateFormat("yyyyMMddhhmmssSSSS"); // 작성시간
+                final String Roomkey = wTime.format(new Date())+"_"+String.valueOf(matchNum);
 
-                DatabaseReference roomRef = table.child(key);
-                room = new Room(key, Active, Leader, TeamNum, Gu, Dong, groupDate, groupPlace, groupContent, attendNum);
+                DatabaseReference roomRef = table.child(Roomkey);
+                room = new Room(Roomkey, Active, LeaderName, LeaderID, LeaderMatchNum, TeamNum, Gu, Dong, groupDate, groupTime, groupPlace, groupContent, attendNum);
                 roomRef.setValue(room);
                 Toast.makeText(RoomAddActivity.this, "작성 완료", Toast.LENGTH_SHORT).show();
             }
@@ -484,7 +521,7 @@ public class RoomAddActivity extends MyActivity {
 
                 String key = room.getRoomkey()+"_"+String.valueOf(matchNum);
                 DatabaseReference groupRef = gtable.child(key);
-                Group group= new Group(key, String.valueOf(matchNum));
+                Group group= new Group(key, room.getRoomkey(), String.valueOf(matchNum));
                 groupRef.setValue(group);
             }
 

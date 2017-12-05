@@ -45,6 +45,9 @@ public class GroupAdapter extends BaseAdapter {
     private int teamNum;
     PreferenceManager pref;
 
+    DatabaseReference gtable, rtable;
+    int matchNum;
+
 
     public GroupAdapter(Activity activity, ArrayList<Room> mRoom){
         this.activity = activity;
@@ -99,7 +102,13 @@ public class GroupAdapter extends BaseAdapter {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         final String c_date = sdf.format(new Date());
 
-        final DatabaseReference gtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/GroupDB");
+        // database
+        gtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/GroupDB");
+        rtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/RoomDB");
+
+        // user의 matchNum
+        matchNum = pref.getIntPref(context, KEY_USER_MATNUM);
+
         Query query = gtable.orderByKey();
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -160,10 +169,6 @@ public class GroupAdapter extends BaseAdapter {
             }
         });
 
-
-
-        final DatabaseReference rtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/RoomDB");
-
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -177,11 +182,13 @@ public class GroupAdapter extends BaseAdapter {
 
                     if(b1.equals(b2) || b1.equals(b3)){  //이미 참가한 활동이거나 end일때
 
-                        //db에서 삭제
+                        //attendNum 감소
                         attendNum = attendNum - 1;
                         rtable.child(myRoom.getRoomkey()).child("attendNum").setValue(String.valueOf(attendNum));
 
-                        //승리 group db삭제 만들기
+                        //group db에서 삭제
+                        String key = myRoom.getRoomkey()+"_"+matchNum;
+                        gtable.child(key).removeValue();
 
                         peopleNum.setText(String.valueOf(attendNum)+"("+attendNum*3+"people)"+"/"+String.valueOf(teamNum)+"("+teamNum*3+"people)");
 
@@ -219,7 +226,6 @@ public class GroupAdapter extends BaseAdapter {
 
                     }
                     else{ //참가하지 않은 활동
-                        final DatabaseReference gtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/GroupDB");
                         if(Integer.parseInt(c_date)+1 == Integer.parseInt(g_date) ){
                             if(attendNum<teamNum){  //날짜마감이고 인원 마감x
                                 joinBtn.setImageResource(R.drawable.end);
@@ -238,12 +244,10 @@ public class GroupAdapter extends BaseAdapter {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         PreferenceManager pref = new PreferenceManager();
-                                        int matchNum = pref.getIntPref(context, KEY_USER_MATNUM);
-
 
                                         String key = myRoom.getRoomkey()+"_"+matchNum;
                                         DatabaseReference groupRef = gtable.child(key);
-                                        Group group= new Group(myRoom.getRoomkey(), String.valueOf(matchNum));
+                                        Group group= new Group(key, myRoom.getRoomkey(), String.valueOf(matchNum));
                                         groupRef.setValue(group);
 
                                         //joinBtn.setText("ATTEND");

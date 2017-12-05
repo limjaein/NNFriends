@@ -5,7 +5,7 @@ package com.android.project.nnfriends_.Classes;
  */
 
 public class Diary {
-    private String key;
+    private String key; // ex)201712020924MMMM_ID(작성자)
     private String vID;
     private int matchNum;
     private String vYear;
@@ -20,7 +20,7 @@ public class Diary {
 
     public Diary(){}
     public Diary(String key, String vID, int matchNum, String year, String month, String day, String time, String a1, String a2, String a3, String a4, String a5){
-        this.key = key;
+        this.key = key; // ex)2017120209241234_matchNum(생성자)
         this.vID = vID;
         this.matchNum = matchNum;
         this.vYear = year;

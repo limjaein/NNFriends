@@ -5,13 +5,23 @@ package com.android.project.nnfriends_.Classes;
  */
 
 public class Group {
-    private String Roomkey;         //방번호 -> 구_동_생성시간 (일단은 이렇게)
-    private String matchNum;        //그룹 아이디
+    private String key;         // RoomKey_matchNum
+    private String Roomkey;     //방번호
+    private String matchNum;    //그룹 아이디
 
     public Group(){}
-    public Group(String RoomKey, String matchNum){
+    public Group(String key, String RoomKey, String matchNum){
+        this.key = key;
         this.Roomkey = RoomKey;
         this.matchNum = matchNum;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getRoomkey(){
