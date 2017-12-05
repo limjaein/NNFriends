@@ -1,12 +1,15 @@
 package com.android.project.nnfriends_.Classes;
 
+import java.util.jar.Attributes;
+
 /**
  * Created by victory on 2017-10-19.
  */
 
 public class Diary {
-    private String key; // ex)201712020924MMMM_ID(작성자)
+    private String key; // ex)2017/12/02/09:24:MMMM_id
     private String vID;
+    private String vName;
     private int matchNum;
     private String vYear;
     private String vMonth;
@@ -19,9 +22,10 @@ public class Diary {
     private String answer5;
 
     public Diary(){}
-    public Diary(String key, String vID, int matchNum, String year, String month, String day, String time, String a1, String a2, String a3, String a4, String a5){
-        this.key = key; // ex)2017120209241234_matchNum(생성자)
+    public Diary(String key, String vID, String vName, int matchNum, String year, String month, String day, String time, String a1, String a2, String a3, String a4, String a5){
+        this.key = key;
         this.vID = vID;
+        this.vName = vName;
         this.matchNum = matchNum;
         this.vYear = year;
         this.vMonth = month;
@@ -40,6 +44,10 @@ public class Diary {
 
     public String getvID() {
         return vID;
+    }
+
+    public String getvName() {
+        return vName;
     }
 
     public int getMatchNum() {
@@ -88,6 +96,10 @@ public class Diary {
 
     public void setvID(String vID) {
         this.vID = vID;
+    }
+
+    public void setvName(String vName) {
+        this.vName = vName;
     }
 
     public void setMatchNum(int matchNum) {

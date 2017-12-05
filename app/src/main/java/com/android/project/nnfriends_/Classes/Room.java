@@ -8,19 +8,25 @@ public class Room {
     private String Gu;              //활동 구
     private String Dong;            //활동 동
     private String groupDate;       //활동 날짜
+    private String year;
+    private String month;
+    private String day;
+    private String dayofweek;
     private String groupTime;       //활동 시간
     private String groupPlace;      //활동 장소
     private String groupContent;    //활동 내용
     private String LeaderName;          //방장이름
     private String LeaderID;            //방장아이디
-    private String LeaderMatchNum;     //방장매칭번호
+    private int LeaderMatchNum;     //방장매칭번호
     private String TeamNum;         //참여 팀 수
     private String Active;          //모집 중: 0, 마감:1
     private String Roomkey;         //방번호, ex)201712020924MMMM_matchNum(생성자)
     private String attendNum;       //참가팀 수
 
     public Room(){}
-    public Room(String RoomKey, String Active, String LeaderName, String LeaderID, String LeaderMatchNum, String TeamNum, String Gu, String Dong, String groupDate, String groupTime, String groupPlace, String groupContent, String attendNum){
+    public Room(String RoomKey, String Active, String LeaderName, String LeaderID, int LeaderMatchNum,
+                String TeamNum, String Gu, String Dong, String year, String month, String day, String dayofweek,
+                String groupDate, String groupTime, String groupPlace, String groupContent, String attendNum){
         this.Roomkey = RoomKey;
         this.Active = Active;
         this.LeaderName = LeaderName;
@@ -30,10 +36,16 @@ public class Room {
         this.Gu = Gu;
         this.Dong = Dong;
         this.groupContent = groupContent;
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.dayofweek = dayofweek;
         this.groupDate = groupDate;
         this.groupTime = groupTime;
         this.groupPlace = groupPlace;
         this.attendNum = attendNum;
+
+
     }
 
     public String getLeaderName(){return LeaderName;}
@@ -42,7 +54,7 @@ public class Room {
         return LeaderID;
     }
 
-    public String getLeaderMatchNum() {
+    public int getLeaderMatchNum() {
         return LeaderMatchNum;
     }
 
@@ -55,6 +67,23 @@ public class Room {
     public String getDong(){
         return Dong;
     }
+
+    public String getYear() {
+        return year;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public String getDayofweek() {
+        return dayofweek;
+    }
+
     public String getGroupDate(){
         return groupDate;
     }
@@ -77,7 +106,7 @@ public class Room {
         LeaderID = leaderID;
     }
 
-    public void setLeaderMatchNum(String leaderMatchNum) {
+    public void setLeaderMatchNum(int leaderMatchNum) {
         LeaderMatchNum = leaderMatchNum;
     }
 
@@ -90,6 +119,23 @@ public class Room {
     public void setDong(String Dong){
         this.Dong = Dong;
     }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public void setDayofweek(String dayofweek) {
+        this.dayofweek = dayofweek;
+    }
+
     public void setGroupDate(String groupDate){
         this.groupDate = groupDate;
     }

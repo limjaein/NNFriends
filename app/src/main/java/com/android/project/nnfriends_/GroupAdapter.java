@@ -87,7 +87,7 @@ public class GroupAdapter extends BaseAdapter {
         final TextView peopleNum = (TextView)view.findViewById(R.id.PeopleNum);
         final ImageButton joinBtn = (ImageButton)view.findViewById(R.id.gJoinBtn);
 
-        dateView.setText(myRoom.getGroupDate());
+        dateView.setText(myRoom.getGroupDate()+" "+myRoom.getGroupTime());
         placeView.setText(myRoom.getGroupPlace());
         contentView.setText(myRoom.getGroupContent());
 
@@ -96,11 +96,11 @@ public class GroupAdapter extends BaseAdapter {
         teamNum = Integer.parseInt(myRoom.getTeamNum());    //총 정원 수
         peopleNum.setText(String.valueOf(attendNum)+"("+attendNum*3+"people)"+"/"+String.valueOf(teamNum)+"("+teamNum*3+"people)");
 
-        String groupDate = myRoom.getGroupDate();
-        StringTokenizer st = new StringTokenizer(groupDate,",");
-        final String g_date = st.nextToken();
+        final String g_date = myRoom.getYear()+myRoom.getMonth()+myRoom.getDay();
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         final String c_date = sdf.format(new Date());
+        Log.d("checkk", g_date+", "+c_date);
 
         // database
         gtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/GroupDB");

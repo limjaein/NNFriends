@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.android.project.nnfriends_.LoginActivity.KEY_USER_ID;
+import static com.android.project.nnfriends_.LoginActivity.KEY_USER_MATNUM;
 import static com.android.project.nnfriends_.LoginActivity.KEY_USER_NAME;
 
 public class WDiaryActivity extends MyActivity {
@@ -219,15 +221,18 @@ public class WDiaryActivity extends MyActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                int matchNum = 0; // 처리해야됨
-                String key = String.valueOf(matchNum) + "_" + year + month + day;
+                PreferenceManager pref = new PreferenceManager();
+                int matchNum = pref.getIntPref(WDiaryActivity.this, KEY_USER_MATNUM);
+                String id = pref.getStringPref(WDiaryActivity.this, KEY_USER_ID);
+
+                SimpleDateFormat key = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSSS");
+                final String Diarykey = key.format(new Date())+"_writer:"+id;
                 SimpleDateFormat wTime = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm"); // 작성시간
                 final Date today = new Date();
 
-                DatabaseReference diaryRef = table.child(key);
-                PreferenceManager pref = new PreferenceManager();
+                DatabaseReference diaryRef = table.child(Diarykey);
                 String name = pref.getStringPref(WDiaryActivity.this, KEY_USER_NAME);
-                Diary diary = new Diary(key, name, matchNum, year, month, day, wTime.format(today), ans1, ans2, ans3, ans4, ans5);
+                Diary diary = new Diary(Diarykey, id, name, matchNum, year, month, day, wTime.format(today), ans1, ans2, ans3, ans4, ans5);
                 diaryRef.setValue(diary);
                 Toast.makeText(WDiaryActivity.this, "작성 완료", Toast.LENGTH_SHORT).show();
             }

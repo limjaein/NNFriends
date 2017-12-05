@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.android.project.nnfriends_.Classes.Diary;
+import com.android.project.nnfriends_.Classes.PreferenceManager;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import static com.android.project.nnfriends_.LoginActivity.KEY_USER_ID;
+import static com.android.project.nnfriends_.LoginActivity.KEY_USER_MATNUM;
 
 public class RDiaryActivity extends MyActivity {
     String year, month, day;
@@ -77,21 +81,26 @@ public class RDiaryActivity extends MyActivity {
         tv_day.setText(day+"");
 
         table = FirebaseDatabase.getInstance().getReference("NNfriendsDB/DiaryDB");
-        final int matchNum = 0; // 처리해야함
+        PreferenceManager pref = new PreferenceManager();
+        final int matchNum = pref.getIntPref(RDiaryActivity.this, KEY_USER_MATNUM);
+        final String id = pref.getStringPref(RDiaryActivity.this, KEY_USER_ID);
         String key = String.valueOf(matchNum) + "_" + year + month + day;
 
-        table.orderByKey().equalTo(key).addListenerForSingleValueEvent(new ValueEventListener() {
+        table.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Diary diary = data.getValue(Diary.class);
-                    tv_writer.setText(diary.getvID()); // 전화번호말고 이름 가져와야됨
-                    tv_writeTime.setText(diary.getwTime());
-                    tv_ans1.setText(diary.getAnswer1());
-                    tv_ans2.setText(diary.getAnswer2());
-                    tv_ans3.setText(diary.getAnswer3());
-                    tv_ans4.setText(diary.getAnswer4());
-                    tv_ans5.setText(diary.getAnswer5());
+                    if (diary.getvID().equals(id)&&diary.getvYear().equals(year)&&diary.getvMonth().equals(month)&&diary.getvDay().equals(day)) {
+                        tv_writer.setText(diary.getvName());
+                        tv_writeTime.setText(diary.getwTime());
+                        tv_ans1.setText(diary.getAnswer1());
+                        tv_ans2.setText(diary.getAnswer2());
+                        tv_ans3.setText(diary.getAnswer3());
+                        tv_ans4.setText(diary.getAnswer4());
+                        tv_ans5.setText(diary.getAnswer5());
+                        break;
+                    }
                 }
             }
 

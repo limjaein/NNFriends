@@ -15,6 +15,7 @@ import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.RequiresApi;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -233,7 +234,6 @@ public class RoomAddActivity extends MyActivity {
             year = calendar.get(Calendar.YEAR);
             month = calendar.get(Calendar.MONTH);
             day = calendar.get(Calendar.DAY_OF_MONTH);
-            dayofweek = calendar.get(Calendar.DAY_OF_WEEK);
 
             DatePickerDialog datepickerdialog = new DatePickerDialog(getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT,this,year,month,day);
 
@@ -245,35 +245,43 @@ public class RoomAddActivity extends MyActivity {
             //        window.setLayout(1200,1500);
             //        window.setGravity(Gravity.CENTER);
         }
+        @RequiresApi(api = Build.VERSION_CODES.N)
         public void onDateSet(DatePicker view, int year, int month, int day){
             strYear = String.valueOf(year);
             strMonth = String.valueOf(month+1);
             strDay = String.valueOf(day);
+
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month, day);
+            dayofweek = calendar.get(Calendar.DAY_OF_WEEK);
+            Log.d("checkk", String.valueOf(dayofweek));
+
             if (month+1<10)
                 strMonth = "0"+strMonth;
             if (day<10)
                 strDay = "0"+strDay;
             switch (dayofweek) {
-                case 0:
-                    strDayofweek = "Mon";
-                    break;
                 case 1:
-                    strDayofweek = "Tue";
+                    strDayofweek = "Sun";
                     break;
                 case 2:
-                    strDayofweek = "Wnd";
+                    strDayofweek = "Mon";
                     break;
                 case 3:
-                    strDayofweek = "Thu";
+                    strDayofweek = "Tue";
                     break;
                 case 4:
-                    strDayofweek = "Fri";
+                    strDayofweek = "Wnd";
                     break;
                 case 5:
-                    strDayofweek = "Sat";
+                    strDayofweek = "Thu";
                     break;
                 case 6:
-                    strDayofweek = "Sun";
+                    strDayofweek = "Fri";
+                    break;
+                case 7:
+                    strDayofweek = "Sat";
                     break;
             }
 
@@ -480,9 +488,10 @@ public class RoomAddActivity extends MyActivity {
         final String groupTime = timeTxt.getText().toString();
         final String groupPlace = ans2;
         final String groupContent = ans3;
+        Log.d("checkk", pref.getStringPref(RoomAddActivity.this, KEY_USER_NAME));
         final String LeaderName = pref.getStringPref(RoomAddActivity.this, KEY_USER_NAME);
         final String LeaderID = pref.getStringPref(RoomAddActivity.this, KEY_USER_ID);
-        final String LeaderMatchNum = pref.getStringPref(RoomAddActivity.this, KEY_USER_MATNUM);
+        final int LeaderMatchNum = pref.getIntPref(RoomAddActivity.this, KEY_USER_MATNUM);
         final String TeamNum = String.valueOf(ans4);
         final String Active = String.valueOf(0);    //모집중
         //final String Roomkey; // 바꿀예정
@@ -496,11 +505,11 @@ public class RoomAddActivity extends MyActivity {
                 PreferenceManager pref = new PreferenceManager();
                 int matchNum = pref.getIntPref(RoomAddActivity.this, KEY_USER_MATNUM);
 
-                SimpleDateFormat wTime = new SimpleDateFormat("yyyyMMddhhmmssSSSS"); // 작성시간
-                final String Roomkey = wTime.format(new Date())+"_"+String.valueOf(matchNum);
+                SimpleDateFormat wTime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSSS"); // 작성시간
+                final String Roomkey = wTime.format(new Date())+"_leader:"+String.valueOf(matchNum);
 
                 DatabaseReference roomRef = table.child(Roomkey);
-                room = new Room(Roomkey, Active, LeaderName, LeaderID, LeaderMatchNum, TeamNum, Gu, Dong, groupDate, groupTime, groupPlace, groupContent, attendNum);
+                room = new Room(Roomkey, Active, LeaderName, LeaderID, LeaderMatchNum, TeamNum, Gu, Dong, strYear, strMonth, strDay, strDayofweek, groupDate, groupTime, groupPlace, groupContent, attendNum);
                 roomRef.setValue(room);
                 Toast.makeText(RoomAddActivity.this, "작성 완료", Toast.LENGTH_SHORT).show();
             }
@@ -535,6 +544,7 @@ public class RoomAddActivity extends MyActivity {
         // 액티비티 끄기
         CustomApp app = (CustomApp)getApplication();
         app.setPreActivity("PinActivity");
+        setResult(RESULT_OK);
         finish();
     }
 

@@ -137,10 +137,21 @@ public class GroupActivity extends MyActivity {
             @Override
             public void onClick(View view) {
                 intent_add = new Intent(getApplication(), RoomAddActivity.class);
-                startActivity(intent_add);
+                startActivityForResult(intent_add, 1000);
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000) {
+            if (resultCode == RESULT_OK) {
+                Log.d("checkk", "onActivityResult");
+                showList(GuTxt.getText().toString(), DongTxt.getText().toString());
+            }
+        }
     }
 
     public void showList(final String gu, final String dong){
@@ -159,8 +170,8 @@ public class GroupActivity extends MyActivity {
                     }
                 }
                 GroupAdapter mGroupAdapter = new GroupAdapter(GroupActivity.this, selectDong);
-                mGroupAdapter.notifyDataSetChanged();
                 ActiveList.setAdapter(mGroupAdapter);
+                mGroupAdapter.notifyDataSetChanged();
             }
 
             @Override

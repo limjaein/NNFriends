@@ -105,11 +105,16 @@ public class LoginActivity extends AppCompatActivity {
         String Id = pref.getStringPref(LoginActivity.this, KEY_USER_ID);
         String Pin = pref.getStringPref(LoginActivity.this, KEY_USER_PIN);
 
+
         autoId = autopref.getString("autoId",null);
         autoPin = autopref.getString("autoPin", null);
 
         if(autoId !=null && autoPin != null) {
             if(autoId.equals(Id) && autoPin.equals(Pin)) {
+
+                pref.saveStringPref(LoginActivity.this, KEY_USER_ID, Id);
+                pref.saveStringPref(LoginActivity.this, KEY_USER_NAME, Pin);
+
                 Toast.makeText(LoginActivity.this, autoId +" 님 자동로그인 입니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, PinActivity.class);
                 startActivity(intent);
