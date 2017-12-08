@@ -272,7 +272,7 @@ public class RoomAddActivity extends MyActivity {
                     strDayofweek = "Tue";
                     break;
                 case 4:
-                    strDayofweek = "Wnd";
+                    strDayofweek = "Wed";
                     break;
                 case 5:
                     strDayofweek = "Thu";
@@ -530,7 +530,7 @@ public class RoomAddActivity extends MyActivity {
 
                 String key = room.getRoomkey()+"_"+String.valueOf(matchNum);
                 DatabaseReference groupRef = gtable.child(key);
-                Group group= new Group(key, room.getRoomkey(), String.valueOf(matchNum));
+                Group group= new Group(key, room.getRoomkey(), String.valueOf(matchNum),String.valueOf(1));
                 groupRef.setValue(group);
             }
 

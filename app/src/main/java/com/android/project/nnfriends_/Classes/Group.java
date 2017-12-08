@@ -8,12 +8,14 @@ public class Group {
     private String key;         // RoomKey_matchNum
     private String Roomkey;     //방번호
     private String matchNum;    //그룹 아이디
+    private String infoFlag;    //정보 공개 여부 0:공개 안함, 1: 공개함
 
     public Group(){}
-    public Group(String key, String RoomKey, String matchNum){
+    public Group(String key, String RoomKey, String matchNum, String infoFlag){
         this.key = key;
         this.Roomkey = RoomKey;
         this.matchNum = matchNum;
+        this.infoFlag = infoFlag;
     }
 
     public String getKey() {
@@ -27,6 +29,10 @@ public class Group {
     public String getRoomkey(){
         return Roomkey;
     }
+
+    public String getInfoFlag(){
+        return infoFlag;
+    }
     public String getMatchNum(){
         return matchNum;
     }
@@ -36,4 +42,5 @@ public class Group {
     public void setMatchNum(String matchNum){
         this.matchNum = matchNum;
     }
+    public void setInfoFlag(String infoFlag){this.infoFlag = infoFlag;}
 }
