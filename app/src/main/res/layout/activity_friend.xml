@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/menu2"
-    android:padding="40sp"
     tools:context="com.android.project.nnfriends_.FriendActivity">
-    <ListView
+    <ExpandableListView
         android:id="@+id/callList"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content"
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft">
+    </ExpandableListView>
 </LinearLayout>
