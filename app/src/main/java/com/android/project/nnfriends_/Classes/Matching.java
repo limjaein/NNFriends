@@ -5,7 +5,7 @@ package com.android.project.nnfriends_.Classes;
  */
 
 public class Matching {
-    private int matchNum;
+    private int matchNum;  // 수혜자 아이디
     private int matchDate;
     private int rID;        // 수혜자(recipient)
     private int vID1;       // 봉사자(volunteer)

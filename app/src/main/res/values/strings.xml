@@ -2,6 +2,11 @@
     <string name="app_name">NNfriends_</string>
     <string name="ocr_result_tip">인식 결과는 여기에 나타납니다.</string>
 
+    <string-array name="phoneSpinner">
+        <item>KOR</item>
+        <item>NLD</item>
+    </string-array>
+
     <string-array name="gu">
         <item>구</item>
         <item>강남구</item>

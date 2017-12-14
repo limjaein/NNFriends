@@ -17,14 +17,14 @@ public class Room {
     private String groupContent;    //활동 내용
     private String LeaderName;          //방장이름
     private String LeaderID;            //방장아이디
-    private int LeaderMatchNum;     //방장매칭번호
+    private String LeaderMatchNum;     //방장매칭번호
     private String TeamNum;         //참여 팀 수
     private String Active;          //모집 중: 0, 마감:1
     private String Roomkey;         //방번호, ex)201712020924MMMM_matchNum(생성자)
     private String attendNum;       //참가팀 수
 
     public Room(){}
-    public Room(String RoomKey, String Active, String LeaderName, String LeaderID, int LeaderMatchNum,
+    public Room(String RoomKey, String Active, String LeaderName, String LeaderID, String LeaderMatchNum,
                 String TeamNum, String Gu, String Dong, String year, String month, String day, String dayofweek,
                 String groupDate, String groupTime, String groupPlace, String groupContent, String attendNum){
         this.Roomkey = RoomKey;
@@ -54,7 +54,7 @@ public class Room {
         return LeaderID;
     }
 
-    public int getLeaderMatchNum() {
+    public String getLeaderMatchNum() {
         return LeaderMatchNum;
     }
 
@@ -106,7 +106,7 @@ public class Room {
         LeaderID = leaderID;
     }
 
-    public void setLeaderMatchNum(int leaderMatchNum) {
+    public void setLeaderMatchNum(String leaderMatchNum) {
         LeaderMatchNum = leaderMatchNum;
     }
 

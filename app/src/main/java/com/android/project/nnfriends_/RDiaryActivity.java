@@ -82,9 +82,9 @@ public class RDiaryActivity extends MyActivity {
 
         table = FirebaseDatabase.getInstance().getReference("NNfriendsDB/DiaryDB");
         PreferenceManager pref = new PreferenceManager();
-        final int matchNum = pref.getIntPref(RDiaryActivity.this, KEY_USER_MATNUM);
+        final String matchNum = pref.getStringPref(RDiaryActivity.this, KEY_USER_MATNUM);
         final String id = pref.getStringPref(RDiaryActivity.this, KEY_USER_ID);
-        String key = String.valueOf(matchNum) + "_" + year + month + day;
+        String key = matchNum + "_" + year + month + day;
 
         table.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
