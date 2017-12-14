@@ -115,7 +115,7 @@ public class GroupAdapter extends BaseAdapter {
         matchNum = pref.getStringPref(context, KEY_USER_MATNUM);
 
         // 버튼이미지확인
-        int mat = pref.getIntPref(context, KEY_USER_MATNUM);
+        String mat = pref.getStringPref(context, KEY_USER_MATNUM);
 
         if(Integer.parseInt(c_date)+1 >= Integer.parseInt(g_date)){
             Log.d("active2","님 바뀌세요?"+c_date+g_date);
@@ -225,7 +225,7 @@ public class GroupAdapter extends BaseAdapter {
                 Log.d("attendNum","바뀌기 전"+String.valueOf(attendNum));
                 int teamNum = Integer.parseInt(myRoom.getTeamNum());
 
-                int mat = pref.getIntPref(context, KEY_USER_MATNUM);
+                String mat = pref.getStringPref(context, KEY_USER_MATNUM);
                 if(myRoom.getLeaderMatchNum().equals(mat)) {    //내가 만든 방
 
                     AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);

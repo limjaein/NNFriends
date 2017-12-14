@@ -1,6 +1,5 @@
 package com.android.project.nnfriends_;
 
-import android.*;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
@@ -20,9 +19,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -208,6 +204,8 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
 
         if (mgr != null) {
             myPhone = mgr.getLine1Number();
+        } else {
+            myPhone = "";
         }
 
         editID = (EditText) findViewById(R.id.editLoginID);
@@ -225,7 +223,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
                         interNum = "+31";
                         break;
                 }
-                if (mgr != null) {
+                if (myPhone != null) {
                     myPhone = interNum + myPhone.substring(myPhone.length()-10,myPhone.length());
                     editID.setText(myPhone);
                 }

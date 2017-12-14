@@ -503,7 +503,7 @@ public class RoomAddActivity extends MyActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 PreferenceManager pref = new PreferenceManager();
-                int matchNum = pref.getIntPref(RoomAddActivity.this, KEY_USER_MATNUM);
+                String matchNum = pref.getStringPref(RoomAddActivity.this, KEY_USER_MATNUM);
 
                 SimpleDateFormat wTime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSSS"); // 작성시간
                 final String Roomkey = wTime.format(new Date())+"_leader:"+String.valueOf(matchNum);
@@ -525,7 +525,7 @@ public class RoomAddActivity extends MyActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 PreferenceManager pref = new PreferenceManager();
-                int matchNum = pref.getIntPref(RoomAddActivity.this, KEY_USER_MATNUM);
+                String matchNum = pref.getStringPref(RoomAddActivity.this, KEY_USER_MATNUM);
 
 
                 String key = room.getRoomkey()+"_"+String.valueOf(matchNum);
