@@ -163,16 +163,16 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
                 "강남구 개포동 선우아파트", "서울특별시", "강남구", "개포동", "");
 
 
-        table.child(user1.getuID()).setValue(user1);
-        table.child(user2.getuID()).setValue(user2);
-        table.child(user3.getuID()).setValue(user3);
-        table.child(user4.getuID()).setValue(user4);
-        table.child(user5.getuID()).setValue(user5);
-        table.child(user6.getuID()).setValue(user6);
-        table.child(user7.getuID()).setValue(user7);
-        table.child(user8.getuID()).setValue(user8);
-        table.child(user9.getuID()).setValue(user9);
-        table.child(user10.getuID()).setValue(user10);
+//        table.child(user1.getuID()).setValue(user1);
+//        table.child(user2.getuID()).setValue(user2);
+//        table.child(user3.getuID()).setValue(user3);
+//        table.child(user4.getuID()).setValue(user4);
+//        table.child(user5.getuID()).setValue(user5);
+//        table.child(user6.getuID()).setValue(user6);
+//        table.child(user7.getuID()).setValue(user7);
+//        table.child(user8.getuID()).setValue(user8);
+//        table.child(user9.getuID()).setValue(user9);
+//        table.child(user10.getuID()).setValue(user10);
 
     }
 
