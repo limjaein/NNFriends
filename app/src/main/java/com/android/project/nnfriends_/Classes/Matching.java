@@ -5,58 +5,78 @@ package com.android.project.nnfriends_.Classes;
  */
 
 public class Matching {
-    private int matchNum;  // 수혜자 아이디
-    private int matchDate;
-    private int rID;        // 수혜자(recipient)
-    private int vID1;       // 봉사자(volunteer)
-    private int vID2;
+    private String matchNum;  // 수혜자 아이디
+    private String matchDate;
+    private String gu;
+    private String dong;
+    private String rID;        // 수혜자(recipient)
+    private String vID1;       // 봉사자(volunteer)
+    private String vID2;
 
     public Matching(){}
-    public Matching(int num, int date, int r, int v1, int v2){
+    public Matching(String num, String date, String gu, String dong, String r, String v1, String v2){
         this.matchNum = num;
         this.matchDate = date;
+        this.gu = gu;
+        this.dong = dong;
         this.rID = r;
         this.vID1 = v1;
         this.vID2 = v2;
     }
 
-    public int getMatchNum() {
+    public String getDong() {
+        return dong;
+    }
+
+    public String getGu() {
+        return gu;
+    }
+
+    public void setDong(String dong) {
+        this.dong = dong;
+    }
+
+    public void setGu(String gu) {
+        this.gu = gu;
+    }
+
+    public String getMatchNum() {
         return matchNum;
     }
 
-    public int getMatchDate() {
+    public String getMatchDate() {
         return matchDate;
     }
 
-    public int getrID() {
+    public String getrID() {
         return rID;
     }
 
-    public int getvID1() {
+    public String getvID1() {
         return vID1;
     }
 
-    public int getvID2() {
+    public String getvID2() {
         return vID2;
     }
 
-    public void setMatchNum(int matchNum) {
+    public void setMatchNum(String matchNum) {
         this.matchNum = matchNum;
     }
 
-    public void setMatchDate(int matchDate) {
+    public void setMatchDate(String matchDate) {
         this.matchDate = matchDate;
     }
 
-    public void setrID(int rID) {
+    public void setrID(String rID) {
         this.rID = rID;
     }
 
-    public void setvID1(int vID1) {
+    public void setvID1(String vID1) {
         this.vID1 = vID1;
     }
 
-    public void setvID2(int vID2) {
+    public void setvID2(String vID2) {
         this.vID2 = vID2;
     }
 }

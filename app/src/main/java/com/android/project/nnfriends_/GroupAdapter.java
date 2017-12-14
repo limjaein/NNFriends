@@ -43,7 +43,7 @@ public class GroupAdapter extends BaseAdapter {
     private Activity activity;
     private Room myRoom;
     int attendNum;
-    private int teamNum;
+    int teamNum;
     PreferenceManager pref;
 
     DatabaseReference gtable, rtable;
@@ -74,7 +74,7 @@ public class GroupAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View convertView, ViewGroup viewGroup) {
+    public View getView(final int i, View convertView, ViewGroup viewGroup) {
 
         final Context context = viewGroup.getContext();
         View view = convertView;
@@ -115,7 +115,7 @@ public class GroupAdapter extends BaseAdapter {
         matchNum = pref.getStringPref(context, KEY_USER_MATNUM);
 
         // 버튼이미지확인
-        int mat = pref.getIntPref(context, KEY_USER_MATNUM);
+        final String mat = pref.getStringPref(context, KEY_USER_MATNUM);
 
         if(Integer.parseInt(c_date)+1 >= Integer.parseInt(g_date)){
             Log.d("active2","님 바뀌세요?"+c_date+g_date);
@@ -144,7 +144,7 @@ public class GroupAdapter extends BaseAdapter {
 
                 // 내가 참여했는지 확인 0:참여안함 1:참여함
                 myFlag = 0;
-                final String key = myRoom.getRoomkey()+"_"+String.valueOf(matchNum);
+                final String key = myRoom.getRoomkey()+"_"+matchNum;
                 Query query = gtable.orderByKey().equalTo(key);
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -221,13 +221,14 @@ public class GroupAdapter extends BaseAdapter {
                 Bitmap b_end = ((BitmapDrawable)d3).getBitmap();
                 Bitmap b_join = ((BitmapDrawable)d4).getBitmap();
 
-                int attendNum = Integer.parseInt(myRoom.getAttendNum());
-                Log.d("attendNum","바뀌기 전"+String.valueOf(attendNum));
-                int teamNum = Integer.parseInt(myRoom.getTeamNum());
+                final Room myRoom = mRoom.get(i);
+                Log.d("시발 룸키", myRoom.getRoomkey());
+                int attendNum = Integer.valueOf(myRoom.getAttendNum());
+                int teamNum = Integer.valueOf(myRoom.getTeamNum());
+                Log.d("시발","바뀌기 전 어탠드넘, 팀넘"+String.valueOf(attendNum)+", "+String.valueOf(teamNum));
 
-                int mat = pref.getIntPref(context, KEY_USER_MATNUM);
-                if(myRoom.getLeaderMatchNum().equals(mat)) {    //내가 만든 방
-
+                if(myRoom.getLeaderMatchNum().equals(matchNum)) {    //내가 만든 방
+                    Log.d("시발", "내가 만든 방임");
                     AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
                     alertBuilder.setMessage("Are you sure you want to delete this room?")
                             .setCancelable(false)
@@ -277,6 +278,7 @@ public class GroupAdapter extends BaseAdapter {
 
                 }
                 else{   //내가 안만든 방
+                    Log.d("시발", "내가 안 만든 방임");
                     if(b_btn.equals(b_join)){   //버튼이 join일때
                         attendNum += 1;
                         alertAttendNum = attendNum;
@@ -323,7 +325,7 @@ public class GroupAdapter extends BaseAdapter {
                                 //db저장
                                 String key = myRoom.getRoomkey()+"_"+matchNum;
                                 DatabaseReference groupRef = gtable.child(key);
-                                Group group= new Group(key, myRoom.getRoomkey(), matchNum,String.valueOf(0));
+                                Group group= new Group(key, myRoom.getRoomkey(), matchNum, String.valueOf(0));
                                 groupRef.setValue(group);
 
                                 rtable.child(myRoom.getRoomkey()).child("attendNum").setValue(String.valueOf(alertAttendNum));

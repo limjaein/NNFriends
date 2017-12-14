@@ -41,6 +41,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import static com.android.project.nnfriends_.SignupActivity.KEY_FINGER_FLAG;
+
 public class LoginActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback{
 
     boolean running;
@@ -84,9 +86,11 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
         initFont();
         init();
 
+        testInput();
+
         Reprint.initialize(this);
 
-        if (checkDeviceSpec()) {
+        if (checkDeviceSpec() && pref.getBooleanPref(LoginActivity.this, KEY_FINGER_FLAG)) {
 
             final LayoutInflater inflater = getLayoutInflater();
             final View dialogView = inflater.inflate(R.layout.dialog_login, null);
@@ -135,6 +139,45 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
 //            finish();
 
         }
+    }
+
+    private void testInput() {
+
+        table = FirebaseDatabase.getInstance().getReference("NNfriendsDB/UserDB");
+
+        User user1 = new User("+821012345678", "1111", "여육십1", 66, 1, "123456-1234567", 0,
+                "강남구 개포동 선우아파트", "서울특별시", "강남구", "개포동", "");
+        User user2 = new User("+821012345679", "1111", "남육십1", 69, 0, "123456-1234567", 0,
+                "강남구 개포동 선우아파트", "서울특별시", "강남구", "개포동", "");
+        User user3 = new User("+821012345674", "1111", "여칠십1", 70, 1, "123456-1234567", 0,
+                "강남구 개포동 선우아파트", "서울특별시", "강남구", "개포동", "");
+        User user4 = new User("+821012345672", "1111", "여육십2", 68, 1, "123456-1234567", 0,
+                "광진구 자양동 선우아파트", "서울특별시", "광진구", "자양동", "");
+        User user5 = new User("+821012345671", "1111", "여육십3", 65, 1, "123456-1234567", 0,
+                "강남구 개포동 선우아파트", "서울특별시", "강남구", "개포동", "");
+        User user6 = new User("+821012345622", "1111", "여칠십2", 78, 1, "123456-1234567", 0,
+                "강남구 개포동 선우아파트", "서울특별시", "강남구", "개포동", "");
+        User user7 = new User("+821012345654", "1111", "남칠십1", 77, 0, "123456-1234567", 0,
+                "강남구 개포동 선우아파트", "서울특별시", "강남구", "개포동", "");
+        User user8 = new User("+821012345999", "1111", "남팔십1", 82, 0, "123456-1234567", 0,
+                "강남구 개포동 선우아파트", "서울특별시", "강남구", "개포동", "");
+        User user9 = new User("+821012345123", "1111", "여육십4", 66, 1, "123456-1234567", 0,
+                "강남구 개포동 선우아파트", "서울특별시", "강남구", "개포동", "");
+        User user10 = new User("+821012344321", "1111", "남칠십2", 74, 0, "123456-1234567", 0,
+                "강남구 개포동 선우아파트", "서울특별시", "강남구", "개포동", "");
+
+
+        table.child(user1.getuID()).setValue(user1);
+        table.child(user2.getuID()).setValue(user2);
+        table.child(user3.getuID()).setValue(user3);
+        table.child(user4.getuID()).setValue(user4);
+        table.child(user5.getuID()).setValue(user5);
+        table.child(user6.getuID()).setValue(user6);
+        table.child(user7.getuID()).setValue(user7);
+        table.child(user8.getuID()).setValue(user8);
+        table.child(user9.getuID()).setValue(user9);
+        table.child(user10.getuID()).setValue(user10);
+
     }
 
     public void initAutoLogin() {
@@ -250,8 +293,12 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
 
         TextView textView1 = (TextView) findViewById(R.id.btnLogin);
         TextView textView2 = (TextView) findViewById(R.id.btnSignup);
+        TextView textView3 = (TextView) findViewById(R.id.editLoginID);
+        TextView textView4 = (TextView) findViewById(R.id.editLoginPIN);
         textView1.setTypeface(typeface);
         textView2.setTypeface(typeface);
+        textView3.setTypeface(typeface);
+        textView4.setTypeface(typeface);
     }
     public boolean checkDeviceSpec() {
         boolean finderprintFlag = Reprint.isHardwarePresent();
@@ -267,7 +314,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
             case R.id.btnSignup:
                 intent = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(intent);
-                finish();
+                //finish();
                 break;
             case R.id.btnLogin:
                 loginCheck();

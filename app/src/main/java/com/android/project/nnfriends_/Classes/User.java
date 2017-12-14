@@ -11,7 +11,7 @@ public class User {
     private String uPW;        // 4자리 PIN비밀번호
     private String name;
     private int age;        // 만 나이, 주민번호에서 판별
-    private int gender;     // 주민번호에서 판별; 0:여, 1:남
+    private int gender;     // 주민번호에서 판별; 1:여, 0:남
     private String SSN;        // 주민등록번호
     private int state;      // 권한상태; 0:봉사대기, 1:수혜대기, 2:봉사승인, 3:수혜승인
     private String address_full;    // 전체주소
