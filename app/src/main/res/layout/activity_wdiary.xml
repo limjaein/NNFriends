@@ -55,19 +55,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        </ScrollView>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:background="@color/colorWhite"
             android:orientation="vertical"
+            android:gravity="center"
             android:padding="10dp">
 
             <TextView
                 android:id="@+id/quest1"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="questClick"
                 android:text="Please tell me your friend's name."
@@ -75,14 +74,14 @@
 
             <TextView
                 android:id="@+id/ans1"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
                 android:textSize="30dp" />
 
             <TextView
                 android:id="@+id/quest2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:onClick="questClick"
@@ -91,14 +90,14 @@
 
             <TextView
                 android:id="@+id/ans2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorGray"
                 android:textSize="30dp" />
 
             <TextView
                 android:id="@+id/quest3"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:onClick="questClick"
@@ -107,14 +106,14 @@
 
             <TextView
                 android:id="@+id/ans3"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorGray"
                 android:textSize="30dp" />
 
             <TextView
                 android:id="@+id/quest4"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:onClick="questClick"
@@ -123,14 +122,14 @@
 
             <TextView
                 android:id="@+id/ans4"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorGray"
                 android:textSize="30dp" />
 
             <TextView
                 android:id="@+id/quest5"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:onClick="questClick"
@@ -139,11 +138,13 @@
 
             <TextView
                 android:id="@+id/ans5"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorGray"
                 android:textSize="30dp" />
         </LinearLayout>
+
+        </ScrollView>
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton

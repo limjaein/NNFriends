@@ -68,29 +68,30 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:background="@color/colorWhite"
                 android:orientation="vertical"
+                android:gravity="center"
                 android:padding="10dp">
 
                 <TextView
                     android:id="@+id/quest1"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Please tell me your friend's name."
                     android:textSize="30dp" />
 
                 <TextView
                     android:id="@+id/ans1r"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGray"
                     android:textSize="30dp" />
 
                 <TextView
                     android:id="@+id/quest2"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="When did you work during breakfast, lunch or dinner?"
@@ -98,14 +99,14 @@
 
                 <TextView
                     android:id="@+id/ans2r"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGray"
                     android:textSize="30dp" />
 
                 <TextView
                     android:id="@+id/quest3"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="Tell me your time of service."
@@ -113,14 +114,14 @@
 
                 <TextView
                     android:id="@+id/ans3r"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGray"
                     android:textSize="30dp" />
 
                 <TextView
                     android:id="@+id/quest4"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="What activities did you do?"
@@ -128,14 +129,14 @@
 
                 <TextView
                     android:id="@+id/ans4r"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGray"
                     android:textSize="30dp" />
 
                 <TextView
                     android:id="@+id/quest5"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="Was there anything unusual?"
@@ -143,7 +144,7 @@
 
                 <TextView
                     android:id="@+id/ans5r"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGray"
                     android:textSize="30dp" />
