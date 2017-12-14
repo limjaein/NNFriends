@@ -41,7 +41,6 @@ public class GroupAdapter extends BaseAdapter {
 
     private ArrayList<Room> mRoom = new ArrayList<>();
     private Activity activity;
-    private Room myRoom;
     int attendNum;
     int teamNum;
     PreferenceManager pref;
@@ -74,7 +73,7 @@ public class GroupAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int i, View convertView, ViewGroup viewGroup) {
+    public View getView(final int pos, View convertView, ViewGroup viewGroup) {
 
         final Context context = viewGroup.getContext();
         View view = convertView;
@@ -83,25 +82,22 @@ public class GroupAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.group_listview, null);
         }
 
-        myRoom = mRoom.get(i);
-        Log.d("checkk", "getView");
-
         TextView dateView = (TextView)view.findViewById(R.id.DateView);
         TextView placeView = (TextView)view.findViewById(R.id.PlaceView);
         final TextView contentView = (TextView)view.findViewById(R.id.ContentView);
         final TextView peopleNum = (TextView)view.findViewById(R.id.PeopleNum);
         final ImageButton joinBtn = (ImageButton)view.findViewById(R.id.gJoinBtn);
 
-        dateView.setText(myRoom.getGroupDate()+" "+myRoom.getGroupTime());
-        placeView.setText(myRoom.getGroupPlace());
-        contentView.setText(myRoom.getGroupContent());
+        dateView.setText(mRoom.get(pos).getGroupDate()+" "+mRoom.get(pos).getGroupTime());
+        placeView.setText(mRoom.get(pos).getGroupPlace());
+        contentView.setText(mRoom.get(pos).getGroupContent());
 
-        attendNum = Integer.parseInt(myRoom.getAttendNum());
-        teamNum = Integer.parseInt(myRoom.getTeamNum());    //총 정원 수
+        attendNum = Integer.parseInt(mRoom.get(pos).getAttendNum());
+        teamNum = Integer.parseInt(mRoom.get(pos).getTeamNum());    //총 정원 수
         peopleNum.setText(String.valueOf(attendNum)+"("+attendNum*3+"people)"+"/"+String.valueOf(teamNum)+"("+teamNum*3+"people)");
 
 
-        final String g_date = myRoom.getYear()+myRoom.getMonth()+myRoom.getDay();
+        final String g_date = mRoom.get(pos).getYear()+mRoom.get(pos).getMonth()+mRoom.get(pos).getDay();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         final String c_date = sdf.format(new Date());
@@ -113,19 +109,21 @@ public class GroupAdapter extends BaseAdapter {
 
         // user의 matchNum
         matchNum = pref.getStringPref(context, KEY_USER_MATNUM);
+        Log.d("checkkk matchNum:", matchNum);
 
         // 버튼이미지확인
-        final String mat = pref.getStringPref(context, KEY_USER_MATNUM);
+        //String mat = pref.getStringPref(context, KEY_USER_MATNUM);
 
+        // 날짜 마감일 때
         if(Integer.parseInt(c_date)+1 >= Integer.parseInt(g_date)){
             Log.d("active2","님 바뀌세요?"+c_date+g_date);
-            rtable.child(myRoom.getRoomkey()).child("active").setValue(String.valueOf("1"));
+            rtable.child(mRoom.get(pos).getRoomkey()).child("active").setValue(String.valueOf("1"));
             joinBtn.setImageResource(R.drawable.end);
             joinBtn.setEnabled(false);
         }
         else{
-            if(myRoom.getLeaderMatchNum().equals(mat)){    //내가 만든 방
-                if(myRoom.getActive().equals("0")){ //모집중
+            if(mRoom.get(pos).getLeaderMatchNum().equals(matchNum)){    //내가 만든 방
+                if(mRoom.get(pos).getActive().equals("0")){ //모집중
                     joinBtn.setImageResource(R.drawable.attend);
                     joinBtn.setEnabled(true);
                 }
@@ -144,7 +142,7 @@ public class GroupAdapter extends BaseAdapter {
 
                 // 내가 참여했는지 확인 0:참여안함 1:참여함
                 myFlag = 0;
-                final String key = myRoom.getRoomkey()+"_"+matchNum;
+                final String key = mRoom.get(pos).getRoomkey()+"_"+matchNum;
                 Query query = gtable.orderByKey().equalTo(key);
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -154,12 +152,12 @@ public class GroupAdapter extends BaseAdapter {
                             Group group = data.getValue(Group.class);
                             if (group.getKey().equals(key)) {
                                 myFlag = 1;
-                                Log.d("active4",key+"_"+myRoom.getRoomkey());
+                                Log.d("active4",key+"_"+mRoom.get(pos).getRoomkey());
                                 break;
                             }
                         }
                         //
-                        if(myRoom.getActive().equals("0")){ //모집중
+                        if(mRoom.get(pos).getActive().equals("0")){ //모집중
 
 
                             if(myFlag == 1){    //내가 참가한 방
@@ -212,6 +210,7 @@ public class GroupAdapter extends BaseAdapter {
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Drawable d1 = joinBtn.getDrawable();
                 Drawable d2= context.getResources().getDrawable(R.drawable.attend);
                 Drawable d3 = context.getResources().getDrawable(R.drawable.end);
@@ -221,14 +220,13 @@ public class GroupAdapter extends BaseAdapter {
                 Bitmap b_end = ((BitmapDrawable)d3).getBitmap();
                 Bitmap b_join = ((BitmapDrawable)d4).getBitmap();
 
-                final Room myRoom = mRoom.get(i);
-                Log.d("시발 룸키", myRoom.getRoomkey());
-                int attendNum = Integer.valueOf(myRoom.getAttendNum());
-                int teamNum = Integer.valueOf(myRoom.getTeamNum());
-                Log.d("시발","바뀌기 전 어탠드넘, 팀넘"+String.valueOf(attendNum)+", "+String.valueOf(teamNum));
+                int attendNum = Integer.parseInt(mRoom.get(pos).getAttendNum());
+                Log.d("attendNum","바뀌기 전"+String.valueOf(attendNum));
+                int teamNum = Integer.parseInt(mRoom.get(pos).getTeamNum());
 
-                if(myRoom.getLeaderMatchNum().equals(matchNum)) {    //내가 만든 방
-                    Log.d("시발", "내가 만든 방임");
+                String mat = pref.getStringPref(context, KEY_USER_MATNUM);  //나의 matNum
+                if(mRoom.get(pos).getLeaderMatchNum().equals(mat)) {    //내가 만든 방
+                    Log.d("myRoom",mRoom.get(pos).getLeaderMatchNum()+"_"+mat );
                     AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
                     alertBuilder.setMessage("Are you sure you want to delete this room?")
                             .setCancelable(false)
@@ -237,8 +235,8 @@ public class GroupAdapter extends BaseAdapter {
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     Toast.makeText(context, "DELETE", Toast.LENGTH_SHORT).show();
                                     //db삭제
-                                    String rkey = myRoom.getRoomkey();
-                                    String gkey = myRoom.getRoomkey()+"_"+matchNum;
+                                    String rkey = mRoom.get(pos).getRoomkey();
+                                    String gkey = mRoom.get(pos).getRoomkey()+"_"+matchNum;
 
                                     /////여기서 그 그룹에 참가한 모든 matchNum을 어떻게 다알아와서 삭제하지....??//////////
                                     //그룹 디비 에서 roomKey 가 rkey인 애들 다 삭제
@@ -294,13 +292,13 @@ public class GroupAdapter extends BaseAdapter {
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         Toast.makeText(context, "AGREE", Toast.LENGTH_SHORT).show();
                                         //db저장
-                                        String key = myRoom.getRoomkey()+"_"+matchNum;
+                                        String key = mRoom.get(pos).getRoomkey()+"_"+matchNum;
                                         DatabaseReference groupRef = gtable.child(key);
-                                        Group group= new Group(key, myRoom.getRoomkey(), matchNum,String.valueOf(1));
+                                        Group group= new Group(key, mRoom.get(pos).getRoomkey(), matchNum,String.valueOf(1));
                                         groupRef.setValue(group);
 
-                                        rtable.child(myRoom.getRoomkey()).child("attendNum").setValue(String.valueOf(alertAttendNum));
-                                        myRoom.setAttendNum(String.valueOf(alertAttendNum));
+                                        rtable.child(mRoom.get(pos).getRoomkey()).child("attendNum").setValue(String.valueOf(alertAttendNum));
+                                        mRoom.get(pos).setAttendNum(String.valueOf(alertAttendNum));
                                         Log.d("attendNum","바뀌고"+String.valueOf(alertAttendNum));
 
                                         if(alertAttendNum>=alertTeamNum){ //인원마감
@@ -309,7 +307,7 @@ public class GroupAdapter extends BaseAdapter {
                                             joinBtn.setScaleType(ImageView.ScaleType.FIT_XY);
                                             Toast.makeText(context, "ATTEND COMPLETE(인원마감)", Toast.LENGTH_SHORT).show();
                                             //activie 1로 바꾸기
-                                            rtable.child(myRoom.getRoomkey()).child("active").setValue(String.valueOf("1"));
+                                            rtable.child(mRoom.get(pos).getRoomkey()).child("active").setValue(String.valueOf("1"));
                                         }
                                         else{   //인원마감 아님
                                             joinBtn.setImageResource(R.drawable.attend);
@@ -323,13 +321,13 @@ public class GroupAdapter extends BaseAdapter {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //db저장
-                                String key = myRoom.getRoomkey()+"_"+matchNum;
+                                String key = mRoom.get(pos).getRoomkey()+"_"+matchNum;
                                 DatabaseReference groupRef = gtable.child(key);
-                                Group group= new Group(key, myRoom.getRoomkey(), matchNum, String.valueOf(0));
+                                Group group= new Group(key, mRoom.get(pos).getRoomkey(), matchNum,String.valueOf(0));
                                 groupRef.setValue(group);
 
-                                rtable.child(myRoom.getRoomkey()).child("attendNum").setValue(String.valueOf(alertAttendNum));
-                                myRoom.setAttendNum(String.valueOf(alertAttendNum));
+                                rtable.child(mRoom.get(pos).getRoomkey()).child("attendNum").setValue(String.valueOf(alertAttendNum));
+                                mRoom.get(pos).setAttendNum(String.valueOf(alertAttendNum));
                                 Log.d("attendNum","바뀌고"+String.valueOf(alertAttendNum));
 
                                 if(alertAttendNum>=alertTeamNum){ //인원마감
@@ -338,7 +336,7 @@ public class GroupAdapter extends BaseAdapter {
                                     joinBtn.setScaleType(ImageView.ScaleType.FIT_XY);
                                     Toast.makeText(context, "ATTEND COMPLETE(인원마감)", Toast.LENGTH_SHORT).show();
                                     //activie 1로 바꾸기
-                                    rtable.child(myRoom.getRoomkey()).child("active").setValue(String.valueOf("1"));
+                                    rtable.child(mRoom.get(pos).getRoomkey()).child("active").setValue(String.valueOf("1"));
                                 }
                                 else{   //인원마감 아님
                                     joinBtn.setImageResource(R.drawable.attend);
@@ -367,16 +365,16 @@ public class GroupAdapter extends BaseAdapter {
                     else{   //버튼이 end이거나 attend일때
                         attendNum -= 1;
                         //db삭제
-                        String key = myRoom.getRoomkey()+"_"+matchNum;
+                        String key = mRoom.get(pos).getRoomkey()+"_"+matchNum;
                         gtable.child(key).removeValue();
 
                         //room attendNum 수정
-                        rtable.child(myRoom.getRoomkey()).child("attendNum").setValue(String.valueOf(attendNum));
-                        myRoom.setAttendNum(String.valueOf(attendNum));
+                        rtable.child(mRoom.get(pos).getRoomkey()).child("attendNum").setValue(String.valueOf(attendNum));
+                        mRoom.get(pos).setAttendNum(String.valueOf(attendNum));
 
                         if (b_btn.equals(b_end)){
                             //active 를0으로
-                            rtable.child(myRoom.getRoomkey()).child("active").setValue(String.valueOf("0"));
+                            rtable.child(mRoom.get(pos).getRoomkey()).child("active").setValue(String.valueOf("0"));
                             Toast.makeText(context, "end 액티브 0으로", Toast.LENGTH_SHORT).show();
                         }
                         joinBtn.setImageResource(R.drawable.join);

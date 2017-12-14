@@ -8,17 +8,24 @@ import java.util.ArrayList;
 
 public class CallGroup {
     private ArrayList<Call> child;
-    private String Position;
-    private boolean publicCheck;
+    private String Position;    //장소 제목
+    private String groupKey;    //그룹 키 정보
+    private String publicCheck;    //공개여부`
     //public -> true, private -> false
 
     CallGroup(){
-
     }
     public CallGroup(String Pos){
         Position = Pos;
         child = new ArrayList<>();
-        publicCheck = false;
+        publicCheck = "0";
+    }
+
+    public CallGroup(String Pos, ArrayList<Call> people, String groupKey, String publicCheck){
+        Position = Pos;
+        child = people;
+        this.groupKey = groupKey;
+        this.publicCheck = publicCheck;
     }
 
     public void setChild(ArrayList<Call> child) {
@@ -30,14 +37,15 @@ public class CallGroup {
     public String getPosition() {
         return Position;
     }
+    public String getGroupKey(){return groupKey;}
     public void setPosition(String position) {
         Position = position;
     }
-
-    public void setPublicCheck(boolean publicCheck) {
+    public void setGroupKey(String groupKey){this.groupKey = groupKey;}
+    public void setPublicCheck(String publicCheck) {
         this.publicCheck = publicCheck;
     }
-    public boolean isPublicCheck() {
+    public String getPublicCheck() {
         return publicCheck;
     }
 }

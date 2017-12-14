@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 
 import com.android.project.nnfriends_.Classes.Call;
 import com.android.project.nnfriends_.Classes.CallGroup;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -43,6 +46,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
         if(convertView == null){
             convertView = myinf.inflate(this.groupLayout, parent, false);
         }
+
         TextView groupName = (TextView)convertView.findViewById(R.id.groupName);
         Button publicBtn = (Button)convertView.findViewById(R.id.publicBtn);
         Button privateBtn = (Button)convertView.findViewById(R.id.privateBtn);
@@ -58,8 +62,8 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
         groupName.setText(DataList.get(groupPosition).getPosition());
 
         //버튼 초기설정대로 바꾸기
-        Boolean check = DataList.get(groupPosition).isPublicCheck();
-        if(check){//public
+        String check = DataList.get(groupPosition).getPublicCheck();
+        if(check.equals("1")){//public
             privateBtn.setBackgroundColor(Color.parseColor("#ffffff")); // 하얀색
             publicBtn.setBackgroundColor(Color.parseColor("#b41abc9c")); // 검은색
             privateBtn.setTextColor(Color.parseColor("#b41abc9c"));
@@ -83,7 +87,12 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
                 publicBtn.setBackgroundColor(Color.parseColor("#b41abc9c")); // 검은색
                 privateBtn.setTextColor(Color.parseColor("#b41abc9c"));
                 publicBtn.setTextColor(Color.parseColor("#ffffff"));
-                DataList.get(groupPos).setPublicCheck(true);
+                DataList.get(groupPos).setPublicCheck("1");
+
+                DatabaseReference gtable;
+                gtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/GroupDB");
+                gtable.child(DataList.get(groupPos).getGroupKey()).child("infoFlag").setValue(String.valueOf("1"));
+                DataList.get(groupPos).setPublicCheck("1");
             }
         });
         privateBtn.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +104,12 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
                 privateBtn.setBackgroundColor(Color.parseColor("#b41abc9c")); // 검은색
                 publicBtn.setTextColor(Color.parseColor("#b41abc9c"));
                 privateBtn.setTextColor(Color.parseColor("#ffffff"));
-                DataList.get(groupPos).setPublicCheck(false);
+                DataList.get(groupPos).setPublicCheck("0");
+
+                DatabaseReference gtable;
+                gtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/GroupDB");
+                gtable.child(DataList.get(groupPos).getGroupKey()).child("infoFlag").setValue(String.valueOf("0"));
+                DataList.get(groupPos).setPublicCheck("0");
             }
         });
 
@@ -111,6 +125,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
         }
 
         final ArrayList<Call> people = DataList.get(groupPosition).getChild();
+        Log.d("groupList","groupPos"+"_"+groupPosition);
         Button callBtn = (Button) convertView.findViewById(R.id.CallBtn);
         //버튼 포커싱 되면 child 안보임
         callBtn.setFocusable(false);
@@ -118,7 +133,13 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
         TextView childName = (TextView)convertView.findViewById(R.id.ChildNameView);
         TextView childPhone = (TextView)convertView.findViewById(R.id.ChildPhoneView);
         childName.setText(people.get(childPosition).getName());
-        childPhone.setText(people.get(childPosition).getPhoneNum());
+        Log.d("infoFlag", people.get(childPosition).getName()+"_"+people.get(childPosition).getInfoFalg());
+        if(people.get(childPosition).getInfoFalg().equals("1")){
+            childPhone.setText(people.get(childPosition).getPhoneNum());
+        }
+        else{
+            childPhone.setText("비공개");
+        }
 
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
