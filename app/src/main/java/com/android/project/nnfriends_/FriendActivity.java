@@ -113,35 +113,37 @@ public class FriendActivity extends MyActivity {
 
                                     if(UserList.size()!=0){
                                         for (int i = 0; i < AttendRoomList.size(); i++) {
+                                            ArrayList<Call> people2 = new ArrayList<Call>();
+                                            String publicCheck ="0";
+                                            Log.d("groupList","peoplesize_"+people2.size());
                                             if (AttendRoomList.get(i).getActive().equals("1")) {  //마감된 방이고
                                                 Log.d("groupList","1"+AttendRoomList.get(i).getRoomkey()+"_내가참석하고마감된방");
-                                                CallGroup cg = new CallGroup(AttendRoomList.get(i).getGroupPlace());    //해당 장소의 그룹 생성
+                                                  //해당 장소의 그룹 생성
                                                 Log.d("groupList","그룹생성"+AttendRoomList.get(i).getGroupPlace());
-
-                                                for(int j=0; j<GroupList.size(); j++){
-                                                    if(GroupList.get(j).getRoomkey().equals(AttendRoomList.get(i).getRoomkey())){
-                                                        Log.d("groupList","2내가참석한 룸이랑 그룹리스트의 룸이랑 일치"+GroupList.get(j).getRoomkey());
-                                                        for(int a=0; a<UserList.size(); a++){
-                                                            if(UserList.get(a).getMatchNum().equals(GroupList.get(j).getMatchNum())){
-                                                                Log.d("groupList","3"+UserList.get(a).getMatchNum()+"_"+GroupList.get(j).getMatchNum());
-                                                                if(!(UserList.get(a).getMatchNum().equals(matchNum))){
-                                                                    Log.d("groupList","4"+matchNum+"_"+UserList.get(a).getMatchNum());
-                                                                    User user = UserList.get(a);
-                                                                    people.add(new Call(user.getName(), user.getuID(), GroupList.get(j).getInfoFlag()));
-                                                                    Log.d("groupList","user"+"_"+user.getName());
+                                                for (int j=0; j<UserList.size(); j++){
+                                                    for(int a=0; a<GroupList.size(); a++){
+                                                        if (GroupList.get(a).getRoomkey().equals(AttendRoomList.get(i).getRoomkey())){
+                                                            if(UserList.get(j).getMatchNum().equals(GroupList.get(a).getMatchNum())){
+                                                                if (!(UserList.get(j).getMatchNum().equals(matchNum))){
+                                                                    User user = UserList.get(j);
+                                                                    people2.add(new Call(user.getName(), user.getuID(), GroupList.get(a).getInfoFlag()));
+                                                                    Log.d("groupList",AttendRoomList.get(i).getGroupPlace()+"_"+user.getName());
+                                                                }
+                                                                else{
+                                                                    publicCheck = GroupList.get(a).getInfoFlag();
                                                                 }
                                                             }
                                                         }
                                                     }
                                                 }
-                                                Log.d("groupList",people.size()+"");
-                                                cg.setChild(people);
+
+                                                callGroups.add(new CallGroup(AttendRoomList.get(i).getGroupPlace(),people2,AttendRoomList.get(i).getRoomkey()+"_"+matchNum, publicCheck));
+                                                Log.d("groupList",callGroups.get(0).getPosition());
+                                                Log.d("groupList",callGroups.get(0).getChild().get(0).getName());
                                             }
-                                            callGroups.add(cg);
                                         }
 
                                         if(callGroups.size() != 0){
-                                            Log.d("groupList",callGroups.get(0).getPosition()+"_"+"callGroup");
 
                                             ExpandAdapter adapter = new ExpandAdapter(getApplicationContext(),R.layout.call_grouplist,R.layout.call_childlist, callGroups);
                                             exlistView.setAdapter(adapter);
@@ -158,7 +160,7 @@ public class FriendActivity extends MyActivity {
                                 public void onCancelled(DatabaseError databaseError) {
 
                                 }
-                            });
+                        });
 
 
                         }
