@@ -506,7 +506,7 @@ public class RoomAddActivity extends MyActivity {
                 String matchNum = pref.getStringPref(RoomAddActivity.this, KEY_USER_MATNUM);
 
                 SimpleDateFormat wTime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSSS"); // 작성시간
-                final String Roomkey = wTime.format(new Date())+"_leader:"+String.valueOf(matchNum);
+                final String Roomkey = wTime.format(new Date())+"_leader:"+matchNum;
 
                 DatabaseReference roomRef = table.child(Roomkey);
                 room = new Room(Roomkey, Active, LeaderName, LeaderID, LeaderMatchNum, TeamNum, Gu, Dong, strYear, strMonth, strDay, strDayofweek, groupDate, groupTime, groupPlace, groupContent, attendNum);
@@ -528,9 +528,9 @@ public class RoomAddActivity extends MyActivity {
                 String matchNum = pref.getStringPref(RoomAddActivity.this, KEY_USER_MATNUM);
 
 
-                String key = room.getRoomkey()+"_"+String.valueOf(matchNum);
+                String key = room.getRoomkey()+"_"+matchNum;
                 DatabaseReference groupRef = gtable.child(key);
-                Group group= new Group(key, room.getRoomkey(), String.valueOf(matchNum),String.valueOf(1));
+                Group group= new Group(key, room.getRoomkey(), matchNum,String.valueOf(1));
                 groupRef.setValue(group);
             }
 

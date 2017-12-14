@@ -24,12 +24,16 @@ import static com.android.project.nnfriends_.LoginActivity.KEY_USER_MATNUM;
 
 public class FriendActivity extends MyActivity {
     private ExpandableListView exlistView;
-    ArrayList<Group> MyGroupList;
-    ArrayList<Room> AttendRoomList;
-    ArrayList<CallGroup> callGroups;
-    ArrayList<Call> people;
+    ArrayList<Group> MyGroupList= new ArrayList<>();
+    ArrayList<Room> RoomList= new ArrayList<>();
+    ArrayList<Room> AttendRoomList = new ArrayList<>();
+    ArrayList<CallGroup> callGroups= new ArrayList<>();
+    ArrayList<Call> people = new ArrayList<>();
+    ArrayList<Group> GroupList = new ArrayList<>();
+    ArrayList<User> UserList = new ArrayList<>();
     PreferenceManager pref;
     String matchNum;
+    CallGroup cg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,7 @@ public class FriendActivity extends MyActivity {
         Display newDisplay = getWindowManager().getDefaultDisplay();
         int width = newDisplay.getWidth();
 
-        final ArrayList<Group> GroupList = new ArrayList<>();
+
         exlistView = (ExpandableListView)findViewById(R.id.callList);
 
         ///////////////////
@@ -51,72 +55,103 @@ public class FriendActivity extends MyActivity {
         DatabaseReference gtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/GroupDB");
         matchNum = pref.getStringPref(this, KEY_USER_MATNUM);
         Query query = gtable.orderByKey();
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Group group = data.getValue(Group.class);
                     GroupList.add(group); //모든 그룹 가져오기
+                    Log.d("groupList", group.getRoomkey());
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        //내가 참가한 그룹들
-        for(int i =0; i<GroupList.size(); i++){
-            if(matchNum.equals(GroupList.get(i).getMatchNum())){
-                MyGroupList.add(GroupList.get(i));      //내가 참가한 그룹들
-            }
-        }
-
-        //내가 참가한 방 정보 가져오기
-        DatabaseReference rtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/RoomDB");
-        Query query1 = rtable.orderByKey();
-        query1.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    Room room = data.getValue(Room.class);
-                    for (int i=0; i<MyGroupList.size(); i++){
-                        if(MyGroupList.get(i).getRoomkey().equals(room.getRoomkey())){
-                            AttendRoomList.add(room);
+                Log.d("groupList", GroupList.get(0).getRoomkey());
+                if(GroupList.size() != 0){
+                    for(int i =0; i<GroupList.size(); i++){
+                        if(matchNum.equals(GroupList.get(i).getMatchNum())){
+                            MyGroupList.add(GroupList.get(i));      //내가 참가한 그룹들
                         }
                     }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
-
-        //참가한 방이 마감된 방인지 검사 후 나와 같이 참가한 사람들의 matchNum을 리스트에 저장
-        for(int i=0; i<AttendRoomList.size(); i++){
-            if(AttendRoomList.get(i).getActive().equals("1")) { //마감된 방이면
-                CallGroup cg = new CallGroup(AttendRoomList.get(i).getGroupPlace());    //해당 장소의 그룹 생성
-                people.clear();
-                //이방에 참가한 사람들의 matchNum을 저장
-                for (int j = 0; j<GroupList.size(); j++){
-                    if(AttendRoomList.get(i).getRoomkey().equals(GroupList.get(j).getRoomkey())){
-                        if(GroupList.get(j).getMatchNum().equals(matchNum)){
-                            Log.d("checkk","내방");
+                DatabaseReference rtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/RoomDB");
+                Query query1 = rtable.orderByKey();
+                query1.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            Room room = data.getValue(Room.class);
+                            RoomList.add(room);
                         }
-                        else{
+
+                        Log.d("groupList","RoomList"+"_"+RoomList.get(0).getRoomkey());
+                        ///내가 참석한 방 정보 저장
+                        if(RoomList.size() != 0){
+                            Log.d("groupList","들어감");
+                            for(int i = 0; i<GroupList.size(); i++){
+                                if(matchNum.equals(GroupList.get(i).getMatchNum())){    //내가 참가한 그룹
+                                    for (int j = 0; j<RoomList.size(); j++){
+                                        if(GroupList.get(i).getRoomkey().equals(RoomList.get(j).getRoomkey())){
+                                            AttendRoomList.add(RoomList.get(j));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        if(AttendRoomList.size() != 0){ //내가 참석한 룸의 정보들
                             DatabaseReference utable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/UserDB");
-                            Query query2 = utable.orderByKey().equalTo(GroupList.get(j).getMatchNum());
-                            final Group currentGroup = GroupList.get(j);
-                            query2.addListenerForSingleValueEvent(new ValueEventListener() {
+                            Query query2 = utable.orderByKey();
+
+                            query2.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     for (DataSnapshot data : dataSnapshot.getChildren()) {
                                         User user = data.getValue(User.class);
-                                        people.add(new Call(user.getName(), user.getuID(), currentGroup.getInfoFlag()));
+                                        UserList.add(user);
                                     }
+
+                                    if(UserList.size()!=0){
+                                        for (int i = 0; i < AttendRoomList.size(); i++) {
+                                            if (AttendRoomList.get(i).getActive().equals("1")) {  //마감된 방이고
+                                                Log.d("groupList","1"+AttendRoomList.get(i).getRoomkey()+"_내가참석하고마감된방");
+                                                CallGroup cg = new CallGroup(AttendRoomList.get(i).getGroupPlace());    //해당 장소의 그룹 생성
+                                                Log.d("groupList","그룹생성"+AttendRoomList.get(i).getGroupPlace());
+
+                                                for(int j=0; j<GroupList.size(); j++){
+                                                    if(GroupList.get(j).getRoomkey().equals(AttendRoomList.get(i).getRoomkey())){
+                                                        Log.d("groupList","2내가참석한 룸이랑 그룹리스트의 룸이랑 일치"+GroupList.get(j).getRoomkey());
+                                                        for(int a=0; a<UserList.size(); a++){
+                                                            if(UserList.get(a).getMatchNum().equals(GroupList.get(j).getMatchNum())){
+                                                                Log.d("groupList","3"+UserList.get(a).getMatchNum()+"_"+GroupList.get(j).getMatchNum());
+                                                                if(!(UserList.get(a).getMatchNum().equals(matchNum))){
+                                                                    Log.d("groupList","4"+matchNum+"_"+UserList.get(a).getMatchNum());
+                                                                    User user = UserList.get(a);
+                                                                    people.add(new Call(user.getName(), user.getuID(), GroupList.get(j).getInfoFlag()));
+                                                                    Log.d("groupList","user"+"_"+user.getName());
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                Log.d("groupList",people.size()+"");
+                                                cg.setChild(people);
+                                            }
+                                            callGroups.add(cg);
+                                        }
+
+                                        if(callGroups.size() != 0){
+                                            Log.d("groupList",callGroups.get(0).getPosition()+"_"+"callGroup");
+
+                                            ExpandAdapter adapter = new ExpandAdapter(getApplicationContext(),R.layout.call_grouplist,R.layout.call_childlist, callGroups);
+                                            exlistView.setAdapter(adapter);
+                                        }
+
+                                    }
+
+
+
+
                                 }
 
                                 @Override
@@ -125,23 +160,108 @@ public class FriendActivity extends MyActivity {
                                 }
                             });
 
+
                         }
                     }
-                }
-                cg.setChild(people);
-                callGroups.add(cg);
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
             }
-        }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+//        if(MyGroupList.size() != 0){
+//            //내가 참가한 방 정보 가져오기
+//            DatabaseReference rtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/RoomDB");
+//            Query query1 = rtable.orderByKey();
+//            query1.addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+//                        Room room = data.getValue(Room.class);
+//                        for (int i=0; i<MyGroupList.size(); i++){
+//                            if(MyGroupList.get(i).getRoomkey().equals(room.getRoomkey())){
+//                                AttendRoomList.add(room);
+//                            }
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
+//        }
+//
+//        if (AttendRoomList.size() != 0){
+//            //참가한 방이 마감된 방인지 검사 후 나와 같이 참가한 사람들의 matchNum을 리스트에 저장
+//            for(int i=0; i<AttendRoomList.size(); i++){
+//                if(AttendRoomList.get(i).getActive().equals("1")) { //마감된 방이면
+//                    Log.d("checkkk","마감됨");
+//                    CallGroup cg = new CallGroup(AttendRoomList.get(i).getGroupPlace());    //해당 장소의 그룹 생성
+//                    Log.d("checkkk",cg.getPosition()+"_"+"장소생성");
+//                    people.clear();
+//                    //이방에 참가한 사람들의 matchNum을 저장
+//                    for (int j = 0; j<GroupList.size(); j++){
+//                        if(AttendRoomList.get(i).getRoomkey().equals(GroupList.get(j).getRoomkey())){
+//                            if(GroupList.get(j).getMatchNum().equals(matchNum)){
+//                                Log.d("checkk","내방");
+//                            }
+//                            else{
+//                                DatabaseReference utable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/UserDB");
+//                                Query query2 = utable.orderByKey().equalTo(GroupList.get(j).getMatchNum());
+//                                final Group currentGroup = GroupList.get(j);
+//                                query2.addListenerForSingleValueEvent(new ValueEventListener() {
+//                                    @Override
+//                                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+//                                            User user = data.getValue(User.class);
+//                                            people.add(new Call(user.getName(), user.getuID(), currentGroup.getInfoFlag()));
+//                                        }
+//                                    }
+//
+//                                    @Override
+//                                    public void onCancelled(DatabaseError databaseError) {
+//
+//                                    }
+//                                });
+//
+//                            }
+//                        }
+//                    }
+//                    cg.setChild(people);
+//                    callGroups.add(cg);
+//                }
+//            }
+//        }
+
+
 
         //matchNum
-
+//
+//        Log.d("callGroup",callGroups.size()+"");
+//        for (int i=0; i<callGroups.size(); i++){
+//            Log.d("callGroup", callGroups.get(i).getPosition());
+//        }
 
         ///////////////////
 
 
-        ExpandAdapter adapter = new ExpandAdapter(getApplicationContext(),R.layout.call_grouplist,R.layout.call_childlist, callGroups);
-        //exlistView.setIndicatorBounds(width-50, width); //이 코드를 지우면 화살표 위치가 바뀐다.
-        exlistView.setAdapter(adapter);
+//        ExpandAdapter adapter = new ExpandAdapter(getApplicationContext(),R.layout.call_grouplist,R.layout.call_childlist, callGroups);
+//        //exlistView.setIndicatorBounds(width-50, width); //이 코드를 지우면 화살표 위치가 바뀐다.
+//        exlistView.setAdapter(adapter);
         //강제펼침
 //        for(int i=0; i<adapter.getGroupCount();i++){
 //            exlistView.expandGroup(i);
