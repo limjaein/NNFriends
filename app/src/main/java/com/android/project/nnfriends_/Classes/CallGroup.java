@@ -8,12 +8,11 @@ import java.util.ArrayList;
 
 public class CallGroup {
     private ArrayList<Call> child;
-    private String Position;
-    private boolean publicCheck;
+    private String Position;    //장소 제목
+    private boolean publicCheck;    //공개여부`
     //public -> true, private -> false
 
     CallGroup(){
-
     }
     public CallGroup(String Pos){
         Position = Pos;

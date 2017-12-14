@@ -6,11 +6,24 @@ import android.widget.ExpandableListView;
 
 import com.android.project.nnfriends_.Classes.Call;
 import com.android.project.nnfriends_.Classes.CallGroup;
+import com.android.project.nnfriends_.Classes.Group;
+import com.android.project.nnfriends_.Classes.PreferenceManager;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import static com.android.project.nnfriends_.LoginActivity.KEY_USER_MATNUM;
+
 public class FriendActivity extends MyActivity {
     private ExpandableListView exlistView;
+    ArrayList<Group> MyGroupList;
+    PreferenceManager pref;
+    String matchNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +38,37 @@ public class FriendActivity extends MyActivity {
         int width = newDisplay.getWidth();
 
         ArrayList<CallGroup> DataList = new ArrayList<>();
+        final ArrayList<Group> GroupList = new ArrayList<>();
         exlistView = (ExpandableListView)findViewById(R.id.callList);
 
-        CallGroup cg = new CallGroup("어린이대공원");
+        ///////////////////
+        DatabaseReference gtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/GroupDB");
+        matchNum = pref.getIntPref(this, KEY_USER_MATNUM);
+        Query query = gtable.orderByKey();
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Group group = data.getValue(Group.class);
+                    GroupList.add(group); //모든 그룹 가져오기
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        for(int i =0; i<GroupList.size(); i++){
+
+        }
+
+        DatabaseReference rtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/RoomDB");
+        ArrayList<Group>
+        ///////////////////
+
+        CallGroup cg = new CallGroup("어린이대공원"); // 장소
 
         ArrayList<Call> people = new ArrayList<>();
         people.add(new Call("JaeIn","01085286812"));
