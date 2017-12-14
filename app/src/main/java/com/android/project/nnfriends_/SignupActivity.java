@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.project.nnfriends_.Classes.PreferenceManager;
 import com.android.project.nnfriends_.Classes.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +25,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Iterator;
+
+import static com.android.project.nnfriends_.LoginActivity.KEY_FINGER_ID;
+import static com.android.project.nnfriends_.LoginActivity.KEY_FINGER_MATNUM;
+import static com.android.project.nnfriends_.LoginActivity.KEY_FINGER_NAME;
+import static com.android.project.nnfriends_.LoginActivity.KEY_FINGER_PIN;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -144,8 +150,10 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    Toast.makeText(SignupActivity.this, "auto OK", Toast.LENGTH_SHORT).show();
                     fingerprint = true;
                 } else
+                    Toast.makeText(SignupActivity.this, "auto NO", Toast.LENGTH_SHORT).show();
                     fingerprint = false;
             }
         });
@@ -211,6 +219,13 @@ public class SignupActivity extends AppCompatActivity {
                         editName.getText().toString(), Integer.valueOf(age), Integer.valueOf(gender), SSN1+SSN2,
                         state, "", "", "", "", editHelperID.getText().toString());
                 member.setValue(user);
+
+                // 지문 로그인을 위한 정보 저장
+                PreferenceManager pref = new PreferenceManager();
+                pref.saveStringPref(SignupActivity.this, KEY_FINGER_ID, editID.getText().toString());
+                pref.saveStringPref(SignupActivity.this, KEY_FINGER_PIN, editPIN.getText().toString());
+                pref.saveStringPref(SignupActivity.this, KEY_FINGER_NAME, editName.getText().toString());
+
                 Toast.makeText(SignupActivity.this, "회원가입 하였습니다", Toast.LENGTH_SHORT).show();
             }
 

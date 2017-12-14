@@ -1,18 +1,31 @@
 package com.android.project.nnfriends_;
 
+import android.*;
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,22 +41,35 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback{
 
     boolean running;
     EditText editID, editPIN;
     String autoId, autoPin;
+    Spinner spinner;
+    String interNum;
+    String myPhone;
 
     DatabaseReference table;
 
     PreferenceManager pref;
-    //static final String KEY_AUTO_LOGIN = "autoLogin";
+
     static final String KEY_USER_ID = "userID";
-    static final String KEY_USER_NAME = "userName";
     static final String KEY_USER_PIN = "userPIN";
+    static final String KEY_USER_NAME = "userName";
     static final String KEY_USER_MATNUM = "matchNum";
+    static final String KEY_FINGER_ID = "fingerID";
+    static final String KEY_FINGER_PIN = "fingerPIN";
+    static final String KEY_FINGER_NAME = "fingerName";
+    static final String KEY_FINGER_MATNUM = "fingerMatchNum";
 
     static Typeface typeface;
+
+    static final int REQ_PERMISSION = 1000;
+    private static String[] permission = {
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.READ_SMS
+    };
 
     @Override
     public void onBackPressed() {
@@ -79,6 +105,18 @@ public class LoginActivity extends AppCompatActivity {
                     check.setImageResource(R.drawable.fingerprint_check);
                     dialog.dismiss();
                     Toast.makeText(LoginActivity.this, "success", Toast.LENGTH_SHORT).show();
+
+                    String id = pref.getStringPref(LoginActivity.this, KEY_FINGER_ID);
+                    String pin = pref.getStringPref(LoginActivity.this, KEY_FINGER_PIN);
+                    String name = pref.getStringPref(LoginActivity.this, KEY_FINGER_NAME);
+                    String matchNum = pref.getStringPref(LoginActivity.this, KEY_FINGER_MATNUM);
+
+
+                    pref.saveStringPref(LoginActivity.this, KEY_USER_ID, id);
+                    pref.saveStringPref(LoginActivity.this, KEY_USER_PIN, pin);
+                    pref.saveStringPref(LoginActivity.this, KEY_USER_NAME, name);
+                    pref.saveStringPref(LoginActivity.this, KEY_USER_MATNUM, matchNum);
+
                     Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                     startActivity(intent);
                     finish();
@@ -98,7 +136,9 @@ public class LoginActivity extends AppCompatActivity {
 
         }
     }
-    public void initAutoLogin(){
+
+    public void initAutoLogin() {
+        Log.d("checkk", "initauto");
         SharedPreferences autopref = getSharedPreferences("autopref", Activity.MODE_PRIVATE);
 
         PreferenceManager pref = new PreferenceManager();
@@ -106,16 +146,16 @@ public class LoginActivity extends AppCompatActivity {
         String Pin = pref.getStringPref(LoginActivity.this, KEY_USER_PIN);
 
 
-        autoId = autopref.getString("autoId",null);
+        autoId = autopref.getString("autoId", null);
         autoPin = autopref.getString("autoPin", null);
 
-        if(autoId !=null && autoPin != null) {
-            if(autoId.equals(Id) && autoPin.equals(Pin)) {
+        if (autoId != null && autoPin != null) {
+            if (autoId.equals(Id) && autoPin.equals(Pin)) {
 
                 pref.saveStringPref(LoginActivity.this, KEY_USER_ID, Id);
-                pref.saveStringPref(LoginActivity.this, KEY_USER_NAME, Pin);
+                pref.saveStringPref(LoginActivity.this, KEY_USER_PIN, Pin);
 
-                Toast.makeText(LoginActivity.this, autoId +" 님 자동로그인 입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, autoId + " 님 자동로그인 입니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, PinActivity.class);
                 startActivity(intent);
 
@@ -124,9 +164,80 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQ_PERMISSION) {
+            if (grantResults.length > 0) {
+                if (checkPermission(permission)) {
+
+                } else {
+                    askPermission(permission, REQ_PERMISSION);
+                }
+            }
+        }
+    }
+
+    private boolean checkPermission(String[] requestPermission) {
+        boolean[] requestResult = new boolean[requestPermission.length];
+        for (int i = 0; i < requestResult.length; i++) {
+            requestResult[i] = (ContextCompat.checkSelfPermission(this, requestPermission[i]) == PackageManager.PERMISSION_GRANTED);
+            if (!requestResult[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void askPermission(String[] requestPermission, int requestCode) {
+        ActivityCompat.requestPermissions(
+                this,
+                requestPermission,
+                requestCode
+        );
+    }
+
     public void init() {
+        Log.d("checkk", "init");
+        if (!checkPermission(permission)) {
+            askPermission(permission, REQ_PERMISSION);
+            return;
+        }
+        final TelephonyManager mgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+
+        if (mgr != null) {
+            myPhone = mgr.getLine1Number();
+        }
+
         editID = (EditText) findViewById(R.id.editLoginID);
+        editID.setText(myPhone);
         editPIN = (EditText) findViewById(R.id.editLoginPIN);
+        spinner = (Spinner) findViewById(R.id.phoneSpinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0: // kor
+                        interNum = "+82";
+                        break;
+                    case 1: // nld
+                        interNum = "+31";
+                        break;
+                }
+                if (mgr != null) {
+                    myPhone = interNum + myPhone.substring(myPhone.length()-10,myPhone.length());
+                    editID.setText(myPhone);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null)
@@ -189,7 +300,7 @@ public class LoginActivity extends AppCompatActivity {
                         pref.saveStringPref(LoginActivity.this, KEY_USER_ID, id);
                         pref.saveStringPref(LoginActivity.this, KEY_USER_NAME, user.getName());
                         pref.saveStringPref(LoginActivity.this, KEY_USER_PIN, user.getuPW());
-                        pref.saveIntPref(LoginActivity.this, KEY_USER_MATNUM, user.getMatchNum());
+                        pref.saveStringPref(LoginActivity.this, KEY_USER_MATNUM, user.getMatchNum());
                         Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
                         startActivity(intent);
                         finish();

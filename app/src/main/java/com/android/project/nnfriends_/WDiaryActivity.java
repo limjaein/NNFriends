@@ -222,7 +222,7 @@ public class WDiaryActivity extends MyActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 PreferenceManager pref = new PreferenceManager();
-                int matchNum = pref.getIntPref(WDiaryActivity.this, KEY_USER_MATNUM);
+                String matchNum = pref.getStringPref(WDiaryActivity.this, KEY_USER_MATNUM);
                 String id = pref.getStringPref(WDiaryActivity.this, KEY_USER_ID);
 
                 SimpleDateFormat key = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSSS");

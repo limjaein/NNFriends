@@ -491,7 +491,7 @@ public class RoomAddActivity extends MyActivity {
         Log.d("checkk", pref.getStringPref(RoomAddActivity.this, KEY_USER_NAME));
         final String LeaderName = pref.getStringPref(RoomAddActivity.this, KEY_USER_NAME);
         final String LeaderID = pref.getStringPref(RoomAddActivity.this, KEY_USER_ID);
-        final int LeaderMatchNum = pref.getIntPref(RoomAddActivity.this, KEY_USER_MATNUM);
+        final String LeaderMatchNum = pref.getStringPref(RoomAddActivity.this, KEY_USER_MATNUM);
         final String TeamNum = String.valueOf(ans4);
         final String Active = String.valueOf(0);    //모집중
         //final String Roomkey; // 바꿀예정

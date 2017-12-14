@@ -47,7 +47,7 @@ public class GroupAdapter extends BaseAdapter {
     PreferenceManager pref;
 
     DatabaseReference gtable, rtable;
-    int matchNum;
+    String matchNum;
 
     int myFlag = 0; // 나의 참여 여부
     static int alertAttendNum = 0;
@@ -112,7 +112,7 @@ public class GroupAdapter extends BaseAdapter {
         rtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/RoomDB");
 
         // user의 matchNum
-        matchNum = pref.getIntPref(context, KEY_USER_MATNUM);
+        matchNum = pref.getStringPref(context, KEY_USER_MATNUM);
 
         // 버튼이미지확인
         int mat = pref.getIntPref(context, KEY_USER_MATNUM);
@@ -124,7 +124,7 @@ public class GroupAdapter extends BaseAdapter {
             joinBtn.setEnabled(false);
         }
         else{
-            if(myRoom.getLeaderMatchNum()==mat){    //내가 만든 방
+            if(myRoom.getLeaderMatchNum().equals(mat)){    //내가 만든 방
                 if(myRoom.getActive().equals("0")){ //모집중
                     joinBtn.setImageResource(R.drawable.attend);
                     joinBtn.setEnabled(true);
@@ -226,7 +226,7 @@ public class GroupAdapter extends BaseAdapter {
                 int teamNum = Integer.parseInt(myRoom.getTeamNum());
 
                 int mat = pref.getIntPref(context, KEY_USER_MATNUM);
-                if(myRoom.getLeaderMatchNum()==mat) {    //내가 만든 방
+                if(myRoom.getLeaderMatchNum().equals(mat)) {    //내가 만든 방
 
                     AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
                     alertBuilder.setMessage("Are you sure you want to delete this room?")
@@ -294,7 +294,7 @@ public class GroupAdapter extends BaseAdapter {
                                         //db저장
                                         String key = myRoom.getRoomkey()+"_"+matchNum;
                                         DatabaseReference groupRef = gtable.child(key);
-                                        Group group= new Group(key, myRoom.getRoomkey(), String.valueOf(matchNum),String.valueOf(1));
+                                        Group group= new Group(key, myRoom.getRoomkey(), matchNum,String.valueOf(1));
                                         groupRef.setValue(group);
 
                                         rtable.child(myRoom.getRoomkey()).child("attendNum").setValue(String.valueOf(alertAttendNum));
@@ -323,7 +323,7 @@ public class GroupAdapter extends BaseAdapter {
                                 //db저장
                                 String key = myRoom.getRoomkey()+"_"+matchNum;
                                 DatabaseReference groupRef = gtable.child(key);
-                                Group group= new Group(key, myRoom.getRoomkey(), String.valueOf(matchNum),String.valueOf(0));
+                                Group group= new Group(key, myRoom.getRoomkey(), matchNum,String.valueOf(0));
                                 groupRef.setValue(group);
 
                                 rtable.child(myRoom.getRoomkey()).child("attendNum").setValue(String.valueOf(alertAttendNum));
