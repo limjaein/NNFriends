@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.project.nnfriends_.Classes.DialogListAdapter;
 import com.android.project.nnfriends_.Classes.Room;
@@ -28,7 +27,6 @@ public class GroupActivity extends MyActivity {
 
     final Context context = this;
     private Button GuBtn, DongBtn;
-    public TextView GuTxt, DongTxt;
     public ListView ActiveList;
     public Button addBtn;
     static Intent intent_add;
@@ -61,8 +59,6 @@ public class GroupActivity extends MyActivity {
         addBtn = (Button)findViewById(R.id.addBtn);
         GuBtn = (Button) findViewById(R.id.gubtn);
         DongBtn = (Button) findViewById(R.id.dongbtn);
-        GuTxt = (TextView)findViewById(R.id.GuTxt);
-        DongTxt = (TextView)findViewById(R.id.DongTxt);
         GuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +88,7 @@ public class GroupActivity extends MyActivity {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         String strName = GuList.get(i);
-                        GuTxt.setText(strName);
+                        GuBtn.setText(strName);
                         guNum=i;
                         alertDialog.dismiss();
                     }
@@ -123,10 +119,10 @@ public class GroupActivity extends MyActivity {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         String strName = DongList.get(i);
-                        DongTxt.setText(strName);
+                        DongBtn.setText(strName);
                         alertDialog.dismiss();
-                        if (!DongTxt.getText().equals("동")){
-                            showList(GuTxt.getText().toString(), DongTxt.getText().toString());
+                        if (!DongBtn.getText().equals("동")){
+                            showList(GuBtn.getText().toString(), DongBtn.getText().toString());
                         }
                     }
                 });
@@ -149,7 +145,7 @@ public class GroupActivity extends MyActivity {
         if (requestCode == 1000) {
             if (resultCode == RESULT_OK) {
                 Log.d("checkk", "onActivityResult");
-                showList(GuTxt.getText().toString(), DongTxt.getText().toString());
+                showList(GuBtn.getText().toString(), DongBtn.getText().toString());
             }
         }
     }

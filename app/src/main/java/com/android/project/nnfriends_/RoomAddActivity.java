@@ -54,7 +54,6 @@ public class RoomAddActivity extends MyActivity {
     public static int hour;
     public static int minute;
     private Button GuBtn, DongBtn;
-    public TextView GuTxt, DongTxt;
     public static TextView dateTxt;
     public static TextView timeTxt;
 
@@ -103,8 +102,6 @@ public class RoomAddActivity extends MyActivity {
     private void initFont() {
         Typeface typeface = Typeface.createFromAsset(getAssets(), "gozik.ttf");
 
-        TextView textView1 = (TextView) findViewById(R.id.GuTxt);
-        TextView textView2 = (TextView) findViewById(R.id.DongTxt);
         TextView textView3 = (TextView) findViewById(R.id.DateTxt);
         TextView textView4 = (TextView) findViewById(R.id.TimeTxt);
         TextView textView5 = (TextView) findViewById(R.id.quest2);
@@ -118,8 +115,6 @@ public class RoomAddActivity extends MyActivity {
         Button btn3 = (Button)findViewById(R.id.DateBtn);
         Button btn4 = (Button)findViewById(R.id.TimeBtn);
         Button btn5 = (Button)findViewById(R.id.saveBtn);
-        textView1.setTypeface(typeface);
-        textView2.setTypeface(typeface);
         textView3.setTypeface(typeface);
         textView4.setTypeface(typeface);
         textView5.setTypeface(typeface);
@@ -140,8 +135,6 @@ public class RoomAddActivity extends MyActivity {
         timeTxt = (TextView)findViewById(R.id.TimeTxt);
         GuBtn = (Button) findViewById(R.id.gubtn);
         DongBtn = (Button) findViewById(R.id.dongbtn);
-        GuTxt = (TextView)findViewById(R.id.GuTxt);
-        DongTxt = (TextView)findViewById(R.id.DongTxt);
 
         GuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,7 +165,7 @@ public class RoomAddActivity extends MyActivity {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         String strName = GuList.get(i);
-                        GuTxt.setText(strName);
+                        GuBtn.setText(strName);
                         guNum=i;
                         alertDialog.dismiss();
                     }
@@ -203,7 +196,7 @@ public class RoomAddActivity extends MyActivity {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         String strName = DongList.get(i);
-                        DongTxt.setText(strName);
+                        DongBtn.setText(strName);
                         alertDialog.dismiss();
                     }
                 });
@@ -482,8 +475,8 @@ public class RoomAddActivity extends MyActivity {
         PreferenceManager pref = new PreferenceManager();
 
         //db 저장 부분
-        final String Gu = GuTxt.getText().toString();
-        final String Dong =DongTxt.getText().toString();
+        final String Gu = GuBtn.getText().toString();
+        final String Dong =DongBtn.getText().toString();
         final String groupDate = dateTxt.getText().toString();
         final String groupTime = timeTxt.getText().toString();
         final String groupPlace = ans2;
