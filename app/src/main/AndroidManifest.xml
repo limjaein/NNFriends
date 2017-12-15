@@ -49,12 +49,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MenuActivity"/>
-        <activity
-            android:name=".CameraView"
-            android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".ConnectActivity" />
         <activity android:name=".WDiaryActivity" />
         <activity android:name=".RDiaryActivity" />
