@@ -21,13 +21,16 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:orientation="horizontal">
+
         <RadioButton
             android:checked="true"
             android:id="@+id/age0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="All"
             android:textSize="30dp" />
+
         <RadioButton
             android:id="@+id/age1"
             android:layout_width="wrap_content"

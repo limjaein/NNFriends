@@ -51,7 +51,6 @@ import java.util.Date;
 import java.util.Iterator;
 
 import static com.android.project.nnfriends_.LoginActivity.KEY_FINGER_ID;
-import static com.android.project.nnfriends_.LoginActivity.KEY_FINGER_MATNUM;
 import static com.android.project.nnfriends_.LoginActivity.KEY_FINGER_NAME;
 import static com.android.project.nnfriends_.LoginActivity.KEY_FINGER_PIN;
 import static com.android.project.nnfriends_.LoginActivity.typeface;
