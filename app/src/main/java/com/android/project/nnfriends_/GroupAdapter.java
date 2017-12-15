@@ -317,7 +317,7 @@ public class GroupAdapter extends BaseAdapter {
                                             joinBtn.setImageResource(R.drawable.end);
                                             joinBtn.setEnabled(true);
                                             joinBtn.setScaleType(ImageView.ScaleType.FIT_XY);
-                                            Toast.makeText(context, "ATTEND COMPLETE(인원마감)", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(context, "ATTEND COMPLETE", Toast.LENGTH_SHORT).show();
                                             //activie 1로 바꾸기
                                             rtable.child(mRoom.get(pos).getRoomkey()).child("active").setValue(String.valueOf("1"));
                                         }
@@ -325,7 +325,7 @@ public class GroupAdapter extends BaseAdapter {
                                             joinBtn.setImageResource(R.drawable.attend);
                                             joinBtn.setEnabled(true);
                                             joinBtn.setScaleType(ImageView.ScaleType.FIT_XY);
-                                            Toast.makeText(context, "ATTEND COMPLETE(노인원마감)", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(context, "ATTEND COMPLETE", Toast.LENGTH_SHORT).show();
                                         }
                                         peopleNum.setText(String.valueOf(alertAttendNum)+"("+alertAttendNum*3+"people)"+"/"+String.valueOf(alertTeamNum)+"("+alertTeamNum*3+"people)");
                                     }
@@ -346,7 +346,7 @@ public class GroupAdapter extends BaseAdapter {
                                     joinBtn.setImageResource(R.drawable.end);
                                     joinBtn.setEnabled(true);
                                     joinBtn.setScaleType(ImageView.ScaleType.FIT_XY);
-                                    Toast.makeText(context, "ATTEND COMPLETE(인원마감)", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "ATTEND COMPLETE", Toast.LENGTH_SHORT).show();
                                     //activie 1로 바꾸기
                                     rtable.child(mRoom.get(pos).getRoomkey()).child("active").setValue(String.valueOf("1"));
                                 }
@@ -354,7 +354,7 @@ public class GroupAdapter extends BaseAdapter {
                                     joinBtn.setImageResource(R.drawable.attend);
                                     joinBtn.setEnabled(true);
                                     joinBtn.setScaleType(ImageView.ScaleType.FIT_XY);
-                                    Toast.makeText(context, "ATTEND COMPLETE(노인원마감)", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "ATTEND COMPLETE", Toast.LENGTH_SHORT).show();
                                 }
                                 peopleNum.setText(String.valueOf(alertAttendNum)+"("+alertAttendNum*3+"people)"+"/"+String.valueOf(alertTeamNum)+"("+alertTeamNum*3+"people)");
                             }
@@ -387,13 +387,12 @@ public class GroupAdapter extends BaseAdapter {
                         if (b_btn.equals(b_end)){
                             //active 를0으로
                             rtable.child(mRoom.get(pos).getRoomkey()).child("active").setValue(String.valueOf("0"));
-                            Toast.makeText(context, "end 액티브 0으로", Toast.LENGTH_SHORT).show();
                         }
                         joinBtn.setImageResource(R.drawable.join);
                         joinBtn.setEnabled(true);
                         joinBtn.setScaleType(ImageView.ScaleType.FIT_XY);
                         peopleNum.setText(String.valueOf(attendNum)+"("+attendNum*3+"people)"+"/"+String.valueOf(teamNum)+"("+teamNum*3+"people)");
-                        Toast.makeText(context, "참가 취소", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Attend Cancle", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

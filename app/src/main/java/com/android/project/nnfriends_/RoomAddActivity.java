@@ -416,7 +416,7 @@ public class RoomAddActivity extends MyActivity {
                             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
                             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                                     RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "대답하세요");
+                            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Please Answer");
                             startActivityForResult(intent, REQ_SPEAK_CODE);
                             break;
                         }
@@ -504,7 +504,7 @@ public class RoomAddActivity extends MyActivity {
                 DatabaseReference roomRef = table.child(Roomkey);
                 room = new Room(Roomkey, Active, LeaderName, LeaderID, LeaderMatchNum, TeamNum, Gu, Dong, strYear, strMonth, strDay, strDayofweek, groupDate, groupTime, groupPlace, groupContent, attendNum);
                 roomRef.setValue(room);
-                Toast.makeText(RoomAddActivity.this, "작성 완료", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RoomAddActivity.this, "Write Complete", Toast.LENGTH_SHORT).show();
             }
 
             @Override

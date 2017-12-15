@@ -1,35 +1,27 @@
 package com.android.project.nnfriends_;
 
-import android.*;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -44,8 +36,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -53,7 +43,6 @@ import java.util.Iterator;
 import static com.android.project.nnfriends_.LoginActivity.KEY_FINGER_ID;
 import static com.android.project.nnfriends_.LoginActivity.KEY_FINGER_NAME;
 import static com.android.project.nnfriends_.LoginActivity.KEY_FINGER_PIN;
-import static com.android.project.nnfriends_.LoginActivity.typeface;
 
 public class SignupActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback{
 
@@ -242,7 +231,7 @@ public class SignupActivity extends AppCompatActivity implements ActivityCompat.
                         Iterator<DataSnapshot> child = dataSnapshot.getChildren().iterator();
                         while (child.hasNext()){
                             if(child.next().getKey().equals(interNum+editID.getText().toString())){
-                                Toast.makeText(SignupActivity.this, "존재하는 아이디 입니다", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignupActivity.this, "ID Not Exist", Toast.LENGTH_SHORT).show();
                                 table.removeEventListener(this);
                                 editID.setText("");
                                 //btnIDcheck.setBackgroundTintList();
@@ -251,7 +240,7 @@ public class SignupActivity extends AppCompatActivity implements ActivityCompat.
                                 return;
                             }
                         }
-                        Toast.makeText(SignupActivity.this, "중복 확인 완료", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupActivity.this, "Duplicate check complete", Toast.LENGTH_SHORT).show();
                         btnIDcheck.setImageResource(R.drawable.check_ok);
                         checkID = true;
                         return;
@@ -420,7 +409,7 @@ public class SignupActivity extends AppCompatActivity implements ActivityCompat.
     public boolean joinCheck() {
 
         if (!checkID) {
-            Toast.makeText(this, "아이디 중복검사가 필요합니다", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Need ID duplication check", Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -463,7 +452,7 @@ public class SignupActivity extends AppCompatActivity implements ActivityCompat.
         pref.saveStringPref(SignupActivity.this, KEY_FINGER_NAME, editName.getText().toString());
         pref.saveBooleanPref(SignupActivity.this, KEY_FINGER_FLAG, true);
 
-        Toast.makeText(SignupActivity.this, "회원가입 하였습니다", Toast.LENGTH_SHORT).show();
+        Toast.makeText(SignupActivity.this, "Join Success", Toast.LENGTH_SHORT).show();
 
 
         return true;

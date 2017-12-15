@@ -137,7 +137,7 @@ public class WDiaryActivity extends MyActivity {
                             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH);
                             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                                     RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "대답하세요");
+                            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Please Answer");
                             startActivityForResult(intent, REQ_SPEAK_CODE);
                             break;
                         }
@@ -234,7 +234,7 @@ public class WDiaryActivity extends MyActivity {
                 String name = pref.getStringPref(WDiaryActivity.this, KEY_USER_NAME);
                 Diary diary = new Diary(Diarykey, id, name, matchNum, year, month, day, wTime.format(today), ans1, ans2, ans3, ans4, ans5);
                 diaryRef.setValue(diary);
-                Toast.makeText(WDiaryActivity.this, "작성 완료", Toast.LENGTH_SHORT).show();
+                Toast.makeText(WDiaryActivity.this, "Write Complete", Toast.LENGTH_SHORT).show();
             }
 
             @Override

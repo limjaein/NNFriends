@@ -96,7 +96,7 @@ public class PinActivity extends AppCompatActivity {
                     this.finish();
                 } else {
                     password.setText("");
-                    Toast.makeText(this, "PIN번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "PIN Num Inconsistency.", Toast.LENGTH_SHORT).show();
                 }
             }
         }

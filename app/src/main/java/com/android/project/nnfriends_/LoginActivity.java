@@ -333,7 +333,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     User user = data.getValue(User.class);
                     if (user.getuPW().equals(pw)) {
-                        Toast.makeText(LoginActivity.this, "로그인 성공!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_LONG).show();
                         pref = new PreferenceManager();
                         SharedPreferences autopref = getSharedPreferences("autopref", Activity.MODE_PRIVATE);
 
@@ -353,11 +353,11 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
                     } else {
                         //Log.d("check", user.getUserID());
                         //Log.d("check", user.getUserPW());
-                        Toast.makeText(LoginActivity.this, "비밀번호가 틀립니다", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Password Inconsistency", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
-                Toast.makeText(LoginActivity.this, "존재하지 않는 아이디입니다", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "ID Not Exist", Toast.LENGTH_LONG).show();
             }
 
             @Override

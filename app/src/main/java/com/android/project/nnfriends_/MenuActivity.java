@@ -75,7 +75,6 @@ public class MenuActivity extends MyActivity {
         initFont();
 
     // Example of a call to a native method
-        Toast.makeText(this, stringFromJNI(), Toast.LENGTH_SHORT).show();
     }
 
     private void matchSetting() {
@@ -173,9 +172,9 @@ public class MenuActivity extends MyActivity {
                     Matching matching = new Matching(userID, "", me.getAddress_gu(), me.getAddress_dong(), userID, ser1, ser2);
                     mtable.child(userID).setValue(matching);
 
-                    Toast.makeText(context, "match", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Match", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Fail", Toast.LENGTH_SHORT).show();
                 }
             }
 

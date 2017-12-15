@@ -39,7 +39,7 @@ public class MyActivity extends AppCompatActivity {
         int id = item.getItemId();
         //or switch문을 이용하면 될듯 하다.
         if (id == R.id.action_logout) {
-            Toast.makeText(this, "로그아웃 클릭", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Logout Success", Toast.LENGTH_SHORT).show();
 
             SharedPreferences auto = getSharedPreferences("autopref", Activity.MODE_PRIVATE);
             SharedPreferences.Editor editor = auto.edit();
