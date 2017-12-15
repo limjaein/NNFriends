@@ -94,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="When did you work during breakfast, lunch or dinner?"
+                    android:text="                When did you work \nduring breakfast, lunch or dinner?"
                     android:textSize="30dp" />
 
                 <TextView

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -31,6 +32,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
     private int chlidLayout = 0;
     private ArrayList<CallGroup> DataList;
     private LayoutInflater myinf = null;
+    Typeface font;
 
     public ExpandAdapter(Context context,int groupLay,int chlidLay,ArrayList<CallGroup> DataList){
         this.DataList = DataList;
@@ -38,7 +40,9 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
         this.chlidLayout = chlidLay;
         this.context = context;
         this.myinf = (LayoutInflater)(this.context).getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        font = Typeface.createFromAsset(context.getAssets(), "gozik.ttf");
     }
+
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
@@ -62,6 +66,9 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
 
         groupName.setText(DataList.get(groupPosition).getPosition());
         groupTime.setText(DataList.get(groupPosition).getDate());
+
+        groupName.setTypeface(font);
+        groupTime.setTypeface(font);
 
         //버튼 초기설정대로 바꾸기
         String check = DataList.get(groupPosition).getPublicCheck();
@@ -95,6 +102,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
                 gtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/GroupDB");
                 gtable.child(DataList.get(groupPos).getGroupKey()).child("infoFlag").setValue(String.valueOf("1"));
                 DataList.get(groupPos).setPublicCheck("1");
+                notifyDataSetChanged();
             }
         });
         privateBtn.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +120,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
                 gtable = FirebaseDatabase.getInstance().getReference("NNfriendsDB/GroupDB");
                 gtable.child(DataList.get(groupPos).getGroupKey()).child("infoFlag").setValue(String.valueOf("0"));
                 DataList.get(groupPos).setPublicCheck("0");
+                notifyDataSetChanged();
             }
         });
 
@@ -142,7 +151,8 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
         else{
             childPhone.setText("비공개");
         }
-
+        childName.setTypeface(font);
+        childPhone.setTypeface(font);
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,6 +174,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
 
         return convertView;
     }
+
     @Override
     public boolean hasStableIds() {
         // TODO Auto-generated method stub

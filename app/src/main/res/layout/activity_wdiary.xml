@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:onClick="questClick"
-                android:text="When did you work during breakfast, lunch or dinner?"
+                android:text="                When did you work \nduring breakfast, lunch or dinner?"
                 android:textSize="30dp" />
 
             <TextView

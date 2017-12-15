@@ -24,7 +24,7 @@
             android:id="@+id/gubtn"
             android:text="구"
             android:background="@android:color/transparent"
-            android:textSize="70sp" />
+            android:textSize="40sp" />
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -32,7 +32,7 @@
             android:id="@+id/dongbtn"
             android:background="@android:color/transparent"
             android:text="동"
-            android:textSize="70sp" />
+            android:textSize="40sp" />
     </LinearLayout>
 
 
@@ -132,7 +132,7 @@
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/quest2"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20sp"
                     android:onClick="questClick"
@@ -141,14 +141,14 @@
 
                 <TextView
                     android:id="@+id/ans2"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGray"
                     android:textSize="30sp"/>
 
                 <TextView
                     android:id="@+id/quest3"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:onClick="questClick"
@@ -157,14 +157,14 @@
 
                 <TextView
                     android:id="@+id/ans3"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGray"
                     android:textSize="30dp"/>
 
                 <TextView
                     android:id="@+id/quest4"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:onClick="questClick"
@@ -173,7 +173,7 @@
 
                 <TextView
                     android:id="@+id/ans4"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGray"
                     android:textSize="30dp"/>
