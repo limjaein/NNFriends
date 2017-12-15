@@ -3,6 +3,7 @@ package com.android.project.nnfriends_;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -54,6 +55,8 @@ public class GroupActivity extends MyActivity {
 //        rooms.add(new Room("광진구","화양동","20171115, 14시", "노인정", "뜨개질"));
 
         /////////////////////////////////////
+
+        initFont();
 
         ActiveList = (ListView)findViewById(R.id.activeList);
         addBtn = (Button)findViewById(R.id.addBtn);
@@ -137,6 +140,17 @@ public class GroupActivity extends MyActivity {
             }
         });
 
+    }
+
+    private void initFont() {
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "gozik.ttf");
+
+        Button btn1 = (Button)findViewById(R.id.gubtn);
+        Button btn2 = (Button)findViewById(R.id.dongbtn);
+        Button btn3 = (Button)findViewById(R.id.addBtn);
+        btn1.setTypeface(typeface);
+        btn2.setTypeface(typeface);
+        btn3.setTypeface(typeface);
     }
 
     @Override

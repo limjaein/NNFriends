@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
@@ -81,6 +82,17 @@ public class GroupAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.group_listview, null);
         }
+
+        Typeface typeface = Typeface.createFromAsset(context.getAssets(), "gozik.ttf");
+
+        TextView text1 = (TextView)view.findViewById(R.id.DateView);
+        TextView text2 = (TextView)view.findViewById(R.id.PlaceView);
+        TextView text3 = (TextView)view.findViewById(R.id.ContentView);
+        TextView text4 = (TextView)view.findViewById(R.id.PeopleNum);
+        text1.setTypeface(typeface);
+        text2.setTypeface(typeface);
+        text3.setTypeface(typeface);
+        text4.setTypeface(typeface);
 
         TextView dateView = (TextView)view.findViewById(R.id.DateView);
         TextView placeView = (TextView)view.findViewById(R.id.PlaceView);
