@@ -27,9 +27,9 @@
             android:id="@+id/menu_tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="75dp"
+            android:paddingLeft="50dp"
             android:text="connect"
-            android:textSize="40dp" />
+            android:textSize="55sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -54,9 +54,9 @@
             android:id="@+id/menu_tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="85dp"
+            android:paddingLeft="75dp"
             android:text="diary"
-            android:textSize="40dp" />
+            android:textSize="55sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -80,9 +80,9 @@
             android:id="@+id/menu_tv3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="85dp"
+            android:paddingLeft="75dp"
             android:text="group"
-            android:textSize="40dp" />
+            android:textSize="55sp" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/friendBtn"
@@ -103,8 +103,8 @@
             android:id="@+id/menu_tv4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="85dp"
+            android:paddingLeft="75dp"
             android:text="friend"
-            android:textSize="40dp" />
+            android:textSize="55sp" />
     </LinearLayout>
 </LinearLayout>

@@ -459,7 +459,7 @@ public class SignupActivity extends AppCompatActivity implements ActivityCompat.
 
 
         // 지문 로그인을 위한 정보 저장
-        pref.saveStringPref(SignupActivity.this, KEY_FINGER_ID, editID.getText().toString());
+        pref.saveStringPref(SignupActivity.this, KEY_FINGER_ID, interNum+editID.getText().toString());
         pref.saveStringPref(SignupActivity.this, KEY_FINGER_PIN, editPIN.getText().toString());
         pref.saveStringPref(SignupActivity.this, KEY_FINGER_NAME, editName.getText().toString());
         pref.saveBooleanPref(SignupActivity.this, KEY_FINGER_FLAG, true);

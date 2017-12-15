@@ -172,6 +172,10 @@ public class MenuActivity extends MyActivity {
 
                     Matching matching = new Matching(userID, "", me.getAddress_gu(), me.getAddress_dong(), userID, ser1, ser2);
                     mtable.child(userID).setValue(matching);
+
+                    Toast.makeText(context, "match", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -181,7 +185,7 @@ public class MenuActivity extends MyActivity {
             }
         });
 
-        Log.d("checkk!!", ser1+","+ser2);
+//        Log.d("checkk!!", ser1+","+ser2);
 //        utable.child(ser1).child("state").setValue(2);
 //        utable.child(ser1).child("matchNum").setValue(userID);
 //        utable.child(ser2).child("state").setValue(2);
