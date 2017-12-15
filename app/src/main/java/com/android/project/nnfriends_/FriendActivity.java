@@ -137,7 +137,7 @@ public class FriendActivity extends MyActivity {
                                                     }
                                                 }
 
-                                                callGroups.add(new CallGroup(AttendRoomList.get(i).getGroupPlace(),people2,AttendRoomList.get(i).getRoomkey()+"_"+matchNum, publicCheck));
+                                                callGroups.add(new CallGroup(AttendRoomList.get(i).getGroupPlace(),AttendRoomList.get(i).getGroupDate(),people2,AttendRoomList.get(i).getRoomkey()+"_"+matchNum, publicCheck));
                                                 Log.d("groupList",callGroups.get(0).getPosition());
                                                 Log.d("groupList",callGroups.get(0).getChild().get(0).getName());
                                             }

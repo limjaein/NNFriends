@@ -50,6 +50,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
         TextView groupName = (TextView)convertView.findViewById(R.id.groupName);
         Button publicBtn = (Button)convertView.findViewById(R.id.publicBtn);
         Button privateBtn = (Button)convertView.findViewById(R.id.privateBtn);
+        TextView groupTime = (TextView)convertView.findViewById(R.id.groupTime);
         //버튼 포커싱 되면 child 안보임
         publicBtn.setFocusable(false);
         publicBtn.setFocusableInTouchMode(false);
@@ -60,6 +61,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
         final int groupPos = groupPosition;
 
         groupName.setText(DataList.get(groupPosition).getPosition());
+        groupTime.setText(DataList.get(groupPosition).getDate());
 
         //버튼 초기설정대로 바꾸기
         String check = DataList.get(groupPosition).getPublicCheck();

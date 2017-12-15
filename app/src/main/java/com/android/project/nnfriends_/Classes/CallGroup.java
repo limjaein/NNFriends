@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class CallGroup {
     private ArrayList<Call> child;
     private String Position;    //장소 제목
+    private String Date;    //날짜
     private String groupKey;    //그룹 키 정보
     private String publicCheck;    //공개여부`
     //public -> true, private -> false
@@ -21,13 +22,16 @@ public class CallGroup {
         publicCheck = "0";
     }
 
-    public CallGroup(String Pos, ArrayList<Call> people, String groupKey, String publicCheck){
+    public CallGroup(String Pos, String Date, ArrayList<Call> people, String groupKey, String publicCheck){
         Position = Pos;
+        this.Date = Date;
         child = people;
         this.groupKey = groupKey;
         this.publicCheck = publicCheck;
     }
 
+    public void setDate(String Date){this.Date = Date;}
+    public String getDate(){return Date;}
     public void setChild(ArrayList<Call> child) {
         this.child = child;
     }
