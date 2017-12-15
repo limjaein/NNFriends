@@ -12,16 +12,21 @@
     <!--<ScrollView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content">-->
+    <TextView
+        android:gravity="center"
+        android:text="------------------------------Essentials------------------------------"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
         <LinearLayout
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Spinner
                 android:layout_marginLeft="5dp"
-                android:id="@+id/phoneSpinner"
+                android:id="@+id/signupSpinner"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:spinnerMode="dropdown"
@@ -37,22 +42,35 @@
             android:background="#FFFFFF"
             android:gravity="center">
 
+            <TextView
+                android:id="@+id/internum"
+                android:textSize="40sp"
+                android:gravity="center"
+                android:text="+82 0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingBottom="3dp"/>
             <EditText
                 android:id="@+id/editID"
                 android:layout_width="0dp"
-                android:layout_height="65dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:hint="I  D"
+                android:gravity="left"
+                android:hint="        I   D"
                 android:inputType="number"
-                android:textSize="30sp" />
+                android:textSize="40sp" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnIDcheck"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="3dp"
-                android:backgroundTint="@color/menu3" />
+                android:layout_width="27dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="1dp"
+                android:adjustViewBounds="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/check_no" />
         </LinearLayout>
 
         <LinearLayout
@@ -67,38 +85,42 @@
             <EditText
                 android:id="@+id/editPIN"
                 android:layout_width="0dp"
-                android:layout_height="65dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:hint="P I N"
                 android:inputType="numberPassword"
                 android:maxLength="4"
-                android:textSize="30sp" />
+                android:textSize="40sp" />
 
-            <Button
+            <ImageButton
+                android:layout_marginRight="8dp"
+                android:src="@drawable/hide"
+                android:scaleType="fitCenter"
                 android:id="@+id/btnPINcheck"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="3dp"
-                android:backgroundTint="@color/menu3" />
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="?android:attr/selectableItemBackground" />
         </LinearLayout>
 
         <LinearLayout
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:background="#FFFFFF"
             android:gravity="center">
-
             <EditText
                 android:id="@+id/editName"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60dp"
                 android:gravity="center"
                 android:hint="N  A  M  E"
-                android:textSize="30sp" />
+                android:textSize="40sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -113,13 +135,13 @@
             <EditText
                 android:id="@+id/editSSN1"
                 android:layout_width="0dp"
-                android:layout_height="65dp"
-                android:layout_weight="4"
+                android:layout_height="60dp"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:hint="S S N"
                 android:inputType="number"
                 android:maxLength="6"
-                android:textSize="30sp" />
+                android:textSize="40sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -129,68 +151,97 @@
                 android:textSize="35sp" />
 
             <EditText
+                android:gravity="center"
                 android:id="@+id/editSSN2"
                 android:layout_width="0dp"
-                android:layout_height="65dp"
-                android:layout_weight="5"
+                android:layout_height="60dp"
+                android:layout_weight="1"
                 android:inputType="numberPassword"
                 android:maxLength="7"
                 android:paddingLeft="20dp"
-                android:textSize="35sp" />
+                android:textSize="40sp" />
         </LinearLayout>
 
         <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
             android:gravity="center">
 
             <RadioGroup
                 android:id="@+id/stateGroup"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="40dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:checked="true"
                     android:id="@+id/btnServant"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="50dp"
-                    android:paddingLeft="10dp"
-                    android:text="servant"
+                    android:text="Servant"
                     android:textSize="20sp" />
 
                 <RadioButton
                     android:id="@+id/btnBeneficiary"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
                     android:text="Beneficiary"
                     android:textSize="20sp" />
             </RadioGroup>
+            <ImageButton
+                android:id="@+id/btnAddress"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:adjustViewBounds="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/home_no"
+                android:layout_width="35dp"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@color/menu1"
-            android:gravity="center">
+    <TextView
+        android:gravity="center"
+        android:text="--------------------------------Options--------------------------------"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-            <EditText
-                android:id="@+id/editHelperID"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:hint="H E L P E R    I D"
-                android:inputType="number"
-                android:gravity="center"
-                android:textSize="30sp" />
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/menu1"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/internum2"
+            android:textSize="40sp"
+            android:gravity="center"
+            android:text="+82 0"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingBottom="3dp"/>
+        <EditText
+            android:id="@+id/editHelperID"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:hint="  SERVANT  I D"
+            android:inputType="number"
+            android:textSize="40sp" />
+    </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -199,33 +250,14 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnOCR"
-                android:layout_width="90dp"
-                android:layout_height="50dp"
-                android:backgroundTint="@color/menu3"
-                android:onClick="btnClick"
-                android:text="OCR"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp" />
-
-            <Button
                 android:id="@+id/btnJoin"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="15dp"
+                android:layout_width="130dp"
+                android:layout_height="60dp"
                 android:backgroundTint="@color/menu4"
                 android:onClick="btnClick"
                 android:text="JOIN!"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp" />
-
-            <RadioButton
-                android:id="@+id/btnFingerprint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:text="Fingerprint"
-                android:textSize="17sp" />
         </LinearLayout>
     <!--</ScrollView>-->
 

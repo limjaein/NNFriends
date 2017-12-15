@@ -41,9 +41,8 @@ public class GroupAdapter extends BaseAdapter {
 
     private ArrayList<Room> mRoom = new ArrayList<>();
     private Activity activity;
-    private Room myRoom;
     int attendNum;
-    private int teamNum;
+    int teamNum;
     PreferenceManager pref;
 
     DatabaseReference gtable, rtable;
@@ -83,26 +82,22 @@ public class GroupAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.group_listview, null);
         }
 
-        myRoom = mRoom.get(pos);
-        Log.d("position check", pos+"");
-        Log.d("myRoom", myRoom.getRoomkey()+myRoom.getLeaderMatchNum());
-
         TextView dateView = (TextView)view.findViewById(R.id.DateView);
         TextView placeView = (TextView)view.findViewById(R.id.PlaceView);
         final TextView contentView = (TextView)view.findViewById(R.id.ContentView);
         final TextView peopleNum = (TextView)view.findViewById(R.id.PeopleNum);
         final ImageButton joinBtn = (ImageButton)view.findViewById(R.id.gJoinBtn);
 
-        dateView.setText(myRoom.getGroupDate()+" "+myRoom.getGroupTime());
-        placeView.setText(myRoom.getGroupPlace());
-        contentView.setText(myRoom.getGroupContent());
+        dateView.setText(mRoom.get(pos).getGroupDate()+" "+mRoom.get(pos).getGroupTime());
+        placeView.setText(mRoom.get(pos).getGroupPlace());
+        contentView.setText(mRoom.get(pos).getGroupContent());
 
-        attendNum = Integer.parseInt(myRoom.getAttendNum());
-        teamNum = Integer.parseInt(myRoom.getTeamNum());    //총 정원 수
+        attendNum = Integer.parseInt(mRoom.get(pos).getAttendNum());
+        teamNum = Integer.parseInt(mRoom.get(pos).getTeamNum());    //총 정원 수
         peopleNum.setText(String.valueOf(attendNum)+"("+attendNum*3+"people)"+"/"+String.valueOf(teamNum)+"("+teamNum*3+"people)");
 
 
-        final String g_date = myRoom.getYear()+myRoom.getMonth()+myRoom.getDay();
+        final String g_date = mRoom.get(pos).getYear()+mRoom.get(pos).getMonth()+mRoom.get(pos).getDay();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         final String c_date = sdf.format(new Date());
@@ -122,13 +117,13 @@ public class GroupAdapter extends BaseAdapter {
         // 날짜 마감일 때
         if(Integer.parseInt(c_date)+1 >= Integer.parseInt(g_date)){
             Log.d("active2","님 바뀌세요?"+c_date+g_date);
-            rtable.child(myRoom.getRoomkey()).child("active").setValue(String.valueOf("1"));
+            rtable.child(mRoom.get(pos).getRoomkey()).child("active").setValue(String.valueOf("1"));
             joinBtn.setImageResource(R.drawable.end);
             joinBtn.setEnabled(false);
         }
         else{
-            if(myRoom.getLeaderMatchNum().equals(matchNum)){    //내가 만든 방
-                if(myRoom.getActive().equals("0")){ //모집중
+            if(mRoom.get(pos).getLeaderMatchNum().equals(matchNum)){    //내가 만든 방
+                if(mRoom.get(pos).getActive().equals("0")){ //모집중
                     joinBtn.setImageResource(R.drawable.attend);
                     joinBtn.setEnabled(true);
                 }
@@ -147,7 +142,7 @@ public class GroupAdapter extends BaseAdapter {
 
                 // 내가 참여했는지 확인 0:참여안함 1:참여함
                 myFlag = 0;
-                final String key = myRoom.getRoomkey()+"_"+matchNum;
+                final String key = mRoom.get(pos).getRoomkey()+"_"+matchNum;
                 Query query = gtable.orderByKey().equalTo(key);
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -157,12 +152,12 @@ public class GroupAdapter extends BaseAdapter {
                             Group group = data.getValue(Group.class);
                             if (group.getKey().equals(key)) {
                                 myFlag = 1;
-                                Log.d("active4",key+"_"+myRoom.getRoomkey());
+                                Log.d("active4",key+"_"+mRoom.get(pos).getRoomkey());
                                 break;
                             }
                         }
                         //
-                        if(myRoom.getActive().equals("0")){ //모집중
+                        if(mRoom.get(pos).getActive().equals("0")){ //모집중
 
 
                             if(myFlag == 1){    //내가 참가한 방
@@ -281,6 +276,7 @@ public class GroupAdapter extends BaseAdapter {
 
                 }
                 else{   //내가 안만든 방
+                    Log.d("시발", "내가 안 만든 방임");
                     if(b_btn.equals(b_join)){   //버튼이 join일때
                         attendNum += 1;
                         alertAttendNum = attendNum;
@@ -296,8 +292,7 @@ public class GroupAdapter extends BaseAdapter {
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         Toast.makeText(context, "AGREE", Toast.LENGTH_SHORT).show();
                                         //db저장
-                                        myRoom = mRoom.get(pos);
-                                        String key = myRoom.getRoomkey()+"_"+matchNum;
+                                        String key = mRoom.get(pos).getRoomkey()+"_"+matchNum;
                                         DatabaseReference groupRef = gtable.child(key);
                                         Group group= new Group(key, mRoom.get(pos).getRoomkey(), matchNum,String.valueOf(1));
                                         groupRef.setValue(group);
